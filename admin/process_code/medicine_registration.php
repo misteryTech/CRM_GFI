@@ -13,20 +13,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $duration = mysqli_real_escape_string($connection, $_POST['duration']);
     $storage_temperature = mysqli_real_escape_string($connection, $_POST['storage_temperature']);
     $storage_instructions = mysqli_real_escape_string($connection, $_POST['storage_instructions']);
+    $stock = mysqli_real_escape_string($connection, $_POST['stock']);
 
     $query = "INSERT INTO medicines (
-        medicine_name, brand_name, medicine_type, expiry_date, manufacturer, dosage, frequency, duration, storage_temperature, storage_instructions
+        medicine_name, brand_name, medicine_type, expiry_date, manufacturer, dosage, frequency, duration, storage_temperature, storage_instructions, stock
     ) VALUES (
-        '$medicine_name', '$brand_name', '$medicine_type', '$expiry_date', '$manufacturer', '$dosage', '$frequency', '$duration', '$storage_temperature', '$storage_instructions'
+        '$medicine_name', '$brand_name', '$medicine_type', '$expiry_date', '$manufacturer', '$dosage', '$frequency', '$duration', '$storage_temperature', '$storage_instructions', '$stock'
     )";
 
     if (mysqli_query($connection, $query)) {
         $_SESSION['success'] = "Medicine registered successfully!";
-        header("Location: ../medicine_information_page.php");
+        header("Location: ../admin_medicine_registration.php");
         exit();
     } else {
         $_SESSION['error'] = "Error: " . $query . "<br>" . mysqli_error($connection);
-        header("Location: ../medicine_information_page.php");
+        header("Location: ../admin_medicine_registration.php");
         exit();
     }
 }

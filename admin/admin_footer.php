@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>made by &copy; SOM <sup>system</sup></span>
+                        <span>DEVELOPED BY:&copy;GFI Student</span>
                     </div>
                 </div>
             </footer>
@@ -183,7 +183,7 @@
 
 
 
-    
+
 
     </script>
 

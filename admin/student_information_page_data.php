@@ -174,6 +174,20 @@ $result = mysqli_query($connection, $query);
                                             echo "<option value='Nursing'" . ($row['course'] == 'Nursing' ? ' selected' : '') . ">Nursing</option>";
                                             echo "</select>";
                                             echo "</div>";
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editUsername'>Username</label>";
+                                            echo "<input type='text' class='form-control' id='editUsername' name='edit_username' value='" . $row['username'] . "' required>";
+                                            echo "</div>";
+
+
+                                            echo "<div class='form-group'>";
+                                            echo "<label for='editPassword'>Password</label>";
+                                            echo "<input type='text' class='form-control' id='editPassword' name='edit_password' value='" . $row['password'] . "' required>";
+                                            echo "</div>";
+
+
+
                                             echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
                                             echo "</form>";
                                             echo "</div>";

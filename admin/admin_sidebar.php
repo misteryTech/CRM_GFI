@@ -43,13 +43,15 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#studentData"
         aria-expanded="true" aria-controls="studentData">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
-        <span>Student Details</span>
+        <span>Student Management</span>
     </a>
     <div id="studentData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Students:</h6>
             <a class="collapse-item" href="student_registration_page.php">Student Registration</a>
             <a class="collapse-item" href="student_information_page_data.php">Students Data</a>
+            <a class="collapse-item" href="student_information_page_data.php">Appointment Scheduling</a>
+            <a class="collapse-item" href="student_information_page_data.php">Medical Records</a>
 
         </div>
     </div>
@@ -58,60 +60,65 @@
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#staffData"
+        aria-expanded="true" aria-controls="staffData">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
-        <span>Events Gallery</span>
+        <span>Staff Management</span>
     </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+    <div id="staffData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Events:</h6>
-            <a class="collapse-item" href="gallery_events_page_registration.php">Add Events Gallery</a>
-            <a class="collapse-item" href="gallery_events_page.php">View Gallery</a>
-            <a class="collapse-item" href="gallery_events_table_page.php">View Gallery Table</a>
-            <a class="collapse-item" href="calendar_event_page.php">Calendar Of Events</a>
+            <h6 class="collapse-header">Staff Management</span>
+            </a>:</h6>
+            <a class="collapse-item" href="student_registration_page.php">Staff Registration</a>
+            <a class="collapse-item" href="student_information_page_data.php">Staff Data</a>
+            <a class="collapse-item" href="student_information_page_data.php">Medical Records</a>
+
         </div>
     </div>
 </li>
 
-<!-- Nav Item - Utilities Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-        aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-wrench"></i>
-        <span>Organization Details</span>
-    </a>
-    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-        data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Organization Details:</h6>
-            <a class="collapse-item" href="organization_page.php">Org Student Registration</a>
-            <a class="collapse-item" href="organization_information_page_view.php">Org Student Data</a>
-            <a class="collapse-item" href="organization_registration_page.php">Organization Registration</a>
-            <a class="collapse-item" href="view_organization_reg_page.php">View Organization</a>
 
+
+
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#itemData"
+        aria-expanded="true" aria-controls="itemData">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+        <span>Inventory  Management</span>
+    </a>
+    <div id="itemData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Inventory Management</span>
+            </a>:</h6>
+            <a class="collapse-item" href="admin_medicine_registration.php">Medicine and Supplies</a>
+            <a class="collapse-item" href="admin_med_stock.php">Stock Levels</a>
+            <a class="collapse-item" href="admin_reorder_stock.php">Reordering</a>
+
+        </div>
     </div>
 </li>
 
-<!-- Divider -->
-<hr class="sidebar-divider">
 
+<!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#opendepartment"
-        aria-expanded="true" aria-controls="collapseUtilities">
-        <i class="fas fa-fw fa-wrench"></i>
-        <span>Department Details</span>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reportData"
+        aria-expanded="true" aria-controls="reportData">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+        <span>Reports</span>
     </a>
-    <div id="opendepartment" class="collapse" aria-labelledby="headingUtilities"
-        data-parent="#accordionSidebar">
+    <div id="reportData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Department Details:</h6>
-            <a class="collapse-item" href="department_registration_page.php">Add Department</a>
-            <a class="collapse-item" href="organization_information_page_view.php">Rgistered Department</a>
+            <h6 class="collapse-header">Report Management</span>
+            </a>:</h6>
+            <a class="collapse-item" href="student_registration_page.php">Student Report</a>
+            <a class="collapse-item" href="student_information_page_data.php">Inventory Report</a>
 
-
+        </div>
     </div>
 </li>
+
+
 
 
 

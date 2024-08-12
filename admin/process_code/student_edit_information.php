@@ -18,22 +18,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $year = mysqli_real_escape_string($connection, $_POST['edit_year']);
     $section = mysqli_real_escape_string($connection, $_POST['edit_section']);
     $course = mysqli_real_escape_string($connection, $_POST['edit_course']);
+    $username = mysqli_real_escape_string($connection, $_POST['edit_username']);
+    $password = mysqli_real_escape_string($connection, $_POST['edit_password']);
 
-    $query = "UPDATE students SET 
-        username='$username', 
-        first_name='$first_name', 
-        last_name='$last_name', 
-        dob='$dob', 
-        gender='$gender', 
-        email='$email', 
-        phone='$phone', 
-        street='$street', 
-        barangay='$barangay', 
-        municipality='$municipality', 
-        province='$province', 
-        year='$year', 
-        section='$section', 
-        course='$course' 
+    $query = "UPDATE students SET
+        username='$username',
+        first_name='$first_name',
+        last_name='$last_name',
+        dob='$dob',
+        gender='$gender',
+        email='$email',
+        phone='$phone',
+        street='$street',
+        barangay='$barangay',
+        municipality='$municipality',
+        province='$province',
+        year='$year',
+        section='$section',
+        course='$course',
+        username='$username',
+        password='$password'
         WHERE id='$student_id'";
 
     if (mysqli_query($connection, $query)) {
