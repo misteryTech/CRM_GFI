@@ -61,7 +61,7 @@ if (!isset($_SESSION['student_id'])) {
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     <?php
-                                                        $query= mysqli_query($connection,"SELECT * FROM STUDENTS");
+                                                        $query= mysqli_query($connection,"SELECT * FROM students_table");
 
                                                         $count_row_student = mysqli_num_rows($query);
 

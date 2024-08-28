@@ -42,15 +42,15 @@ include("../include/connection.php");
                     <?php endif; ?>
 
 
-                    <h2>Student Registration Form</h2>
-                    <form action="process_code/student_registration.php" method="POST">
-                        <!-- Student Information -->
+                    <h2>Admin/Staff Registration Form</h2>
+                    <form action="process_code/staff_registration.php" method="POST">
+                        <!-- Admin/Staff Information -->
                         <div class="form-group">
 
                             <div class="form-row">
                                 <div class="col-md-4">
-                                    <label for="studentId">Student ID</label>
-                                    <input type="text" class="form-control" id="studentId" name="student_id" required>
+                                    <label for="staffId">Staff ID</label>
+                                    <input type="text" class="form-control" id="staffId" name="staff_id" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="username">Username</label>
@@ -114,41 +114,39 @@ include("../include/connection.php");
                             </div>
                         </div>
 
-                           <!-- Course -->
-                           <div class="form-group">
-                            <h3>Course</h3>
+                        <!-- Position Details -->
+                        <div class="form-group">
+                            <h3>Position Details</h3>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <label for="year">Year</label>
-                                    <input type="text" class="form-control" id="year" name="year" required>
+                                    <label for="position">Position</label>
+                                    <input type="text" class="form-control" id="position" name="position" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="section">Section</label>
-                                    <input type="text" class="form-control" id="section" name="section" required>
+                                    <label for="department">Department</label>
+                                    <select class="form-control" id="department" name="department" required>
+                                        <option value="">Select Department</option>
+                                        <option value="Administration">Administration</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Human Resources">Human Resources</option>
+                                        <option value="IT">IT</option>
+                                        <option value="Maintenance">Maintenance</option>
+                                        <option value="Library">Library</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                  <label for="course">Course</label>
-                                  <select class="form-control" id="course" name="course" required>
-                                      <option value="">Select Course</option>
-                                      <option value="Computer Science">Computer Science</option>
-                                      <option value="Information Technology">Information Technology</option>
-                                      <option value="Engineering">Engineering</option>
-                                      <option value="Business Administration">Business Administration</option>
-                                      <option value="Psychology">Psychology</option>
-                                      <option value="Nursing">Nursing</option>
-                                  </select>
+                                <div class="col-md-6">
+
+                                    <label for="dob">Date Hired</label>
+                                    <input type="date" class="form-control" id="date_hired" name="date_hired" required>
                                 </div>
 
+
+                            </div>
                         </div>
+
                         <button type="submit" class="btn btn-success">Register</button>
                     </form>
                 </div>
-
-
-
-
-
 
                 <!-- /.container-fluid -->
             </div>

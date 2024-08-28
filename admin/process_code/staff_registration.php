@@ -3,7 +3,6 @@ session_start();
 include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
     $username = mysqli_real_escape_string($connection, $_POST['username']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
@@ -16,23 +15,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $barangay = mysqli_real_escape_string($connection, $_POST['barangay']);
     $municipality = mysqli_real_escape_string($connection, $_POST['municipality']);
     $province = mysqli_real_escape_string($connection, $_POST['province']);
-    $year = mysqli_real_escape_string($connection, $_POST['year']);
-    $section = mysqli_real_escape_string($connection, $_POST['section']);
-    $course = mysqli_real_escape_string($connection, $_POST['course']);
+    $position = mysqli_real_escape_string($connection, $_POST['position']);
+    $department = mysqli_real_escape_string($connection, $_POST['department']);
+    $date_hired = mysqli_real_escape_string($connection, $_POST['date_hired']);
 
-    $query = "INSERT INTO students_table (
-        student_id, username, password, first_name, last_name, dob, gender, email, phone, street, barangay, municipality, province, year, section, course
+
+    $query = "INSERT INTO staff_table (
+        username, password, first_name, last_name, dob, gender, email, phone, street, barangay, municipality, province, position, department, date_hired
     ) VALUES (
-        '$student_id', '$username', '$password', '$first_name', '$last_name', '$dob', '$gender', '$email', '$phone', '$street', '$barangay', '$municipality', '$province', '$year', '$section', '$course'
+        '$username', '$password', '$first_name', '$last_name', '$dob', '$gender', '$email', '$phone', '$street', '$barangay', '$municipality', '$province', '$position', '$department', '$date_hired'
     )";
 
     if (mysqli_query($connection, $query)) {
-        $_SESSION['success'] = "Student registered successfully!";
-        header("Location: ../student_registration_page.php");
+        $_SESSION['success'] = "Staff registered successfully!";
+        header("Location: ../staff_registration_page.php");
         exit();
     } else {
         $_SESSION['error'] = "Error: " . $query . "<br>" . mysqli_error($connection);
-        header("Location: ../student_registration_page.php");
+        header("Location: ../staff_registration_page.php");
         exit();
     }
 }

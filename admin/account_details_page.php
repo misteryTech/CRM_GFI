@@ -14,7 +14,7 @@ if (!isset($_SESSION['student_id'])) {
 $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
 
 // Fetch student details from the database
-$studentQuery = "SELECT * FROM students WHERE student_id = '$student_id'";
+$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
 $studentResult = mysqli_query($connection, $studentQuery);
 $student = mysqli_fetch_assoc($studentResult);
 
@@ -97,7 +97,7 @@ $student = mysqli_fetch_assoc($studentResult);
                                 </select>
                             </div>
                         </div>
-          
+
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
                 </div>

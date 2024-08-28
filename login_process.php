@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = mysqli_real_escape_string($connection, $_POST['password']);
 
     // Query to find the user with the provided username
-    $query = "SELECT * FROM students WHERE username = '$username'";
+    $query = "SELECT * FROM students_table WHERE username = '$username'";
     $result = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($result) == 1) {

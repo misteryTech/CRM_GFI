@@ -69,13 +69,33 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Staff Management</span>
             </a>:</h6>
-            <a class="collapse-item" href="student_registration_page.php">Staff Registration</a>
-            <a class="collapse-item" href="student_information_page_data.php">Staff Data</a>
-            <a class="collapse-item" href="student_information_page_data.php">Medical Records</a>
+            <a class="collapse-item" href="staff_registration_page.php">Staff Registration</a>
+            <a class="collapse-item" href="#">Staff Data</a>
+            <a class="collapse-item" href="#">Medical Records</a>
 
         </div>
     </div>
 </li>
+
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#teacherData"
+        aria-expanded="true" aria-controls="teacherData">
+        <i class="fa fa-file-image-o" aria-hidden="true"></i>
+        <span>Teacher Management</span>
+    </a>
+    <div id="teacherData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Teacher Management</span>
+            </a>:</h6>
+            <a class="collapse-item" href="teacher_registration_page.php">Teacher Registration</a>
+            <a class="collapse-item" href="#">Teacher Data</a>
+            <a class="collapse-item" href="#">Medical Records</a>
+
+        </div>
+    </div>
+</li>
+
 
 
 

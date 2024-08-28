@@ -4,9 +4,8 @@ session_start();
 include("../include/connection.php");
 
 // Fetch all student information from the database
-$query = "SELECT * FROM students";
+$query = "SELECT * FROM students_table";
 $result = mysqli_query($connection, $query);
-
 ?>
 
 <body id="page-top">
@@ -62,9 +61,7 @@ $result = mysqli_query($connection, $query);
                                             <th>Username</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-
                                             <th>Email</th>
-
                                             <th>Year</th>
                                             <th>Section</th>
                                             <th>Course</th>
@@ -81,115 +78,35 @@ $result = mysqli_query($connection, $query);
                                             echo "<td>" . $row['username'] . "</td>";
                                             echo "<td>" . $row['first_name'] . "</td>";
                                             echo "<td>" . $row['last_name'] . "</td>";
-
                                             echo "<td>" . $row['email'] . "</td>";
-
                                             echo "<td>" . $row['year'] . "</td>";
                                             echo "<td>" . $row['section'] . "</td>";
                                             echo "<td>" . $row['course'] . "</td>";
                                             echo "<td>";
-                                            echo "<button class='btn btn-primary' data-toggle='modal' data-target='#editModal" . $row['id'] . "'>Edit</button> ";
-                                            echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['id'] . "'>Delete</button>";
+                                            echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['student_id'] . "'>View</button> ";
+                                            echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['student_id'] . "'>Delete</button>";
                                             echo "</td>";
                                             echo "</tr>";
 
-                                            // Edit Modal
-                                            echo "<div class='modal fade' id='editModal" . $row['id'] . "' tabindex='-1' role='dialog' aria-labelledby='editModalLabel' aria-hidden='true'>";
+                                            // View Modal
+                                            echo "<div class='modal fade' id='viewModal" . $row['student_id'] . "' tabindex='-1' role='dialog' aria-labelledby='viewModalLabel" . $row['student_id'] . "' aria-hidden='true'>";
                                             echo "<div class='modal-dialog' role='document'>";
                                             echo "<div class='modal-content'>";
                                             echo "<div class='modal-header'>";
-                                            echo "<h5 class='modal-title' id='editModalLabel'>Edit Student</h5>";
+                                            echo "<h5 class='modal-title' id='viewModalLabel" . $row['student_id'] . "'>Student Details</h5>";
                                             echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
                                             echo "<span aria-hidden='true'>&times;</span>";
                                             echo "</button>";
                                             echo "</div>";
                                             echo "<div class='modal-body'>";
-                                            // Edit form with fields pre-filled with existing data
-                                            echo "<form action='process_code/student_edit_information.php' method='POST'>";
-                                            echo "<input type='hidden' name='student_id' value='" . $row['id'] . "'>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editUsername'>Username</label>";
-                                            echo "<input type='text' class='form-control' id='editUsername' name='edit_username' value='" . $row['username'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editFirstName'>First Name</label>";
-                                            echo "<input type='text' class='form-control' id='editFirstName' name='edit_first_name' value='" . $row['first_name'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editLastName'>Last Name</label>";
-                                            echo "<input type='text' class='form-control' id='editLastName' name='edit_last_name' value='" . $row['last_name'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editDob'>Date of Birth</label>";
-                                            echo "<input type='date' class='form-control' id='editDob' name='edit_dob' value='" . $row['dob'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editGender'>Gender</label>";
-                                            echo "<select class='form-control' id='editGender' name='edit_gender' required>";
-                                            echo "<option value='Male'" . ($row['gender'] == 'Male' ? ' selected' : '') . ">Male</option>";
-                                            echo "<option value='Female'" . ($row['gender'] == 'Female' ? ' selected' : '') . ">Female</option>";
-                                            echo "</select>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editEmail'>Email</label>";
-                                            echo "<input type='email' class='form-control' id='editEmail' name='edit_email' value='" . $row['email'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editPhone'>Phone Number</label>";
-                                            echo "<input type='text' class='form-control' id='editPhone' name='edit_phone' value='" . $row['phone'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editStreet'>Street</label>";
-                                            echo "<input type='text' class='form-control' id='editStreet' name='edit_street' value='" . $row['street'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editBarangay'>Barangay</label>";
-                                            echo "<input type='text' class='form-control' id='editBarangay' name='edit_barangay' value='" . $row['barangay'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editMunicipality'>Municipality</label>";
-                                            echo "<input type='text' class='form-control' id='editMunicipality' name='edit_municipality' value='" . $row['municipality'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editProvince'>Province</label>";
-                                            echo "<input type='text' class='form-control' id='editProvince' name='edit_province' value='" . $row['province'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editYear'>Year</label>";
-                                            echo "<input type='text' class='form-control' id='editYear' name='edit_year' value='" . $row['year'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editSection'>Section</label>";
-                                            echo "<input type='text' class='form-control' id='editSection' name='edit_section' value='" . $row['section'] . "' required>";
-                                            echo "</div>";
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editCourse'>Course</label>";
-                                            echo "<select class='form-control' id='editCourse' name='edit_course' required>";
-                                            echo "<option value=''>Select Course</option>";
-                                            echo "<option value='Computer Science'" . ($row['course'] == 'Computer Science' ? ' selected' : '') . ">Computer Science</option>";
-                                            echo "<option value='Information Technology'" . ($row['course'] == 'Information Technology' ? ' selected' : '') . ">Information Technology</option>";
-                                            echo "<option value='Engineering'" . ($row['course'] == 'Engineering' ? ' selected' : '') . ">Engineering</option>";
-                                            echo "<option value='Business Administration'" . ($row['course'] == 'Business Administration' ? ' selected' : '') . ">Business Administration</option>";
-                                            echo "<option value='Psychology'" . ($row['course'] == 'Psychology' ? ' selected' : '') . ">Psychology</option>";
-                                            echo "<option value='Nursing'" . ($row['course'] == 'Nursing' ? ' selected' : '') . ">Nursing</option>";
-                                            echo "</select>";
-                                            echo "</div>";
-
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editUsername'>Username</label>";
-                                            echo "<input type='text' class='form-control' id='editUsername' name='edit_username' value='" . $row['username'] . "' required>";
-                                            echo "</div>";
-
-
-                                            echo "<div class='form-group'>";
-                                            echo "<label for='editPassword'>Password</label>";
-                                            echo "<input type='text' class='form-control' id='editPassword' name='edit_password' value='" . $row['password'] . "' required>";
-                                            echo "</div>";
-
-
-
-                                            echo "<button type='submit' class='btn btn-primary'>Save Changes</button>";
-                                            echo "</form>";
+                                            echo "<p><strong>Student ID:</strong> " . $row['student_id'] . "</p>";
+                                            echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
+                                            echo "<p><strong>First Name:</strong> " . $row['first_name'] . "</p>";
+                                            echo "<p><strong>Last Name:</strong> " . $row['last_name'] . "</p>";
+                                            echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
+                                            echo "<p><strong>Year:</strong> " . $row['year'] . "</p>";
+                                            echo "<p><strong>Section:</strong> " . $row['section'] . "</p>";
+                                            echo "<p><strong>Course:</strong> " . $row['course'] . "</p>";
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
                                             echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
@@ -199,11 +116,11 @@ $result = mysqli_query($connection, $query);
                                             echo "</div>";
 
                                             // Delete Modal
-                                            echo "<div class='modal fade' id='deleteModal" . $row['id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel' aria-hidden='true'>";
+                                            echo "<div class='modal fade' id='deleteModal" . $row['student_id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel" . $row['student_id'] . "' aria-hidden='true'>";
                                             echo "<div class='modal-dialog' role='document'>";
                                             echo "<div class='modal-content'>";
                                             echo "<div class='modal-header'>";
-                                            echo "<h5 class='modal-title' id='deleteModalLabel'>Delete Student</h5>";
+                                            echo "<h5 class='modal-title' id='deleteModalLabel" . $row['student_id'] . "'>Delete Student</h5>";
                                             echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
                                             echo "<span aria-hidden='true'>&times;</span>";
                                             echo "</button>";
@@ -213,9 +130,8 @@ $result = mysqli_query($connection, $query);
                                             echo "</div>";
                                             echo "<div class='modal-footer'>";
                                             echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
-                                            // Delete button - this will submit a form to handle the deletion query
                                             echo "<form action='process_code/student_delete_information.php' method='POST'>";
-                                            echo "<input type='hidden' name='student_id' value='" . $row['id'] . "'>"; // Hidden field to pass student ID
+                                            echo "<input type='hidden' name='student_id' value='" . $row['student_id'] . "'>";
                                             echo "<button type='submit' class='btn btn-danger'>Delete</button>";
                                             echo "</form>";
                                             echo "</div>";
