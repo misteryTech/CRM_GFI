@@ -3,20 +3,20 @@ include("admin_header.php");
 session_start();
 include("../include/connection.php");
 
-// Check if student is logged in
-if (!isset($_SESSION['student_id'])) {
+// Check if staff is logged in
+if (!isset($_SESSION['staff_id'])) {
     $_SESSION['error'] = "You must be logged in to view this page.";
     header("Location: ../login.php");
     exit();
 }
 
-// Get student ID from session
-$student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
+// Get staff ID from session
+$staff_id = mysqli_real_escape_string($connection, $_SESSION['staff_id']);
 
-// Fetch student details from the database
-$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
-$studentResult = mysqli_query($connection, $studentQuery);
-$student = mysqli_fetch_assoc($studentResult);
+// Fetch staff details from the database
+$staffQuery = "SELECT * FROM staff_table WHERE staff_id = '$staff_id'";
+$staffResult = mysqli_query($connection, $staffQuery);
+$staff = mysqli_fetch_assoc($staffResult);
 
 ?>
 
@@ -59,41 +59,41 @@ $student = mysqli_fetch_assoc($studentResult);
 
                     <h2>Account Details</h2>
                     <form action="process_code/account_details_updates.php" method="POST">
-                        <!-- Student Information -->
+                        <!-- staff Information -->
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-4">
-                                    <label for="studentId">Student ID</label>
-                                    <input type="text" class="form-control" id="studentId" name="student_id" value="<?php echo $student['student_id']; ?>" required readonly>
+                                    <label for="staffId">Staff ID</label>
+                                    <input type="text" class="form-control" id="staffId" name="staff_id" value="<?php echo $staff['staff_id']; ?>" required readonly>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $student['username']; ?>" required>
+                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $staff['username']; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="password">Password</label>
-                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $student['password']; ?>" required>
+                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $staff['password']; ?>" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" name="first_name" value="<?php echo $student['first_name']; ?>" required>
+                                    <input type="text" class="form-control" id="firstName" name="first_name" value="<?php echo $staff['first_name']; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" name="last_name" value="<?php echo $student['last_name']; ?>" required>
+                                    <input type="text" class="form-control" id="lastName" name="last_name" value="<?php echo $staff['last_name']; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="dob">Date of Birth</label>
-                                    <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $student['dob']; ?>" required>
+                                    <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $staff['dob']; ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <select class="form-control" id="gender" name="gender" required>
-                                    <option value="Male" <?php echo ($student['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                    <option value="Female" <?php echo ($student['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                    <option value="Male" <?php echo ($staff['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                    <option value="Female" <?php echo ($staff['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
                                 </select>
                             </div>
                         </div>

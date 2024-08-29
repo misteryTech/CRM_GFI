@@ -1,10 +1,11 @@
+
 <?php
 include("admin_header.php");
 session_start();
 include("../include/connection.php");
 
-// Fetch all student information from the database
-$query = "SELECT * FROM students_table";
+// Fetch all teacher information from the database
+$query = "SELECT * FROM teachers_table";
 $result = mysqli_query($connection, $query);
 ?>
 
@@ -33,11 +34,11 @@ $result = mysqli_query($connection, $query);
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Student Information Data</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Teacher Information Data</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="studentTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="teacherTable" width="100%" cellspacing="0">
                                     <?php if (isset($_SESSION['success'])): ?>
                                         <div class="alert alert-success">
                                             <?php
@@ -57,11 +58,11 @@ $result = mysqli_query($connection, $query);
 
                                     <thead>
                                         <tr>
-                                            <th>Student Id</th>
+                                            <th>teacher Id</th>
                                             <th>Username</th>
-                                            <th>Student Name</th>
+                                            <th>teacher Name</th>
 
-                                            <th>Email</th>
+
 
                                             <th>Action</th>
                                         </tr>
@@ -72,24 +73,22 @@ $result = mysqli_query($connection, $query);
 // Loop through each row of the result set
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
-    echo "<td>" . $row['student_id'] . "</td>";
+    echo "<td>" . $row['teacher_id'] . "</td>";
     echo "<td>" . $row['username'] . "</td>";
     echo "<td>" . $row['first_name'] .' '. $row['last_name'] . "</td>";
-    echo "<td>" . $row['email'] . "</td>";
-
     echo "<td>";
-    echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['student_id'] . "'>View</button> ";
-    echo "<button class='btn btn-warning' data-toggle='modal' data-target='#editModal" . $row['student_id'] . "'>Edit</button> ";
-    echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['student_id'] . "'>Delete</button>";
+    echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['teacher_id'] . "'>View</button> ";
+    echo "<button class='btn btn-warning' data-toggle='modal' data-target='#editModal" . $row['teacher_id'] . "'>Edit</button> ";
+    echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['teacher_id'] . "'>Delete</button>";
     echo "</td>";
     echo "</tr>";
 
     // View Modal
-    echo "<div class='modal fade' id='viewModal" . $row['student_id'] . "' tabindex='-1' role='dialog' aria-labelledby='viewModalLabel" . $row['student_id'] . "' aria-hidden='true'>";
+    echo "<div class='modal fade' id='viewModal" . $row['teacher_id'] . "' tabindex='-1' role='dialog' aria-labelledby='viewModalLabel" . $row['teacher_id'] . "' aria-hidden='true'>";
     echo "<div class='modal-dialog modal-lg' role='document'>"; // Changed to modal-lg for larger width
     echo "<div class='modal-content'>";
     echo "<div class='modal-header'>";
-    echo "<h5 class='modal-title' id='viewModalLabel" . $row['student_id'] . "'>Student Details</h5>";
+    echo "<h5 class='modal-title' id='viewModalLabel" . $row['teacher_id'] . "'>teacher Details</h5>";
     echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
     echo "<span aria-hidden='true'>&times;</span>";
     echo "</button>";
@@ -97,7 +96,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='modal-body'>";
     echo "<div class='row'>";
     echo "<div class='col-md-6'>";
-    echo "<p><strong>Student ID:</strong> " . $row['student_id'] . "</p>";
+    echo "<p><strong>teacher ID:</strong> " . $row['teacher_id'] . "</p>";
     echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
     echo "<p><strong>First Name:</strong> " . $row['first_name'] . "</p>";
     echo "</div>";
@@ -105,8 +104,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<p><strong>Last Name:</strong> " . $row['last_name'] . "</p>";
     echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
     echo "<p><strong>Year:</strong> " . $row['year'] . "</p>";
-    echo "<p><strong>Section:</strong> " . $row['section'] . "</p>";
-    echo "<p><strong>Course:</strong> " . $row['course'] . "</p>";
+    echo "<p><strong>position:</strong> " . $row['position'] . "</p>";
+    echo "<p><strong>department:</strong> " . $row['department'] . "</p>";
     echo "</div>";
     echo "</div>";
     echo "</div>";
@@ -118,45 +117,46 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
     // Edit Modal
-    echo "<div class='modal fade' id='editModal" . $row['student_id'] . "' tabindex='-1' role='dialog' aria-labelledby='editModalLabel" . $row['student_id'] . "' aria-hidden='true'>";
+    echo "<div class='modal fade' id='editModal" . $row['teacher_id'] . "' tabindex='-1' role='dialog' aria-labelledby='editModalLabel" . $row['teacher_id'] . "' aria-hidden='true'>";
     echo "<div class='modal-dialog modal-lg' role='document'>"; // Changed to modal-lg for larger width
     echo "<div class='modal-content'>";
     echo "<div class='modal-header'>";
-    echo "<h5 class='modal-title' id='editModalLabel" . $row['student_id'] . "'>Edit Student</h5>";
+    echo "<h5 class='modal-title' id='editModalLabel" . $row['teacher_id'] . "'>Edit teacher</h5>";
     echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
     echo "<span aria-hidden='true'>&times;</span>";
     echo "</button>";
     echo "</div>";
     echo "<div class='modal-body'>";
-    echo "<form action='process_code/student_edit_information.php' method='POST'>";
-    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+    echo "<form action='process_code/teacher_edit_information.php' method='POST'>";
+    echo "<input type='hidden' name='teacher_id' value='" . $row['teacher_id'] . "'>";
     echo "<input type='hidden' name='edit_password' value='" . $row['password'] . "'>";
     echo "<div class='row'>";
 
 
     echo "<div class='col-md-6'>";
     echo "<div class='form-group'>";
-    echo "<label for='username" . $row['student_id'] . "'>Username</label>";
-    echo "<input type='text' class='form-control' id='username" . $row['student_id'] . "' name='edit_username' value='" . $row['username'] . "' required>";
+    echo "<label for='username" . $row['teacher_id'] . "'>Username</label>";
+    echo "<input type='text' class='form-control' id='username" . $row['teacher_id'] . "' name='edit_username' value='" . $row['username'] . "' required>";
     echo "</div>";
 
 
 
     echo "<div class='form-group'>";
-    echo "<label for='first_name" . $row['student_id'] . "'>First Name</label>";
-    echo "<input type='text' class='form-control' id='first_name" . $row['student_id'] . "' name='edit_first_name' value='" . $row['first_name'] . "' required>";
+    echo "<label for='first_name" . $row['teacher_id'] . "'>First Name</label>";
+    echo "<input type='text' class='form-control' id='first_name" . $row['teacher_id'] . "' name='edit_first_name' value='" . $row['first_name'] . "' required>";
     echo "</div>";
 
 
     echo "<div class='form-group'>";
-    echo "<label for='dob" . $row['student_id'] . "'>Date of Birth</label>";
+    echo "<label for='dob" . $row['teacher_id'] . "'>Date of Birth</label>";
     echo "<input type='date' class='form-control' id='dob" . $row['dob'] . "' name='edit_dob' value='" . $row['dob'] . "' required>";
     echo "</div>";
 
 
+
     echo "<div class='form-group'>";
-    echo "<label for='year" . $row['student_id'] . "'>School Year</label>";
-    echo "<input type='text' class='form-control' id='year" . $row['student_id'] . "' name='edit_year' value='" . $row['year'] . "' required>";
+    echo "<label for='dob" . $row['teacher_id'] . "'>Date Hired</label>";
+    echo "<input type='date' class='form-control' id='dob" . $row['dob'] . "' name='edit_date_hired' value='" . $row['date_hired'] . "' required>";
     echo "</div>";
 
     echo "</div>";
@@ -165,23 +165,23 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     echo "<div class='col-md-6'>";
     echo "<div class='form-group'>";
-    echo "<label for='last_name" . $row['student_id'] . "'>Student ID</label>";
-    echo "<input type='text' class='form-control' id='last_name" . $row['student_id'] . "' name='edit_last_name' value='" . $row['student_id'] . "' required>";
+    echo "<label for='last_name" . $row['teacher_id'] . "'>teacher ID</label>";
+    echo "<input type='text' class='form-control' id='last_name" . $row['teacher_id'] . "' name='edit_last_name' value='" . $row['teacher_id'] . "' required>";
     echo "</div>";
 
 
 
     echo "<div class='form-group'>";
-    echo "<label for='edit_last_name" . $row['student_id'] . "'>Last Name</label>";
-    echo "<input type='text' class='form-control' id='edit_last_name" . $row['student_id'] . "' name='edit_last_name' value='" . $row['last_name'] . "' required>";
+    echo "<label for='edit_last_name" . $row['teacher_id'] . "'>Last Name</label>";
+    echo "<input type='text' class='form-control' id='edit_last_name" . $row['teacher_id'] . "' name='edit_last_name' value='" . $row['last_name'] . "' required>";
     echo "</div>";
 
 
     $gender_options = ['Male', 'Female', 'Other'];
 
     echo "<div class='form-group'>";
-    echo "<label for='gender" . $row['student_id'] . "'>Gender</label>";
-    echo "<select class='form-control' id='gender" . $row['student_id'] . "' name='edit_gender' required>";
+    echo "<label for='gender" . $row['teacher_id'] . "'>Gender</label>";
+    echo "<select class='form-control' id='gender" . $row['teacher_id'] . "' name='edit_gender' required>";
 
     // Populate the dropdown options
     foreach ($gender_options as $gender) {
@@ -194,10 +194,19 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
 
-
+   $position_options = ['Administrator', 'teacher'];
     echo "<div class='form-group'>";
-    echo "<label for='section" . $row['student_id'] . "'>School Section</label>";
-    echo "<input type='text' class='form-control' id='section" . $row['student_id'] . "' name='edit_section' value='" . $row['section'] . "' required>";
+    echo "<label for='position" . $row['teacher_id'] . "'>Position</label>";
+    echo "<select class='form-control' id='position" . $row['teacher_id'] . "' name='edit_position' required>";
+
+    // Populate the dropdown options
+    foreach ($position_options as $position) {
+        // Check if this option should be selected
+        $selected = ($row['position'] === $position) ? 'selected' : '';
+        echo "<option value='" . $position . "' " . $selected . ">" . $position . "</option>";
+    }
+
+    echo "</select>";
     echo "</div>";
 
     echo "</div>";
@@ -206,13 +215,13 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
 
-    $course_option = ['Computer Science','Information Technology','Engineering','Business Administration','Psychology','Nursing'];
+    $department_option = ['Science','Mathematics','English','Social Studies','Physical Education','Arts'];
     echo "<div class='form-group'>";
-    echo "<label for='course" . $row['student_id'] . "'>Bachelor Course</label>";
-    echo "<select class='form-control' id='course" . $row['student_id'] . "' name='edit_course' required>";
-        foreach($course_option as $course){
-            $selected_course  = ($row['course'] === $course) ? 'selected' : '';
-            echo "<option value='" . $course . "' " . $selected_course . ">". $course . "</option>";
+    echo "<label for='department" . $row['teacher_id'] . "'>Department</label>";
+    echo "<select class='form-control' id='department" . $row['teacher_id'] . "' name='edit_department' required>";
+        foreach($department_option as $department){
+            $selected_department  = ($row['department'] === $department) ? 'selected' : '';
+            echo "<option value='" . $department . "' " . $selected_department . ">". $department . "</option>";
         }
 
         echo "</select>";
@@ -226,30 +235,30 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 
     echo "<div class='form-group'>";
-    echo "<label for='email" . $row['student_id'] . "'>Email</label>";
-    echo "<input type='email' class='form-control' id='email" . $row['student_id'] . "' name='edit_email' value='" . $row['email'] . "' required>";
+    echo "<label for='email" . $row['teacher_id'] . "'>Email</label>";
+    echo "<input type='email' class='form-control' id='email" . $row['teacher_id'] . "' name='edit_email' value='" . $row['email'] . "' required>";
     echo "</div>";
 
     echo "<div class='form-group'>";
-    echo "<label for='phone" . $row['student_id'] . "'>Phone No.</label>";
-    echo "<input type='text' class='form-control' id='phone" . $row['student_id'] . "' name='edit_phone' value='" . $row['phone'] . "' required>";
+    echo "<label for='phone" . $row['teacher_id'] . "'>Phone No.</label>";
+    echo "<input type='text' class='form-control' id='phone" . $row['teacher_id'] . "' name='edit_phone' value='" . $row['phone'] . "' required>";
     echo "</div>";
 
     echo "<div class='form-group'>";
-    echo "<label for='Street" . $row['student_id'] . "'>Street</label>";
+    echo "<label for='Street" . $row['teacher_id'] . "'>Street</label>";
     echo "<input type='text' class='form-control' id='street" . $row['street'] . "' name='edit_street' value='" . $row['street'] . "' required>";
     echo "</div>";
 
     echo "<div class='form-group'>";
-    echo "<label for='Barangay" . $row['student_id'] . "'>Barangay</label>";
+    echo "<label for='Barangay" . $row['teacher_id'] . "'>Barangay</label>";
     echo "<input type='text' class='form-control' id='barangay" . $row['barangay'] . "' name='edit_barangay' value='" . $row['barangay'] . "' required>";
     echo "</div>";
     echo "<div class='form-group'>";
-    echo "<label for='Municipality" . $row['student_id'] . "'>Municipality</label>";
+    echo "<label for='Municipality" . $row['teacher_id'] . "'>Municipality</label>";
     echo "<input type='text' class='form-control' id='municipality" . $row['municipality'] . "' name='edit_municipality' value='" . $row['municipality'] . "' required>";
     echo "</div>";
     echo "<div class='form-group'>";
-    echo "<label for='Province" . $row['student_id'] . "'>Province</label>";
+    echo "<label for='Province" . $row['teacher_id'] . "'>Province</label>";
     echo "<input type='text' class='form-control' id='province" . $row['province'] . "' name='edit_province' value='" . $row['province'] . "' required>";
     echo "</div>";
 
@@ -268,22 +277,22 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
     // Delete Modal
-    echo "<div class='modal fade' id='deleteModal" . $row['student_id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel" . $row['student_id'] . "' aria-hidden='true'>";
+    echo "<div class='modal fade' id='deleteModal" . $row['teacher_id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel" . $row['teacher_id'] . "' aria-hidden='true'>";
     echo "<div class='modal-dialog modal-lg' role='document'>"; // Changed to modal-lg for larger width
     echo "<div class='modal-content'>";
     echo "<div class='modal-header'>";
-    echo "<h5 class='modal-title' id='deleteModalLabel" . $row['student_id'] . "'>Delete Student</h5>";
+    echo "<h5 class='modal-title' id='deleteModalLabel" . $row['teacher_id'] . "'>Delete teacher</h5>";
     echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
     echo "<span aria-hidden='true'>&times;</span>";
     echo "</button>";
     echo "</div>";
     echo "<div class='modal-body'>";
-    echo "<p>Are you sure you want to delete this student ID" . $row['student_id'] ." ? </p>";
+    echo "<p>Are you sure you want to delete this teacher ID" . $row['teacher_id'] ." ? </p>";
     echo "</div>";
     echo "<div class='modal-footer'>";
     echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
-    echo "<form action='process_code/student_delete_information.php' method='POST'>";
-    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+    echo "<form action='process_code/teacher_delete_information.php' method='POST'>";
+    echo "<input type='hidden' name='id' value='" . $row['teacher_id'] . "'>";
     echo "<button type='submit' class='btn btn-danger'>Delete</button>";
     echo "</form>";
     echo "</div>";

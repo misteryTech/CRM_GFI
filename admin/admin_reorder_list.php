@@ -1,0 +1,181 @@
+<?php
+include("admin_header.php");
+session_start();
+include("../include/connection.php");
+
+// Fetch reorder medicine information with corresponding medicine details from the database
+$query = "
+    SELECT rm.*, m.medicine_name
+    FROM reorder_medicine rm
+    INNER JOIN medicines m ON rm.medicine_id = m.id
+";
+$result = mysqli_query($connection, $query);
+?>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <?php
+        include("admin_sidebar.php");
+        ?>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <?php
+                include("admin_topbar.php");
+                ?>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Reorder Medicine Information</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="medicineTable" width="100%" cellspacing="0">
+                                    <?php if (isset($_SESSION['success'])): ?>
+                                        <div class="alert alert-success">
+                                            <?php
+                                            echo $_SESSION['success'];
+                                            unset($_SESSION['success']);
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if (isset($_SESSION['error'])): ?>
+                                        <div class="alert alert-danger">
+                                            <?php
+                                            echo $_SESSION['error'];
+                                            unset($_SESSION['error']);
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <thead>
+                                        <tr>
+                                            <th>Medicine ID</th>
+                                            <th>Medicine Name</th>
+                                            <th>Reorder Quantity</th>
+                                            <th>Reorder Date</th>
+                                            <th>Reorder Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php
+                                    // Loop through each row of the result set
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<td>" . $row['medicine_id'] . "</td>";
+                                        echo "<td>" . $row['medicine_name'] . "</td>";
+                                        echo "<td>" . $row['reorder_quantity'] . "</td>";
+                                        echo "<td>" . $row['reorder_date'] . "</td>";
+                                        echo "<td>" . $row['reorder_status'] . "</td>";
+                                        echo "<td>";
+                                        echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['medicine_id'] . "'>View</button> ";
+
+                                        // Accept Request Stock Button
+                                        echo "<form action='process_code/accept_reorder_request.php' method='POST' style='display:inline-block;'>";
+                                        echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
+                                        echo "<button type='submit' class='btn btn-success'>Accept</button>";
+                                        echo "</form> ";
+
+                                        echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['medicine_id'] . "'>Delete</button>";
+                                        echo "</td>";
+                                        echo "</tr>";
+
+                                        // View Modal
+                                        echo "<div class='modal fade' id='viewModal" . $row['medicine_id'] . "' tabindex='-1' role='dialog' aria-labelledby='viewModalLabel" . $row['medicine_id'] . "' aria-hidden='true'>";
+                                        echo "<div class='modal-dialog modal-lg' role='document'>";
+                                        echo "<div class='modal-content'>";
+                                        echo "<div class='modal-header'>";
+                                        echo "<h5 class='modal-title' id='viewModalLabel" . $row['medicine_id'] . "'>Medicine List Request Details</h5>";
+                                        echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                                        echo "<span aria-hidden='true'>&times;</span>";
+                                        echo "</button>";
+                                        echo "</div>";
+                                        echo "<div class='modal-body'>";
+                                        echo "<div class='row'>";
+                                        echo "<div class='col-md-6'>";
+                                        echo "<p><strong>Medicine ID:</strong> " . $row['medicine_id'] . "</p>";
+                                        echo "<p><strong>Medicine Name:</strong> " . $row['medicine_name'] . "</p>";
+                                        echo "<p><strong>Current Stock:</strong> " . $row['current_stock'] . "</p>";
+                                        echo "</div>";
+                                        echo "<div class='col-md-6'>";
+
+                                        echo "<p><strong>Reorder Quantity:</strong> " . $row['reorder_quantity'] . "</p>";
+                                        echo "<p><strong>Reorder Date:</strong> " . $row['reorder_date'] . "</p>";
+                                        echo "<p><strong>Reorder Status:</strong> " . $row['reorder_status'] . "</p>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                        echo "<div class='modal-footer'>";
+                                        echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                        echo "</div>";
+
+                                        // Delete Modal
+                                        echo "<div class='modal fade' id='deleteModal" . $row['medicine_id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel" . $row['medicine_id'] . "' aria-hidden='true'>";
+                                        echo "<div class='modal-dialog modal-lg' role='document'>";
+                                        echo "<div class='modal-content'>";
+                                        echo "<div class='modal-header'>";
+                                        echo "<h5 class='modal-title' id='deleteModalLabel" . $row['medicine_id'] . "'>Delete Reorder</h5>";
+                                        echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+                                        echo "<span aria-hidden='true'>&times;</span>";
+                                        echo "</button>";
+                                        echo "</div>";
+                                        echo "<div class='modal-body'>";
+                                        echo "<p>Are you sure you want to delete this reorder " . $row['reorder_id'] . " ?</p>";
+                                        echo "</div>";
+                                        echo "<div class='modal-footer'>";
+                                        echo "<form action='process_code/reorder_medicine_delete.php' method='POST'>";
+                                        echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
+                                        echo "<button type='submit' class='btn btn-danger'>Delete</button>";
+                                        echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
+                                        echo "</form>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                    }
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <?php
+            include("admin_footer.php");
+            ?>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+</body>
+
+</html>

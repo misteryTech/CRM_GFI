@@ -11,7 +11,7 @@
  Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 28/08/2024 16:50:46
+ Date: 29/08/2024 16:49:53
 */
 
 SET NAMES utf8mb4;
@@ -86,13 +86,15 @@ CREATE TABLE `medicines`  (
   `storage_instructions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp,
   `stock` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of medicines
 -- ----------------------------
-INSERT INTO `medicines` VALUES (1, 'asd', 'asd', 'Capsule', '2024-08-13', 'asd', '123', '123', '123', 'asd', '123', '2024-08-12 11:07:57', '');
+INSERT INTO `medicines` VALUES (1, 'asd', 'asd', 'Capsule', '2024-08-13', 'asd', '123', '123', '123', 'asd', '123', '2024-08-12 11:07:57', '1', 'On Process');
+INSERT INTO `medicines` VALUES (2, 'Bioflu', 'Bear Brand', 'Tablet', '2024-08-29', 'shinko', '123', '123', '21', '35%', 'normal', '2024-08-29 14:01:12', '50', NULL);
 
 -- ----------------------------
 -- Table structure for organizations
@@ -137,6 +139,26 @@ CREATE TABLE `registrations`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for reorder_medicine
+-- ----------------------------
+DROP TABLE IF EXISTS `reorder_medicine`;
+CREATE TABLE `reorder_medicine`  (
+  `reorder_id` int NOT NULL AUTO_INCREMENT,
+  `medicine_id` int NOT NULL,
+  `current_stock` int NOT NULL,
+  `reorder_quantity` int NOT NULL,
+  `reorder_status` enum('Pending','Ordered','Received') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'Pending',
+  `reorder_date` date NOT NULL,
+  `expected_arrival` date NULL DEFAULT NULL,
+  PRIMARY KEY (`reorder_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of reorder_medicine
+-- ----------------------------
+INSERT INTO `reorder_medicine` VALUES (2, 1, 1, 500, 'Pending', '2024-08-29', NULL);
+
+-- ----------------------------
 -- Table structure for staff_table
 -- ----------------------------
 DROP TABLE IF EXISTS `staff_table`;
@@ -163,7 +185,7 @@ CREATE TABLE `staff_table`  (
 -- ----------------------------
 -- Records of staff_table
 -- ----------------------------
-INSERT INTO `staff_table` VALUES (1, 'admin', '1h1gVxCY@g@R', 'asd', 'asd', '2024-08-29', 'Male', 'websupport@starbright.com.ph', '09399213074', 'Pres Quirino Ave', 'asd', 'asd', 'asd', 'asd', 'Administration', '0000-00-00');
+INSERT INTO `staff_table` VALUES (1, 'admin', 'admin', 'asd', 'asd', '2024-08-29', 'Male', '', '', '', '', '', '', 'Administrator', '', '0000-00-00');
 
 -- ----------------------------
 -- Table structure for students_table
@@ -193,7 +215,6 @@ CREATE TABLE `students_table`  (
 -- ----------------------------
 -- Records of students_table
 -- ----------------------------
-INSERT INTO `students_table` VALUES (1, '123123', 'student', 'JJko*+ODw9fe', 'student', 'student', '2024-08-28', 'Male', 'admin@gmail.com', '09399213074', 'Pres Quirino Ave', 'asd', 'asd', 'asd', '2015', '3rd', 'Computer Science');
 
 -- ----------------------------
 -- Table structure for teachers_table
@@ -217,7 +238,7 @@ CREATE TABLE `teachers_table`  (
   `position` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `date_hired` date NOT NULL,
   PRIMARY KEY (`teacher_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teachers_table

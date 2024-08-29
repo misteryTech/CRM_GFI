@@ -7,23 +7,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = mysqli_real_escape_string($connection, $_POST['password']);
 
     // Query to find the user with the provided username
-    $query = "SELECT * FROM students_table WHERE username = '$username'";
+    $query = "SELECT * FROM staff_table WHERE username = '$username'";
     $result = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $stored_password = $row['password'];
-        $role = $row['role']; // Assuming there is a role column in the students table
+        $position = $row['position']; // Assuming there is a role column in the students table
 
         // Verify the password
         if ($password === $stored_password) {
             // Password is correct, set the session variables
             $_SESSION['username'] = $row['username'];
-            $_SESSION['student_id'] = $row['student_id'];
-            $_SESSION['id'] = $row['id'];
+            $_SESSION['staff_id'] = $row['staff_id'];
 
             // Redirect based on role
-            if ($role === 'Admin') {
+            if ($position === 'Administrator') {
                 header("Location: admin/admin_dashboard.php");
             } else {
                 header("Location: student/student_dashboard.php");

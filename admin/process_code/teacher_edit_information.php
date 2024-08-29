@@ -3,8 +3,8 @@ session_start();
 include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = mysqli_real_escape_string($connection, $_POST['id']);
-    $student_id = mysqli_real_escape_string($connection, $_POST['student_id']);
+    $id = mysqli_real_escape_string($connection, $_POST['teacher_id']);
+
     $username = mysqli_real_escape_string($connection, $_POST['edit_username']);
     $first_name = mysqli_real_escape_string($connection, $_POST['edit_first_name']);
     $last_name = mysqli_real_escape_string($connection, $_POST['edit_last_name']);
@@ -16,13 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $barangay = mysqli_real_escape_string($connection, $_POST['edit_barangay']);
     $municipality = mysqli_real_escape_string($connection, $_POST['edit_municipality']);
     $province = mysqli_real_escape_string($connection, $_POST['edit_province']);
-    $year = mysqli_real_escape_string($connection, $_POST['edit_year']);
-    $section = mysqli_real_escape_string($connection, $_POST['edit_section']);
-    $course = mysqli_real_escape_string($connection, $_POST['edit_course']);
+
+
+    $date_hired = mysqli_real_escape_string($connection, $_POST['edit_date_hired']);
+    $department = mysqli_real_escape_string($connection, $_POST['edit_department']);
+    $position = mysqli_real_escape_string($connection, $_POST['edit_position']);
+
+
     $username = mysqli_real_escape_string($connection, $_POST['edit_username']);
     $password = mysqli_real_escape_string($connection, $_POST['edit_password']);
 
-    $query = "UPDATE students_table SET
+    $query = "UPDATE teachers_table SET
         username='$username',
         first_name='$first_name',
         last_name='$last_name',
@@ -34,20 +38,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         barangay='$barangay',
         municipality='$municipality',
         province='$province',
-        year='$year',
-        section='$section',
-        course='$course',
+        date_hired='$date_hired',
+        department='$department',
+        position='$position',
         username='$username',
         password='$password'
-        WHERE id='$id'";
+        WHERE teacher_id='$id'";
 
     if (mysqli_query($connection, $query)) {
-        $_SESSION['success'] = "Student information updated successfully!";
+        $_SESSION['success'] = "teacher information updated successfully!";
     } else {
         $_SESSION['error'] = "Error: " . $query . "<br>" . mysqli_error($connection);
     }
 
-    header("Location: ../student_information_page_data.php"); // Change this to the appropriate page
+    header("Location: ../teachers_information_page_data.php"); // Change this to the appropriate page
     exit();
 }
 

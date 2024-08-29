@@ -3,11 +3,11 @@ include("../../include/connection.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['student_id'])) {
-        $student_id = $_POST['student_id'];
+    if (isset($_POST['id'])) {
+        $student_id = $_POST['id'];
 
         // Delete student from the database
-        $delete_query = "DELETE FROM students WHERE id='$student_id'";
+        $delete_query = "DELETE FROM students_table WHERE id='$student_id'";
         $delete_result = mysqli_query($connection, $delete_query);
 
         if ($delete_result) {

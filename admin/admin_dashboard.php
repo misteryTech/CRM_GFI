@@ -8,7 +8,7 @@ session_start();
 include("../include/connection.php");
 
 // Check if student is logged in
-if (!isset($_SESSION['student_id'])) {
+if (!isset($_SESSION['staff_id'])) {
     $_SESSION['error'] = "You must be logged in to view this page.";
     header("Location: ../login.php");
     exit();

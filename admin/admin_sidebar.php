@@ -70,7 +70,7 @@
             <h6 class="collapse-header">Staff Management</span>
             </a>:</h6>
             <a class="collapse-item" href="staff_registration_page.php">Staff Registration</a>
-            <a class="collapse-item" href="#">Staff Data</a>
+            <a class="collapse-item" href="staff_information_page_data.php">Staff Data</a>
             <a class="collapse-item" href="#">Medical Records</a>
 
         </div>
@@ -89,7 +89,7 @@
             <h6 class="collapse-header">Teacher Management</span>
             </a>:</h6>
             <a class="collapse-item" href="teacher_registration_page.php">Teacher Registration</a>
-            <a class="collapse-item" href="#">Teacher Data</a>
+            <a class="collapse-item" href="teachers_information_page_data.php">Teacher Data</a>
             <a class="collapse-item" href="#">Medical Records</a>
 
         </div>
@@ -105,7 +105,7 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#itemData"
         aria-expanded="true" aria-controls="itemData">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
-        <span>Inventory  Management</span>
+        <span>Medicine  Management</span>
     </a>
     <div id="itemData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -113,7 +113,7 @@
             </a>:</h6>
             <a class="collapse-item" href="admin_medicine_registration.php">Medicine and Supplies</a>
             <a class="collapse-item" href="admin_med_stock.php">Stock Levels</a>
-            <a class="collapse-item" href="admin_reorder_stock.php">Reordering</a>
+            <a class="collapse-item" href="admin_reorder_list.php">Reordering List</a>
 
         </div>
     </div>

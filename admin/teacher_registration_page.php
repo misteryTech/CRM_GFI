@@ -118,7 +118,18 @@ include("../include/connection.php");
                         <div class="form-group">
                             <h3>Department Details</h3>
                             <div class="form-row">
+
                                 <div class="col-md-6">
+                                    <label for="position">Date Hired</label>
+                                    <input type="date" class="form-control" id="date_hired" name="date_hired" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="position">Position</label>
+                                    <input type="text" class="form-control" id="position" name="position" required>
+                                </div>
+
+                                <div class="col-md-12">
                                     <label for="department">Department</label>
                                     <select class="form-control" id="department" name="department" required>
                                         <option value="">Select Department</option>
@@ -130,10 +141,8 @@ include("../include/connection.php");
                                         <option value="Arts">Arts</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="position">Position</label>
-                                    <input type="text" class="form-control" id="position" name="position" required>
-                                </div>
+
+
                             </div>
                         </div>
 
