@@ -54,7 +54,10 @@ if (!isset($_SESSION['staff_id'])) {
 
 
                     <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
+
+
+
+                            <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -70,7 +73,7 @@ if (!isset($_SESSION['staff_id'])) {
 
 
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Students</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total Students</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -98,11 +101,11 @@ if (!isset($_SESSION['staff_id'])) {
 
                                                 </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                Organization
+                                            Total Teacher
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-building fa-2x text-gray-300"></i>
+                                            <i class="fas fa-user fa-2x text-gray-300"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +132,7 @@ if (!isset($_SESSION['staff_id'])) {
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Events</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Total Medicine</div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
@@ -150,7 +153,7 @@ if (!isset($_SESSION['staff_id'])) {
 
                         <!-- Pending Requests Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -163,7 +166,7 @@ if (!isset($_SESSION['staff_id'])) {
                                                         echo $count_row_events    ;
                                                     ?>
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Registratered Organization</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Request Stock</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -175,16 +178,107 @@ if (!isset($_SESSION['staff_id'])) {
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row">
 
-                        <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
-
-
-
-                    </div>
                 <!-- /.container-fluid -->
+     <!-- Content Row -->
+     <div class="row">
 
+
+<!-- Earnings (Monthly) Card Example -->
+
+
+
+        <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">Request Students</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+
+                <a href="student_release_form.php" class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">Release Form</span>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            Request Teacher
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">Release Form</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-4 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Request Staff</div>
+                            </div>
+                            <div class="col">
+                                <div class="progress progress-sm mr-2">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+
+                <a href="#" class="btn btn-primary btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">Release Form</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+                   </div>
                 </div>
             </div>
          </div>

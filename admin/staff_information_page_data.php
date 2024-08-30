@@ -103,7 +103,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='col-md-6'>";
     echo "<p><strong>Last Name:</strong> " . $row['last_name'] . "</p>";
     echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
-    echo "<p><strong>Year:</strong> " . $row['year'] . "</p>";
+    echo "<p><strong>Year:</strong> " . $row['date_hired'] . "</p>";
     echo "<p><strong>position:</strong> " . $row['position'] . "</p>";
     echo "<p><strong>department:</strong> " . $row['department'] . "</p>";
     echo "</div>";
