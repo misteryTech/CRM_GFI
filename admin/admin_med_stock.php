@@ -164,6 +164,37 @@ $reorder_table = "5";
 
     echo "</div>";
 
+
+        // View Modal
+    echo "<div class='modal fade' id='viewModal" . $row['id'] . "' tabindex='-1' role='dialog' aria-labelledby='viewModalLabel" . $row['id'] . "' aria-hidden='true'>";
+    echo "<div class='modal-dialog modal-lg' role='document'>"; // Changed to modal-lg for larger width
+    echo "<div class='modal-content'>";
+    echo "<div class='modal-header'>";
+    echo "<h5 class='modal-title' id='viewModalLabel" . $row['id'] . "'>staff Details</h5>";
+    echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+    echo "<span aria-hidden='true'>&times;</span>";
+    echo "</button>";
+    echo "</div>";
+    echo "<div class='modal-body'>";
+    echo "<form action='process_code/reorder_medicine_process.php' method='POST'>";
+    echo "<input type='hidden' name='medicine_id' value='" . $row['id'] . "'>";
+    echo "<div class='row'>";
+
+    // Medicine Name
+    echo "<div class='col-md-6'>";
+    echo "<div class='form-group'>";
+    echo "<label for='medicine_name" . $row['id'] . "'>Medicine Name</label>";
+    echo "<input type='text' class='form-control' id='medicine_name" . $row['id'] . "' name='edit_medicine_name' value='" . $row['medicine_name'] . "' required>";
+    echo "</div>";
+
+    echo "<div class='form-group'>";
+    echo "<label for='stock" . $row['id'] . "'>Stock</label>";
+    echo "<input type='number' class='form-control' id='stock" . $row['id'] . "' name='current_stock' value='" . $row['stock'] . "' required>";
+    echo "</div>";
+
+
+    echo "</div>";
+
     // Stock
     echo "<div class='col-md-6'>";
     echo "<div class='form-group'>";

@@ -8,6 +8,8 @@ $query = "
     SELECT rm.*, m.medicine_name
     FROM reorder_medicine rm
     INNER JOIN medicines m ON rm.medicine_id = m.id
+
+    WHERE rm.reorder_status = 'Request'
 ";
 $result = mysqli_query($connection, $query);
 ?>
@@ -82,13 +84,7 @@ $result = mysqli_query($connection, $query);
                                         echo "<td>" . $row['reorder_status'] . "</td>";
                                         echo "<td>";
                                         echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['medicine_id'] . "'>View</button> ";
-
-                                        // Accept Request Stock Button
-                                        echo "<form action='process_code/accept_reorder_request.php' method='POST' style='display:inline-block;'>";
-                                        echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "'>";
-                                        echo "<button type='submit' class='btn btn-success'>Accept</button>";
-                                        echo "</form> ";
-
+                                        echo "<button class='btn btn-success' data-toggle='modal' data-target='#acceptModal" . $row['medicine_id'] . "'>Accept</button> ";
                                         echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['medicine_id'] . "'>Delete</button>";
                                         echo "</td>";
                                         echo "</tr>";
@@ -124,6 +120,60 @@ $result = mysqli_query($connection, $query);
                                         echo "</div>";
                                         echo "</div>";
                                         echo "</div>";
+
+
+                        // Accept Modal
+echo "<div class='modal fade' id='acceptModal" . $row['medicine_id'] . "' tabindex='-1' role='dialog' aria-labelledby='acceptModalLabel" . $row['medicine_id'] . "' aria-hidden='true'>";
+echo "<div class='modal-dialog modal-lg' role='document'>";
+echo "<div class='modal-content'>";
+echo "<div class='modal-header'>";
+echo "<h5 class='modal-title' id='acceptModalLabel" . $row['medicine_id'] . "'>Medicine Request Form</h5>";
+echo "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>";
+echo "<span aria-hidden='true'>&times;</span>";
+echo "</button>";
+echo "</div>";
+echo "<div class='modal-body'>";
+echo "<form action='process_code/order_list_accept.php' method='POST'>";
+echo "<div class='form-row'>";
+
+echo "<input type='hidden' name='reorder_id' value='" . $row['reorder_id'] . "' >";
+
+echo "<div class='form-group col-md-6'>";
+
+echo "<label for='medicineID" . $row['medicine_id'] . "'>Medicine ID:</label>";
+echo "<input type='text' name='medicine_id' class='form-control' id='medicineID" . $row['medicine_id'] . "' value='" . $row['medicine_id'] . "' readonly>";
+echo "</div>";
+echo "<div class='form-group col-md-6'>";
+echo "<label for='medicineName" . $row['medicine_id'] . "'>Medicine Name:</label>";
+echo "<input type='text' name='medicine_name' class='form-control' id='medicineName" . $row['medicine_id'] . "' value='" . $row['medicine_name'] . "' readonly>";
+echo "</div>";
+echo "</div>";
+echo "<div class='form-row'>";
+echo "<div class='form-group col-md-6'>";
+echo "<label for='currentStock" . $row['medicine_id'] . "'>Current Stock:</label>";
+echo "<input type='number' name='medicine_stock' class='form-control' id='currentStock" . $row['medicine_id'] . "' value='" . $row['current_stock'] . "' readonly>";
+echo "</div>";
+echo "<div class='form-group col-md-6'>";
+echo "<label for='reorderQuantity" . $row['medicine_id'] . "'>Reorder Quantity:</label>";
+echo "<input type='number' name='medicine_reorder_quantity' class='form-control' id='reorderQuantity" . $row['medicine_id'] . "' value='" . $row['reorder_quantity'] . "' readonly>";
+echo "</div>";
+echo "</div>";
+
+echo "<div class='form-group'>";
+echo "<label for='additionalNotes" . $row['medicine_id'] . "'>Additional Notes:</label>";
+echo "<textarea class='form-control' name='medicine_additional_notes' id='additionalNotes" . $row['medicine_id'] . "' name='notes' rows='3'></textarea>";
+echo "</div>";
+echo "<input type='hidden' name='medicine_id' value='" . $row['medicine_id'] . "'>";
+echo "<button type='submit' class='btn btn-primary'>Submit Request</button>";
+echo "</form>";
+echo "</div>";
+echo "<div class='modal-footer'>";
+echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+echo "</div>";
+echo "</div>";
+echo "</div>";
+echo "</div>";
+
 
                                         // Delete Modal
                                         echo "<div class='modal fade' id='deleteModal" . $row['medicine_id'] . "' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel" . $row['medicine_id'] . "' aria-hidden='true'>";
@@ -176,6 +226,6 @@ $result = mysqli_query($connection, $query);
         <i class="fas fa-angle-up"></i>
     </a>
 
-</body>
-
-</html>
+    <?php
+    include("admin_footer.php");
+    ?>
