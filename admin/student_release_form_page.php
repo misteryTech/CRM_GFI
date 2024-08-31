@@ -25,7 +25,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
         ?>
 
         <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" class="d -flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
@@ -60,6 +60,9 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                 <div class="col-md-4">
                                     <label for="studentId">Student ID</label>
                                     <h1><?php echo $student_id; ?></h1>
+
+
+                                    <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +91,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                 <div class="form-row">
                                     <div class="col-md-5">
                                         <label for="medicine_name">Medicine Name</label>
-                                        <select name="select_medicine[]" class="form-control">
+                                        <select name="medicine_id[]" class="form-control">
                                             <?php foreach ($medicine as $medicine_data) :?>
                                                 <option value="<?php echo $medicine_data['id']; ?>">
                                                     <?php echo ($medicine_data['medicine_name']); ?>
@@ -97,8 +100,8 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                         </select>
                                     </div>
                                     <div class="col-md-5">
-                                        <label for="dosage">Quantity</label>
-                                        <input type="text" class="form-control" name="dosage[]" required>
+                                        <label for="quantity">Quantity</label>
+                                        <input type="number" class="form-control" name="quantity[]" required>
                                     </div>
                                     <div class="col-md-2 align-self-end">
                                         <button type="button" class="btn btn-danger remove-medicine">Remove</button>
@@ -143,7 +146,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
             newField.innerHTML = `
                 <div class="col-md-5">
                     <label for="medicine_name">Medicine Name</label>
-                    <select name="select_medicine[]" class="form-control">
+                    <select name="medicine_id[]" class="form-control">
                         <?php foreach ($medicine as $medicine_data) :?>
                             <option value="<?php echo $medicine_data['id']; ?>">
                                 <?php echo ($medicine_data['medicine_name']); ?>
@@ -152,8 +155,8 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <label for="dosage">Quantity</label>
-                    <input type="text" class="form-control" name="dosage[]" required>
+                    <label for="quantity">Quantity</label>
+                    <input type="number" class="form-control" name="quantity[]" required>
                 </div>
                 <div class="col-md-2 align-self-end">
                     <button type="button" class="btn btn-danger remove-medicine">Remove</button>

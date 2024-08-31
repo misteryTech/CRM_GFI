@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("connection.php");
 
 $student_id = $_POST['student_id'];
@@ -6,8 +7,8 @@ $illness = $_POST['illness'];
 $symptoms = $_POST['symptoms'];
 $date_diagnosed = $_POST['date_diagnosed'];
 $note = $_POST['note'];
-$medicines = $_POST['medicines']; // Array of medicine IDs
-$dosages = $_POST['dosages']; // Array of corresponding dosages
+$medicines = $_POST['medicine_id']; // Array of medicine IDs
+$quantities = $_POST['quantity']; // Array of corresponding quantities
 
 // Begin a transaction
 $connection->begin_transaction();
@@ -21,22 +22,59 @@ try {
     // Get the last inserted record ID
     $record_id = $connection->insert_id;
 
-    // Insert each prescribed medicine
-    $stmt_medicine = $connection->prepare("INSERT INTO prescribed_medicine_table (record_id, medicine_id, dosage) VALUES (?, ?, ?)");
+    // Prepare statement for inserting prescribed medicine
+    $stmt_medicine = $connection->prepare("INSERT INTO prescribed_medicine_table (record_id, medicine_id, quantity) VALUES (?, ?, ?)");
+
+    // Prepare statement for querying current stock
+    $stmt_check_stock = $connection->prepare("SELECT stock FROM medicines WHERE id = ?");
+
+    // Prepare statement for updating medicine stock
+    $stmt_stock = $connection->prepare("UPDATE medicines SET stock = stock - ? WHERE id = ?");
+
+    // Process each medicine in the arrays
     for ($i = 0; $i < count($medicines); $i++) {
         $medicine_id = $medicines[$i];
-        $dosage = $dosages[$i];
-        $stmt_medicine->bind_param("iis", $record_id, $medicine_id, $dosage);
-        $stmt_medicine->execute();
+        $quantity = $quantities[$i];
+
+        if (!empty($medicine_id) && !empty($quantity) && $quantity > 0) {
+            // Check current stock
+            $stmt_check_stock->bind_param("i", $medicine_id);
+            $stmt_check_stock->execute();
+            $stmt_check_stock->bind_result($current_stock);
+            $stmt_check_stock->fetch();
+
+            // Check if there is enough stock
+            if ($current_stock < $quantity) {
+                throw new Exception("Insufficient stock for medicine ID: $medicine_id");
+            }
+
+            // Insert into prescribed_medicine_table
+            $stmt_medicine->bind_param("iii", $record_id, $medicine_id, $quantity);
+            $stmt_medicine->execute();
+
+            // Update medicine stock
+            $stmt_stock->bind_param("ii", $quantity, $medicine_id);
+            $stmt_stock->execute();
+
+            // Check if the stock update was successful
+            if ($stmt_stock->affected_rows === 0) {
+                throw new Exception("Failed to update medicine stock for medicine ID: $medicine_id");
+            }
+        }
     }
 
     // Commit the transaction
     $connection->commit();
 
-    echo "Record added successfully!";
+    $_SESSION['success'] = "Medical record successfully added!";
+    header("Location: ../student_release_form_page.php?student_id=$student_id");
+    exit();
+
 } catch (Exception $e) {
     // Rollback the transaction if something went wrong
     $connection->rollback();
-    echo "Failed to add record: " . $e->getMessage();
+    $_SESSION['error'] = "Failed to add record: " . $e->getMessage();
+    header("Location: ../student_release_form_page.php?student_id=$student_id");
+    exit();
 }
 ?>

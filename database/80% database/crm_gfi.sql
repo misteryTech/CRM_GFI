@@ -11,7 +11,7 @@
  Target Server Version : 100428 (10.4.28-MariaDB)
  File Encoding         : 65001
 
- Date: 30/08/2024 16:59:04
+ Date: 31/08/2024 16:42:02
 */
 
 SET NAMES utf8mb4;
@@ -93,8 +93,8 @@ CREATE TABLE `medicines`  (
 -- ----------------------------
 -- Records of medicines
 -- ----------------------------
-INSERT INTO `medicines` VALUES (1, 'asd', 'asd', 'Capsule', '2024-08-13', 'asd', '123', '123', '123', 'asd', '123', '2024-08-12 11:07:57', '4507', 'Received');
-INSERT INTO `medicines` VALUES (2, 'Bioflu', 'Bear Brand', 'Tablet', '2024-08-29', 'shinko', '123', '123', '21', '35%', 'normal', '2024-08-29 14:01:12', '50', NULL);
+INSERT INTO `medicines` VALUES (1, 'asd', 'asd', 'Capsule', '2024-08-13', 'asd', '123', '123', '123', 'asd', '123', '2024-08-12 11:07:57', '100', 'Received');
+INSERT INTO `medicines` VALUES (2, 'Bioflu', 'Bear Brand', 'Tablet', '2024-08-29', 'shinko', '123', '123', '21', '35%', 'normal', '2024-08-29 14:01:12', '500', NULL);
 
 -- ----------------------------
 -- Table structure for organizations
@@ -124,13 +124,15 @@ CREATE TABLE `prescribed_medicine_table`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `record_id` int NULL DEFAULT NULL,
   `medicine_id` int NULL DEFAULT NULL,
-  `dosage` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `quantity` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of prescribed_medicine_table
 -- ----------------------------
+INSERT INTO `prescribed_medicine_table` VALUES (1, 1, 1, '100');
+INSERT INTO `prescribed_medicine_table` VALUES (2, 1, 2, '500');
 
 -- ----------------------------
 -- Table structure for registrations
@@ -221,6 +223,7 @@ CREATE TABLE `student_clinic_record_table`  (
 -- ----------------------------
 -- Records of student_clinic_record_table
 -- ----------------------------
+INSERT INTO `student_clinic_record_table` VALUES (1, 1231, 'asd', 'asd', '2024-08-31', 'asdasd');
 
 -- ----------------------------
 -- Table structure for students_table
