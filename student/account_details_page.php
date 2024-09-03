@@ -14,7 +14,7 @@ if (!isset($_SESSION['student_id'])) {
 $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
 
 // Fetch student details from the database
-$studentQuery = "SELECT * FROM students WHERE student_id = '$student_id'";
+$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
 $studentResult = mysqli_query($connection, $studentQuery);
 $student = mysqli_fetch_assoc($studentResult);
 
@@ -59,11 +59,11 @@ $student = mysqli_fetch_assoc($studentResult);
 
                     <h2>Account Details</h2>
                     <form action="process_code/account_details_updates.php" method="POST">
-                        <!-- Student Information -->
+                        <!-- student Information -->
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-4">
-                                    <label for="studentId">Student ID</label>
+                                    <label for="studentId">student ID</label>
                                     <input type="text" class="form-control" id="studentId" name="student_id" value="<?php echo $student['student_id']; ?>" required readonly>
                                 </div>
                                 <div class="col-md-4">

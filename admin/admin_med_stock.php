@@ -69,7 +69,7 @@ $reorder_table = "5";
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
-                                        echo "<table class='table table-bordered'>";
+                                        echo "<table class='table table-bordered' id='stocktable'>";
                                         echo "<thead>";
                                         echo "<tr>";
                                         echo "<th>medicine ID</th>";

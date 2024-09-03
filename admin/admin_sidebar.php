@@ -30,7 +30,6 @@
     </div>
 
 </li>
-
 <!-- Divider -->
 <hr class="sidebar-divider">
 
@@ -50,8 +49,7 @@
             <h6 class="collapse-header">Students:</h6>
             <a class="collapse-item" href="student_registration_page.php">Student Registration</a>
             <a class="collapse-item" href="student_information_page_data.php">Students Data</a>
-            <a class="collapse-item" href="student_information_page_data.php">Appointment Scheduling</a>
-            <a class="collapse-item" href="student_information_page_data.php">Medical Records</a>
+            <a class="collapse-item" href="student_medical_records.php">Medical Records</a>
 
         </div>
     </div>
@@ -131,8 +129,8 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Report Management</span>
             </a>:</h6>
-            <a class="collapse-item" href="student_registration_page.php">Student Report</a>
-            <a class="collapse-item" href="student_information_page_data.php">Inventory Report</a>
+            <a class="collapse-item" href="student_report_page.php">Student Report</a>
+            <a class="collapse-item" href="clinic_report_page.php">Clinic Management Report</a>
 
         </div>
     </div>

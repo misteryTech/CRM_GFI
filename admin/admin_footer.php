@@ -54,7 +54,7 @@
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
-    <script src="../js/demo/chart-pie-demo.js"></script>
+
 
 
         <!-- End of Page Wrapper -->
@@ -65,6 +65,12 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
             <!-- End of Main Content -->
             <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+
+
+
+
             <script>
 
 
@@ -128,9 +134,31 @@
         });
 
 
+
+
+        $(document).ready(function() {
+            $('#stocktable').DataTable();
+        });
+
+
         $(document).ready(function() {
             $('#medicineTable').DataTable();
         });
+
+
+        $(document).ready(function() {
+            $('#medicalrecordTable').DataTable();
+        });
+
+        $(document).ready(function() {
+            $('#medicalRecordTable').DataTable();
+        });
+
+
+        $(document).ready(function() {
+            $('#medicalReleaseRecordTable').DataTable();
+        });
+
 
 
 
