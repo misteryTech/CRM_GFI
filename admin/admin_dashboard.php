@@ -117,7 +117,7 @@ $stmt->close();
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             <?php
-                                                        $query= mysqli_query($connection,"SELECT * FROM organizations");
+                                                        $query= mysqli_query($connection,"SELECT * FROM staff_table");
 
                                                         $count_row_organization = mysqli_num_rows($query);
 

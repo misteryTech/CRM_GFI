@@ -131,6 +131,7 @@
             </a>:</h6>
             <a class="collapse-item" href="student_report_page.php">Student Report</a>
             <a class="collapse-item" href="clinic_report_page.php">Clinic Management Report</a>
+            <a class="collapse-item" href="medicine_report_page.php">Medicine Data Report</a>
 
         </div>
     </div>

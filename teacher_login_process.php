@@ -7,31 +7,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = mysqli_real_escape_string($connection, $_POST['password']);
 
     // Query to find the user with the provided username
-    $query = "SELECT * FROM staff_table WHERE username = '$username'";
+    $query = "SELECT * FROM teachers_table WHERE username = '$username'";
     $result = mysqli_query($connection, $query);
 
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_assoc($result);
         $stored_password = $row['password'];
-        $position = $row['position']; // Assuming there is a role column NAin the students table
+
 
         // Verify the password
         if ($password === $stored_password) {
             // Password is correct, set the session variables
             $_SESSION['username'] = $row['username'];
-            $_SESSION['staff_id'] = $row['staff_id'];
+            $_SESSION['teacher_id'] = $row['teacher_id'];
 
+            header("Location: teacher/teacher_dashboard.php");
             // Redirect based on role
-            if ($position === 'Administrator') {
-                header("Location: admin/admin_dashboard.php");
-            } else {
-                header("Location: admin/admin_dashboard.php");
-            }
             exit();
         } else {
             // Incorrect password
             $_SESSION['error'] = "Invalid username or password!";
-            header("Location: login.php");
+            header("Location: login_teacher.php");
             exit();
         }
     } else {
