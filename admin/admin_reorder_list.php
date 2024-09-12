@@ -9,7 +9,7 @@ $query = "
     FROM reorder_medicine rm
     INNER JOIN medicines m ON rm.medicine_id = m.id
 
-    WHERE rm.reorder_status = 'Request'
+    WHERE rm.reorder_status = 'Pending'
 ";
 $result = mysqli_query($connection, $query);
 ?>
