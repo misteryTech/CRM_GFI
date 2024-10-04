@@ -72,7 +72,7 @@ $reorder_table = "5";
                                         echo "<table class='table table-bordered' id='stocktable'>";
                                         echo "<thead>";
                                         echo "<tr>";
-                                        echo "<th>Medicine ID</th>";
+                           
                                         echo "<th>Medicine Name</th>";
                                         echo "<th>Stock</th>";
                                         echo "</tr>";
@@ -81,7 +81,7 @@ $reorder_table = "5";
 
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo "<tr>";
-                                            echo "<td>" . $row['id'] . "</td>";
+                                         
                                             echo "<td>" . $row['medicine_name'] . "</td>";
                                             echo "<td>" . $row['stock'] . "</td>";
                                             echo "</tr>";

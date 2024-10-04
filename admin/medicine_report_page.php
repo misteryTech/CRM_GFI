@@ -4,7 +4,12 @@ session_start();
 include("../include/connection.php");
 
 // Fetch all student information from the database
-$query = "SELECT * FROM reorder_medicine";
+$query = "SELECT m.id,m.medicine_name,rm.current_stock,rm.reorder_quantity,rm.reorder_status,rm.reorder_status,rm.reorder_date,rm.reorder_process_date,rm.medicine_id
+
+
+
+FROM reorder_medicine AS rm
+INNER JOIN medicines AS m ON rm.medicine_id = m.id";
 $result = mysqli_query($connection, $query);
 ?>
 
@@ -73,7 +78,7 @@ $result = mysqli_query($connection, $query);
 
                                     <thead>
                                         <tr>
-                                            <th>Medicine Id</th>
+                                          <th>Medicine Name</th>
                                             <th>Current</th>
                                             <th>Reorder Quantity</th>
                                             <th>Reorder Status</th>
@@ -87,7 +92,7 @@ $result = mysqli_query($connection, $query);
                                     // Loop through each row of the result set
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
-                                        echo "<td>" . $row['medicine_id'] . "</td>";
+                                        echo "<td>" . $row['medicine_name'] . "</td>";
                                         echo "<td>" . $row['current_stock'] . "</td>";
                                         echo "<td>" . $row['reorder_quantity']."</td>";
                                         echo "<td>" . $row['reorder_status'] . "</td>";

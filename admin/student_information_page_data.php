@@ -98,15 +98,30 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='row'>";
     echo "<div class='col-md-6'>";
     echo "<p><strong>Student ID:</strong> " . $row['student_id'] . "</p>";
-    echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
+  
     echo "<p><strong>First Name:</strong> " . $row['first_name'] . "</p>";
+    echo "<p><strong>Date of Birth:</strong> " . $row['dob'] . "</p>";
+    echo "<p><strong>Gender: </strong> " . $row['gender'] . "</p>";
+    echo "<hr>";
+    echo "<p><strong>Street: </strong> " . $row['street'] . "</p>";
+    echo "<p><strong>Barangay: </strong> " . $row['barangay'] . "</p>";
+    echo "<p><strong>Munipality: </strong> " . $row['municipality'] . "</p>";
+    echo "<p><strong>Munipality: </strong> " . $row['province'] . "</p>";
     echo "</div>";
+
+
+
+
     echo "<div class='col-md-6'>";
+    echo "<p><strong>Username:</strong> " . $row['username'] . "</p>";
     echo "<p><strong>Last Name:</strong> " . $row['last_name'] . "</p>";
+    echo "<p><strong>Phone:</strong> " . $row['phone'] . "</p>";
     echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
+    echo "<hr>";
     echo "<p><strong>Year:</strong> " . $row['year'] . "</p>";
     echo "<p><strong>Section:</strong> " . $row['section'] . "</p>";
     echo "<p><strong>Course:</strong> " . $row['course'] . "</p>";
+    echo "<p><strong>Registration Date:</strong> " . $row['registration_date'] . "</p>";
     echo "</div>";
     echo "</div>";
     echo "</div>";

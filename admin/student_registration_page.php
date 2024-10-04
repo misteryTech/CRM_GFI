@@ -43,14 +43,16 @@ include("../include/connection.php");
 
 
                     <h2>Student Registration Form</h2>
-                    <form action="process_code/student_registration.php" method="POST">
+                    <form action="process_code/student_registration.php" method="POST"  enctype="multipart/form-data">
                         <!-- Student Information -->
                         <div class="form-group">
 
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <label for="studentId">Student ID</label>
-                                    <input type="text" class="form-control" id="studentId" name="student_id" required>
+                                    <input type="text"  class="form-control" id="studentId" name="student_id" required>
+                                    <span id="studentIdError" style="color:red; display:none;">Student ID already exists!</span>
+                                    <span id="studentIdAvail" style="color:green; display:none;">Student ID Available!</span>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="username">Username</label>
@@ -115,20 +117,20 @@ include("../include/connection.php");
                         </div>
 
                            <!-- Course -->
-                           <div class="form-group">
+                        <div class="form-group">
                             <h3>Course</h3>
                             <div class="form-row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="year">Year</label>
                                     <input type="text" class="form-control" id="year" name="year" required>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="section">Section</label>
                                     <input type="text" class="form-control" id="section" name="section" required>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                  <label for="course">Course</label>
+
+                                <div class="col-md-4">
+                                <label for="course">Course</label>
                                   <select class="form-control" id="course" name="course" required>
                                       <option value="">Select Course</option>
                                       <option value="Computer Science">Computer Science</option>
@@ -140,7 +142,29 @@ include("../include/connection.php");
                                   </select>
                                 </div>
 
+
+                            </div>
+                   
+
                         </div>
+
+                        <div class="form-group">
+                            <h3>Medical History</h3>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="year">Pre-existing condition</label>
+                                    <input type="text" class="form-control" id="pre_condition" name="pre_condition" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="section">Documents</label>
+                                    <input type="file" class="form-control" id="documents" name="documents" required>
+                                </div>
+                            </div>
+                     
+
+                        </div>
+
+
                         <button type="submit" class="btn btn-success">Register</button>
                     </form>
                 </div>
@@ -160,8 +184,36 @@ include("../include/connection.php");
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-
+                       
     <?php
     include("admin_footer.php");
     ?>
     </div>
+    <script>
+                    $(document).ready(function() {
+                        // AJAX check for duplicate student ID
+                        $("#studentId").blur(function() {
+                            var studentId = $(this).val();
+                            $.ajax({
+                                url: "validation/check_student_id.php",
+                                method: "POST",
+                                data: { student_id: studentId },
+                                success: function(response) {
+                                    if (response == "exists") {
+    $("#studentIdError").show();
+    $("#studentIdAvail").hide();
+    $("#studentIdError").html('Student ID already exists.');
+    $("button[type='submit']").prop('disabled', true);
+    $("#studentId").css('border-color', 'red');  // Red border for duplicate ID
+} else {
+    $("#studentIdError").hide();
+    $("#studentIdAvail").show();
+    $("#studentIdError").html('Student is Available.');
+    $("button[type='submit']").prop('disabled', false);
+    $("#studentId").css('border-color', 'green');  // Green border for available ID
+}
+                                }
+                            });
+                        });
+                    });
+                </script>
