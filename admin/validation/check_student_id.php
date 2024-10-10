@@ -16,7 +16,7 @@ if (isset($_POST['student_id'])) {
     // Execute the statement
     mysqli_stmt_execute($stmt);
     
-    // Store the result to check the number of rows
+    // Store the result to check the number of rowss
     mysqli_stmt_store_result($stmt);
     
     // Check if any rows were returned

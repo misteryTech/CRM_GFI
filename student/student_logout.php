@@ -5,6 +5,6 @@ session_start(); // Start or resume the session
 session_destroy();
 
 // Redirect to the login page
-header("Location: ../login_student.php");
+header("Location: ../index.php");
 exit(); // Exit the script to ensure the redirection occurs
 ?>
