@@ -161,7 +161,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                 <div class="col-md-2 align-self-end">
                     <button type="button" class="btn btn-danger remove-medicine">Remove</button>
                 </div>`;
-            medicineFields.appendChild(newField);
+            medicineFields.appendChild(newField);s
 
             // Attach the remove event listener to the new remove button
             newField.querySelector('.remove-medicine').addEventListener('click', function() {
