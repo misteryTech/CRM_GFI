@@ -1,7 +1,6 @@
 <?php
 include("student_header.php");
 
-session_start();
 include("../include/connection.php");
 
 // Check if the student is logged in

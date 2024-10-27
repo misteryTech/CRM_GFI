@@ -21,7 +21,7 @@
         <?php
 
 // Query to count requests in `message_request_tbl`
-$request_count_query = "SELECT COUNT(*) AS request_count FROM message_request_tbl";
+$request_count_query = "SELECT COUNT(*) AS request_count FROM message_request_tbl WHERE status = 'Request'";
 $result = mysqli_query($connection, $request_count_query);
 $row = mysqli_fetch_assoc($result);
 

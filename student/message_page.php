@@ -56,7 +56,7 @@ $student = mysqli_fetch_assoc($studentResult);
                         </div>
                     <?php endif; ?>
 
-                    <h2>Medical Records</h2>
+                    <h2>Send Message to staff</h2>
                     <form action="process_code/message_request.php" method="POST"  enctype="multipart/form-data">
                         <!-- student Information -->
                         <div class="form-group">
@@ -80,7 +80,7 @@ $student = mysqli_fetch_assoc($studentResult);
                      
                         </div>
 
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="submit" class="btn btn-success">Send Message</button>
                     </form>
                 </div>
 
