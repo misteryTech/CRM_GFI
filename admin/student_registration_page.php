@@ -153,11 +153,11 @@ include("../include/connection.php");
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="year">Pre-existing condition</label>
-                                    <input type="text" class="form-control" id="pre_condition" name="pre_condition" required>
+                                    <input type="text" class="form-control" id="pre_condition" name="pre_condition">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="section">Documents</label>
-                                    <input type="file" class="form-control" id="documents" name="documents" required>
+                                    <input type="file" class="form-control" id="documents" name="documents">
                                 </div>
                             </div>
                      

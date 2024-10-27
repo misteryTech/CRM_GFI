@@ -1,3 +1,16 @@
+<?php
+session_start(); // Start the session
+
+// Check if student ID exists in the session
+if (isset($_SESSION['student_id'])) {
+    $studentId = $_SESSION['student_id'];
+} else {
+    // Redirect to login page or an error page if the session does not exist
+    header("Location: login.php"); // Redirect to the login page
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

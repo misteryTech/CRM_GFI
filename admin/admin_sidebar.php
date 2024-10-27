@@ -17,6 +17,28 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 
+
+        <?php
+
+// Query to count requests in `message_request_tbl`
+$request_count_query = "SELECT COUNT(*) AS request_count FROM message_request_tbl";
+$result = mysqli_query($connection, $request_count_query);
+$row = mysqli_fetch_assoc($result);
+
+// If there's a result, set the count; otherwise, default to 0
+$request_count = $row['request_count'] ?? 0;
+
+
+        ?>
+        <a class="nav-link" href="message_request_table.php">
+        <i class="fas fa-fw fa-envelope"></i>
+        <span>Notification</span>    <?php if ($request_count > 0): ?>
+        <span class="badge badge-pill badge-danger"><?php echo $request_count; ?></span>
+    <?php endif; ?>
+</a>
+
+
+
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountData"
         aria-expanded="true" aria-controls="accountData">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>

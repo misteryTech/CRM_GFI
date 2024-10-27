@@ -312,7 +312,7 @@ $stmt->close();
                                 <table class="table table-bordered" id="medicalRecordTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Record Id</th>
+                                         
                                             <th>Student ID</th>
                                             <th>Illness</th>
                                             <th>symptoms</th>
@@ -331,7 +331,7 @@ $stmt->close();
 
 
                                             echo "<tr>";
-                                            echo "<td>" . htmlspecialchars($record['record_id']) . "</td>";
+                                 
                                             echo "<td>" . htmlspecialchars($record['student_id']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";

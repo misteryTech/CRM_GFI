@@ -17,11 +17,42 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 
+        
+    <a class="nav-link" href="pre_existing_medical_records.php">
+        <i class="fas fa-fw fa-plus"></i>
+        <span>Medical Records</span></a>
+
+
+
+        
+        
+ 
+<a class="nav-link" href="student_medical_records.php?user_id=<?php echo htmlspecialchars($studentId); ?>">
+    <i class="fas fa-fw fa-hospital"></i>
+    <span>Student Records</span>
+
+
+         
+<a class="nav-link" href="message_page.php?user_id=<?php echo htmlspecialchars($studentId); ?>">
+    <i class="fas fa-fw fa-envelope"></i>
+    <span>Message Staff</span>
+</a> 
+
+
+
+
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountData"
         aria-expanded="true" aria-controls="accountData">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
         <span>Account Details</span>
     </a>
+
+    
+
+
+
+
+
     <div id="accountData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Account:</h6>

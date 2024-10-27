@@ -26,10 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // File upload handling (documents)
     $target_dir = "uploads/"; // Directory to store uploaded files
-    $file_name = $_FILES["documents"]["name"];
+    $file_name = $_FILES["documents"]["name"] ? $_FILES["documents"]["name"] : ""; // Leave blank if no file
     $target_file = $target_dir . basename($file_name);
     $file_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));  // Get file extension
-    $file_mime_type = mime_content_type($_FILES['documents']['tmp_name']); // Get MIME type
+    $file_mime_type = $file_name ? mime_content_type($_FILES['documents']['tmp_name']) : ""; // Get MIME type only if file exists
     $allowed_extensions = ['pdf', 'doc', 'docx'];
     $allowed_mime_types = [
         'application/pdf', 
@@ -38,31 +38,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ];
     $upload_ok = 1;
 
-    // Check file size (optional, here max file size is 2MB)
-    if ($_FILES["documents"]["size"] > 2000000) {
-        $_SESSION['error'] = "File size is too large. Maximum allowed size is 2MB.";
-        $upload_ok = 0;
-    }
+    if ($file_name) {
+        // Check file size (optional, here max file size is 2MB)
+        if ($_FILES["documents"]["size"] > 2000000) {
+            $_SESSION['error'] = "File size is too large. Maximum allowed size is 2MB.";
+            $upload_ok = 0;
+        }
 
-    // Allow only PDF or Word files (check both extension and MIME type)
-    if (!in_array($file_type, $allowed_extensions) || !in_array($file_mime_type, $allowed_mime_types)) {
-        $_SESSION['error'] = "Only PDF, DOC, or DOCX files are allowed.";
-        $upload_ok = 0;
-    }
+        // Allow only PDF or Word files (check both extension and MIME type)
+        if (!in_array($file_type, $allowed_extensions) || !in_array($file_mime_type, $allowed_mime_types)) {
+            $_SESSION['error'] = "Only PDF, DOC, or DOCX files are allowed.";
+            $upload_ok = 0;
+        }
 
-    // Proceed with upload if the file passes checks
-    if ($upload_ok == 1) {
-        if (move_uploaded_file($_FILES["documents"]["tmp_name"], $target_file)) {
-            $file_upload_success = true;
+        // Proceed with upload if the file passes checks
+        if ($upload_ok == 1) {
+            if (!move_uploaded_file($_FILES["documents"]["tmp_name"], $target_file)) {
+                $_SESSION['error'] = "Error uploading document.";
+                header("Location: ../student_registration_page.php");
+                exit();
+            }
         } else {
-            $_SESSION['error'] = "Error uploading document.";
-            $file_upload_success = false;
             header("Location: ../student_registration_page.php");
             exit();
         }
-    } else {
-        header("Location: ../student_registration_page.php");
-        exit();
     }
 
     // Insert data into students_table using prepared statements
@@ -74,8 +73,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_stmt_bind_param($stmt_student, 'ssssssssssssssss', $student_id, $username, $password, $first_name, $last_name, $dob, $gender, $email, $phone, $street, $barangay, $municipality, $province, $year, $section, $course);
 
     if (mysqli_stmt_execute($stmt_student)) {
-        // Get the last inserted student ID
-
         // Insert medical history into medical_history_table using prepared statements
         $query_medical = "INSERT INTO medical_history_table (user_id, existing_condition, documents, role, date_submitted) 
                           VALUES (?, ?, ?, 'Student', NOW())";
