@@ -17,7 +17,23 @@ include("../include/connection.php");
             $result_medical = $stmt_medical->get_result();
 
             // Fetch data from student_illness table
-            $stmt_illness = $connection->prepare("SELECT * FROM student_illness WHERE student_id = ?");
+            $stmt_illness = $connection->prepare("
+                SELECT 
+                    student_id,
+                    documents,
+                    chief_complain,
+                    illness,
+                    allergic_reaction,
+                    medication,
+                    dose,
+                    times_per_day,
+                    start_date,
+                    end_date,
+                    created_at
+                FROM student_illness
+                WHERE student_id = ?
+                ORDER BY created_at DESC
+            ");
             $stmt_illness->bind_param('i', $student_id);
             $stmt_illness->execute();
             $result_illness = $stmt_illness->get_result();
@@ -76,26 +92,37 @@ include("../include/connection.php");
                                 <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Chief Complain</th>
-                                            <th>Documents </th>
-                                            <th>Date Diagnosed</th>
-                                         
+                                            <th>Document</th>
+                                            <th>Chief Complaint</th>
+                                            <th>Illness</th>
+                                            <th>Allergic Reaction</th>
+                                            <th>Medication</th>
+                                            <th>Dose</th>
+                                            <th>Times Per Day</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Record Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php if (isset($result_illness) && $result_illness->num_rows > 0): ?>
-                                            <?php while ($illness = $result_illness->fetch_assoc()): ?>
+                                            <?php while ($row = $result_illness->fetch_assoc()): ?>
                                                 <tr>
-                                                    <td><?php echo htmlspecialchars($illness['chief_complain']); ?></td>
-                                             
-                                                    <td><a href="/process_code/uploads/<?php echo htmlspecialchars($record['documents']); ?>" target="_blank">View Document</a></td>
-                                            
-                                                    <td><?php echo htmlspecialchars($illness['date_registered']); ?></td>
+                                                    <td><a href="uploads/<?php echo htmlspecialchars($row['documents']); ?>" download>Download</a></td>
+                                                    <td><?php echo htmlspecialchars($row['chief_complain']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['illness']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['allergic_reaction']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['medication']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['dose']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['times_per_day']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['start_date']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['end_date']); ?></td>
+                                                    <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                                 </tr>
                                             <?php endwhile; ?>
                                         <?php else: ?>
                                             <tr>
-                                                <td colspan="3">No illness records found.</td>
+                                                <td colspan="10">No illness records found.</td>
                                             </tr>
                                         <?php endif; ?>
                                     </tbody>

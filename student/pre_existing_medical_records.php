@@ -57,34 +57,71 @@ $student = mysqli_fetch_assoc($studentResult);
                     <?php endif; ?>
 
                     <h2>Medical Records</h2>
-                    <form action="process_code/existing_medical_records.php" method="POST"  enctype="multipart/form-data">
-                        <!-- student Information -->
-                        <div class="form-group">
-                            <div class="form-row">
+                    <form action="process_code/existing_medical_records.php" method="POST" enctype="multipart/form-data">
+    <!-- Student Information -->
+    <div class="form-group">
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="studentId">Student ID</label>
+                <input type="text" class="form-control" id="studentId" name="student_id" value="<?php echo $student['student_id']; ?>" required readonly>
+            </div>
+            <div class="col-md-8">
+                <label for="documents">Documents</label>
+                <input type="file" class="form-control" id="documents" name="documents" required>
+            </div>
+        </div>
+        <br>
 
-                                <div class="col-md-4">
-                                    <label for="studentId">student ID</label>
-                                    <input type="text" class="form-control" id="studentId" name="student_id" value="<?php echo $student['student_id']; ?>" required readonly>
-                                </div>
-                                <div class="col-md-8">
-                                    <label for="username">Documents</label>
-                                    <input type="file" class="form-control" id="documents" name="documents" value="<?php echo $student['username']; ?>" required>
-                                </div>
-                               
-                            </div>
-                            <br>
-                                <div class="form-row">
+        <div class="form-row">
+            <div class="col-md-12">
+                <label for="chiefComplain">Chief Complaint</label>
+                <textarea class="form-control" name="chief_complain" id="chiefComplain"></textarea>
+            </div>
+        </div>
 
-                            <div class="col-md-12">
-                            <label for="Complain">Chief Complain</label>
-                               <textarea class="form-control"  name="chief_complain" id=""></textarea>
-                            </div>
-                            </div>
-                     
-                        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="illness">Illness</label>
+                <input type="text" class="form-control" id="illness" name="illness" required>
+            </div>
+            <div class="col-md-6">
+                <label for="allergicReaction">Allergic Reaction</label>
+                <input type="text" class="form-control" id="allergicReaction" name="allergic_reaction" required>
+            </div>
+        </div>
 
-                        <button type="submit" class="btn btn-success">Update</button>
-                    </form>
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="medication">Medication</label>
+                <input type="text" class="form-control" id="medication" name="medication" required>
+            </div>
+            <div class="col-md-4">
+                <label for="dose">Dose</label>
+                <input type="text" class="form-control" id="dose" name="dose" required>
+            </div>
+            <div class="col-md-4">
+                <label for="timesPerDay">Times Per Day</label>
+                <input type="text" class="form-control" id="timesPerDay" name="times_per_day" required>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="startDate">Start Date</label>
+                <input type="date" class="form-control" id="startDate" name="start_date" required>
+            </div>
+            <div class="col-md-4">
+                <label for="endDate">End Date</label>
+                <input type="date" class="form-control" id="endDate" name="end_date" required>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
+
                 </div>
 
                 <!-- /.container-fluid -->

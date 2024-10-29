@@ -313,7 +313,7 @@ $stmt->close();
                                     <thead>
                                         <tr>
                                          
-                                            <th>Student ID</th>
+                                            <th>Student Name</th>
                                             <th>Illness</th>
                                             <th>symptoms</th>
                                             <th>Date Released</th>
