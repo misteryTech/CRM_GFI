@@ -4,9 +4,7 @@ include("admin_header.php");
 session_start();
 include("../include/connection.php");
 
-// Fetch all staff information from the database
-$query = "SELECT * FROM staff_table";
-$result = mysqli_query($connection, $query);
+
 ?>
 
 <body id="page-top">
@@ -70,6 +68,10 @@ $result = mysqli_query($connection, $query);
 
                                     <tbody>
                                     <?php
+
+                                    // Fetch all staff information from the database
+$query = "SELECT * FROM staff_table";
+$result = mysqli_query($connection, $query);
 // Loop through each row of the result set
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
