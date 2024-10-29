@@ -95,7 +95,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>";
     echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['student_id'] . "'>View</button> ";
     echo "<button class='btn btn-warning' data-toggle='modal' data-target='#editModal" . $row['student_id'] . "'>Edit</button> ";
-    echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['student_id'] . "'>Delete</button>";
+    echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['student_id'] . "'>Archive</button>";
     echo "</td>";
     echo "</tr>";
 
