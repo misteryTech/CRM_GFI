@@ -82,9 +82,13 @@ $result = mysqli_query($connection, $query);
 
                                     <tbody>
                                     <?php
-// Loop through each row of the result set
-while ($row = mysqli_fetch_assoc($result)) {
-    echo "<tr>";
+                                    // Placeholder for fetching and displaying medical records
+                                    $query = "SELECT * FROM students_table";
+                                    $result = mysqli_query($connection, $query);
+                                        while ($row = mysqli_fetch_assoc($result)) {
+
+
+                                           echo "<tr>";
     echo "<td>" . $row['student_id'] . "</td>";
     echo "<td>" . $row['username'] . "</td>";
     echo "<td>" . $row['first_name'] .' '. $row['last_name'] . "</td>";
@@ -96,6 +100,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['student_id'] . "'>Delete</button>";
     echo "</td>";
     echo "</tr>";
+
 
     // View Modal
     echo "<div class='modal fade' id='viewModal" . $row['student_id'] . "' tabindex='-1' role='dialog' aria-labelledby='viewModalLabel" . $row['student_id'] . "' aria-hidden='true'>";
