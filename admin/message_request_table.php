@@ -39,7 +39,7 @@ $reorder_threshold = 5; // Set reorder threshold
                             unset($_SESSION['error']);
                             ?>
                         </div>
-                    <?php endif; ?>s
+                    <?php endif; ?>
 
                     <!-- Tab Pills -->
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -62,7 +62,10 @@ $reorder_threshold = 5; // Set reorder threshold
                                 </div>
                                 <div class="card-body">
                                     <?php
-                                    $query = "SELECT * FROM message_request_tbl WHERE status = 'Request'";
+                                    $query = "SELECT s.first_name, m.message, m.date_send, m.message_id
+                                              FROM message_request_tbl AS m
+                                              INNER JOIN students_table AS s ON m.student_id = s.student_id
+                                              WHERE m.status = 'Request'";
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
@@ -70,7 +73,7 @@ $reorder_threshold = 5; // Set reorder threshold
                                         echo "<thead>";
                                         echo "<tr>";
                                         echo "<th>Student</th>";
-                                        echo "<th>Message</th>"; // Fixed typo from "MEssage"
+                                        echo "<th>Message</th>";
                                         echo "<th>Date Submitted</th>";
                                         echo "<th>Action</th>";
                                         echo "</tr>";
@@ -79,7 +82,7 @@ $reorder_threshold = 5; // Set reorder threshold
 
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo "<tr>";
-                                            echo "<td>" . htmlspecialchars($row['student_id']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['message']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['date_send']) . "</td>";
                                             echo "<td><a class='btn btn-primary' href='reply_page.php?message_id=" . urlencode($row['message_id']) . "'>Reply Message</a></td>";
@@ -89,7 +92,7 @@ $reorder_threshold = 5; // Set reorder threshold
                                         echo "</tbody>";
                                         echo "</table>";
                                     } else {
-                                        echo "<p>No messages in stock.</p>"; // Changed to be more descriptive
+                                        echo "<p>No messages in stock.</p>";
                                     }
                                     ?>
                                 </div>
@@ -104,7 +107,10 @@ $reorder_threshold = 5; // Set reorder threshold
                                 </div>
                                 <div class="card-body">
                                     <?php
-                                    $query = "SELECT * FROM message_request_tbl WHERE status = 'Read'";
+                                    $query = "SELECT s.first_name, m.message, m.date_send, m.message_id
+                                              FROM message_request_tbl AS m
+                                              INNER JOIN student AS s ON m.student_id = s.student_id
+                                              WHERE m.status = 'Read'";
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
@@ -112,7 +118,7 @@ $reorder_threshold = 5; // Set reorder threshold
                                         echo "<thead>";
                                         echo "<tr>";
                                         echo "<th>Student</th>";
-                                        echo "<th>Message</th>"; // Fixed typo from "MEssage"
+                                        echo "<th>Message</th>";
                                         echo "<th>Date Submitted</th>";
                                         echo "<th>Action</th>";
                                         echo "</tr>";
@@ -121,7 +127,7 @@ $reorder_threshold = 5; // Set reorder threshold
 
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo "<tr>";
-                                            echo "<td>" . htmlspecialchars($row['student_id']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['message']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['date_send']) . "</td>";
                                             echo "<td><a class='btn btn-primary' href='reply_page.php?message_id=" . urlencode($row['message_id']) . "'>Reply Message</a></td>";
@@ -131,7 +137,7 @@ $reorder_threshold = 5; // Set reorder threshold
                                         echo "</tbody>";
                                         echo "</table>";
                                     } else {
-                                        echo "<p>No messages in stock.</p>"; // Changed to be more descriptive
+                                        echo "<p>No messages in stock.</p>";
                                     }
                                     ?>
                                 </div>
