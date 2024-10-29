@@ -4,7 +4,7 @@ session_start();
 include("../include/connection.php");
 
 // Fetch all student information from the database
-$query = "SELECT * FROM students_table";
+$query = "SELECT * FROM students_table_copy";
 $result = mysqli_query($connection, $query);
 ?>
 

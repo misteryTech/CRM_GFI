@@ -97,11 +97,11 @@ $student = mysqli_fetch_assoc($studentResult);
             </div>
             <div class="col-md-4">
                 <label for="dose">Dose</label>
-                <input type="text" class="form-control" id="dose" name="dose" required>
+                <input type="number" class="form-control" id="dose" name="dose" required>
             </div>
             <div class="col-md-4">
                 <label for="timesPerDay">Times Per Day</label>
-                <input type="text" class="form-control" id="timesPerDay" name="times_per_day" required>
+                <input type="number" class="form-control" id="timesPerDay" name="times_per_day" required>
             </div>
         </div>
 

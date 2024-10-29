@@ -1,14 +1,14 @@
 <?php
-  $localhost= "localhost";
-  $username= "root";
-  $password= "";
-  $dbname= "crm_gfi";
+$localhost = "localhost";
+$username = "root";
+$password = "";
+$dbname = "crm_gfi";
 
-  $connection = mysqli_connect($localhost,$username,$password,$dbname);
+$connection = mysqli_connect($localhost, $username, $password, $dbname);
 
-  //if($connection){
-   // echo"connected";
-//}else{
- //   echo "disconnected";
-//}
+if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    echo "Connected successfully";
+}
 ?>
