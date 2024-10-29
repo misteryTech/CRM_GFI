@@ -323,7 +323,13 @@ $stmt->close();
                                     <tbody>
                                     <?php
                                     // Placeholder for fetching and displaying medical records
-                                    $query = "SELECT * FROM student_clinic_record_table";
+                                    $query = "SELECT scrt.* , s.*
+                                    
+                                    
+                                    FROM student_clinic_record_table AS scrt
+                                     INNER JOIN students_table AS s ON scrt.student_id = s.student_id
+                                    
+                                    ";
                                     $result = mysqli_query($connection, $query);
                                         while ($record = mysqli_fetch_assoc($result)) {
 
@@ -332,7 +338,7 @@ $stmt->close();
 
                                             echo "<tr>";
                                  
-                                            echo "<td>" . htmlspecialchars($record['student_id']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['first_name']).' ' . htmlspecialchars($record['last_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
