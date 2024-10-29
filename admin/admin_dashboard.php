@@ -4,6 +4,7 @@
 <?php
 include("admin_header.php");
 
+
 session_start();
 include("../include/connection.php");
 
@@ -43,6 +44,39 @@ $stmt->fetch();
 $stmt->close();
 ?>
 
+
+<style>
+    .dataTables_paginate {
+    display: flex;
+    justify-content: center; /* Center the pagination */
+    margin-top: 20px; /* Add some space above the pagination */
+}
+
+.dataTables_paginate .paginate_button {
+    margin: 0 15px; /* Add space between buttons */
+    padding: 8px 12px; /* Add padding for better appearance */
+    border: 1px solid #007bff; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    background: #f8f9fa; /* Background color */
+    color: #007bff; /* Text color */
+    transition: background 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.dataTables_paginate .paginate_button:hover {
+    background: #007bff; /* Background color on hover */
+    color: white; /* Text color on hover */
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: #007bff; /* Background for the active button */
+    color: white; /* Text color for the active button */
+}
+
+.dataTables_info{
+    display: hide;
+}
+
+</style>
 <body id="page-top">
 
     <!-- Page Wrapper -->
