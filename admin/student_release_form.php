@@ -55,6 +55,7 @@ include("../include/connection.php");
 
                                     <thead>
                                         <tr>
+                                            <th>#</th>
                                             <th>Student Id</th>
                                             <th>Username</th>
                                             <th>Student Name</th>
@@ -76,6 +77,7 @@ $result = mysqli_query($connection, $query);
 
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
+    echo "<td>" . $row['id'] . "</td>";
     echo "<td>" . $row['student_id'] . "</td>";
     echo "<td>" . $row['username'] . "</td>";
     echo "<td>" . $row['first_name'] .' '. $row['last_name'] . "</td>";

@@ -130,8 +130,11 @@
         }
 
         $(document).ready(function() {
-            $('#studentTable').DataTable();
-        });
+    $('#studentTable').DataTable({
+        order: [[0, 'asc']] // Column 0 (first column), descending order
+    });
+});
+
 
     
 
