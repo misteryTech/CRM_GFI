@@ -248,12 +248,7 @@
                     <span class="glyphicon glyphicon-log-in"></span> Login
                     <span class="caret"></span>
                   </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#" id="login-btn" class="btn btn-primary">Login</a></li>
-                    <li><a href="#">Sign Up</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">Log Out</a></li>
-                  </ul>
+                 
                 </li>
               </ul>
             </div>
@@ -270,7 +265,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="loginModalLabel">Student Login</h4>
+                <h4 class="modal-title" id="loginModalLabel">Patient Login</h4>
               </div>
               <div class="modal-body">
                 <form action="student_login_process.php" method="POST">
@@ -282,12 +277,17 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
                   </div>
+                  <a href="registration.php" class="btn btn-primary">Register</a>
+
                   <button type="submit" class="btn btn-success">Login</button>
                 </form>
               </div>
             </div>
           </div>
         </div>
+
+
+        
       </div>
 
 
