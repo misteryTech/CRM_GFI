@@ -262,44 +262,6 @@
       </div>
     </div>
 
-
-    <!-- Registration Modal -->
-<div id="registrationModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="registrationModalLabel">Register</h4>
-      </div>
-      <div class="modal-body">
-        <form action="student_registration_process.php" method="POST">
-          <div class="form-group">
-            <label for="full-name">Full Name</label>
-            <input type="text" class="form-control" id="full-name" name="full_name" placeholder="Enter your full name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" maxlength="11" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password" required>
-          </div>
-          <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
         <!-- Login Modal -->
         <div id="loginModal" class="modal fade" role="dialog">
           <div class="modal-dialog" role="document">
@@ -308,7 +270,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="loginModalLabel">Patient Login</h4>
+                <h4 class="modal-title" id="loginModalLabel">Student Login</h4>
               </div>
               <div class="modal-body">
                 <form action="student_login_process.php" method="POST">
@@ -320,7 +282,6 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
                   </div>
-                  <li><a href="#" id="signup-btn" data-toggle="modal" data-target="#registrationModal">Sign Up</a></li>
                   <button type="submit" class="btn btn-success">Login</button>
                 </form>
               </div>
@@ -475,29 +436,13 @@
     
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-
-$(document).ready(function () {
-    // Open login modal
-    $('#login-btn').click(function (event) {
-      event.preventDefault();
-      $('#loginModal').modal('show');
-    });
-
-    // Open registration modal
-    $('#signup-btn').click(function (event) {
-      event.preventDefault();
-      $('#registrationModal').modal('show');
-      $('#registrationModal').modal('hide');
-    });
-  });
-
-  
     $(document).ready(function() {
       // When the "Log In / Sign Up" button is clicked
       $("#login-signup-btn").click(function(event) {
         event.preventDefault();
   
-      
+        // Show the login modal
+        $("#loginModal").modal("show");
       });
     });
   </script>
