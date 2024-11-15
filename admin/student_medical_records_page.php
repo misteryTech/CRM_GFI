@@ -103,7 +103,7 @@ include("../include/connection.php");
                                         <tr>
                                             <th>Record Id</th>
                                       
-                                            <th>Chief Complaint</th>
+                                            <th>Illness</th>
                                             <th>Symstoms</th>
                                             <th>Date Diagnosed</th>
                                             <th>Action</th>
