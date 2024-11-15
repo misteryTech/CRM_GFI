@@ -56,7 +56,7 @@ $messageResult = mysqli_query($connection, $messageQuery);
                         </div>
                     <?php endif; ?>
 
-                    <h2>Send Message to Staff</h2>
+                    <h2>Send Message to School Nurse</h2>
                     <form action="process_code/message_request.php" method="POST" enctype="multipart/form-data">
                         <!-- Student Information -->
                         <div class="form-group">
@@ -68,7 +68,7 @@ $messageResult = mysqli_query($connection, $messageQuery);
                             <br>
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <label for="Complain">Message Staff</label>
+                                    <label for="Complain">Message Nurse</label>
                                     <textarea class="form-control" name="message" required></textarea>
                                 </div>
                             </div>

@@ -31,7 +31,7 @@ include("../include/connection.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Student Information Data</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Staff Information Data</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -60,6 +60,8 @@ include("../include/connection.php");
                                             <th>Student Name</th>
 
                                             <th>Email</th>
+                                            <th>Position</th>
+                                            <th>Department</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -70,19 +72,21 @@ include("../include/connection.php");
 // Loop through each row of the result set
 
 // Fetch all student information from the database
-$query = "SELECT * FROM students_table";
+$query = "SELECT * FROM staff_table";
 $result = mysqli_query($connection, $query);
 
 
 while ($row = mysqli_fetch_assoc($result)) {
     echo "<tr>";
-    echo "<td>" . $row['student_id'] . "</td>";
+    echo "<td>" . $row['staff_id'] . "</td>";
     echo "<td>" . $row['username'] . "</td>";
     echo "<td>" . $row['first_name'] .' '. $row['last_name'] . "</td>";
     echo "<td>" . $row['email'] . "</td>";
+    echo "<td>" . $row['position'] . "</td>";
+    echo "<td>" . $row['department'] . "</td>";
 
     echo "<td>";
-    echo "<a class='btn btn-primary' href='student_release_form_page.php?student_id=" . $row['student_id'] . "'>Release Medicine</a> ";
+    echo "<a class='btn btn-primary' href='staff_release_form_page.php?staff_id=" . $row['staff_id'] . "'>Release Medicine</a> ";
     echo "</td>";
     echo "</tr>";
 

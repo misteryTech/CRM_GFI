@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Delete student from the database
         $query = "UPDATE students_table SET
-        archive='1'
+        archive='0'
         WHERE id='$student_id'";
 
 if (mysqli_query($connection, $query)) {

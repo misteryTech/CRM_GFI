@@ -118,7 +118,7 @@ include("admin_header.php");
                                     
 
 // Fetch all student information from the database
-$query = "SELECT * FROM students_table";
+$query = "SELECT * FROM students_table WHERE archive='0' ORDER BY id DESC";
 $result = mysqli_query($connection, $query);
 // Loop through each row of the result set
 while ($row = mysqli_fetch_assoc($result)) {
@@ -350,7 +350,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
     echo "<form action='process_code/student_delete_information.php' method='POST'>";
     echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
-    echo "<button type='submit' class='btn btn-danger'>Delete</button>";
+    echo "<button type='submit' class='btn btn-danger'>Archived</button>";
     echo "</form>";
     echo "</div>";
     echo "</div>";

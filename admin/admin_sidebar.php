@@ -64,15 +64,15 @@ $request_count = $row['request_count'] ?? 0;
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#studentData"
         aria-expanded="true" aria-controls="studentData">
         <i class="fa fa-file-image-o" aria-hidden="true"></i>
-        <span>Student Management</span>
+        <span>Patient Management</span>
     </a>
     <div id="studentData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Students:</h6>
-            <a class="collapse-item" href="student_registration_page.php">Student Registration</a>
-            <a class="collapse-item" href="student_information_page_data.php">Students Data</a>
-            <a class="collapse-item" href="student_medical_records.php">Medical Records</a>
-
+            <h6 class="collapse-header">Patient:</h6>
+            <a class="collapse-item" href="student_registration_page.php">Patient Registration</a>
+            <a class="collapse-item" href="student_information_page_data.php">Patient Data</a>
+            <a class="collapse-item" href="student_medical_records.php">Patient Records</a>
+            <a class="collapse-item" href="archived_students_data.php">Archive Patients</a>
         </div>
     </div>
 </li>
@@ -91,26 +91,7 @@ $request_count = $row['request_count'] ?? 0;
             </a>:</h6>
             <a class="collapse-item" href="staff_registration_page.php">Staff Registration</a>
             <a class="collapse-item" href="staff_information_page_data.php">Staff Data</a>
-            <a class="collapse-item" href="#">Medical Records</a>
-
-        </div>
-    </div>
-</li>
-
-
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#teacherData"
-        aria-expanded="true" aria-controls="teacherData">
-        <i class="fa fa-file-image-o" aria-hidden="true"></i>
-        <span>Teacher Management</span>
-    </a>
-    <div id="teacherData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Teacher Management</span>
-            </a>:</h6>
-            <a class="collapse-item" href="teacher_registration_page.php">Teacher Registration</a>
-            <a class="collapse-item" href="teachers_information_page_data.php">Teacher Data</a>
-            <a class="collapse-item" href="#">Medical Records</a>
+            <a class="collapse-item" href="staff_medical_records.php">Medical Records</a>
 
         </div>
     </div>

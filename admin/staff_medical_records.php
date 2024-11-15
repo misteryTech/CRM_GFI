@@ -1,9 +1,9 @@
-
 <?php
 include("admin_header.php");
 session_start();
 include("../include/connection.php");
 
+// Fetch all staff information from the database
 
 ?>
 
@@ -32,11 +32,11 @@ include("../include/connection.php");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Staff Information Data</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">staff Medical Data</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="staffTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="staffMedicalRecords" width="100%" cellspacing="0">
                                     <?php if (isset($_SESSION['success'])): ?>
                                         <div class="alert alert-success">
                                             <?php
@@ -56,14 +56,11 @@ include("../include/connection.php");
 
                                     <thead>
                                         <tr>
-                                            <th>staff Id</th>
+                                            <th>Staff Id</th>
                                             <th>Username</th>
-                                            <th>staff Name</th>
-                                            <th>Position</th>
-                                            <th>Department</th>
-                                            <th>Date Hired</th>
+                                            <th>Staff Name</th>
 
-
+                                            <th>Email</th>
 
                                             <th>Action</th>
                                         </tr>
@@ -72,7 +69,6 @@ include("../include/connection.php");
                                     <tbody>
                                     <?php
 
-                                    // Fetch all staff information from the database
 $query = "SELECT * FROM staff_table ORDER BY staff_id DESC";
 $result = mysqli_query($connection, $query);
 // Loop through each row of the result set
@@ -81,13 +77,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>" . $row['staff_id'] . "</td>";
     echo "<td>" . $row['username'] . "</td>";
     echo "<td>" . $row['first_name'] .' '. $row['last_name'] . "</td>";
-    echo "<td>" . $row['position'] . "</td>";
-    echo "<td>" . $row['department'] . "</td>";
-    echo "<td>" . $row['date_hired'] . "</td>";
+    echo "<td>" . $row['email'] . "</td>";
+
     echo "<td>";
-    echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['staff_id'] . "'>View</button> ";
-    echo "<button class='btn btn-warning' data-toggle='modal' data-target='#editModal" . $row['staff_id'] . "'>Edit</button> ";
-    echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['staff_id'] . "'>Delete</button>";
+    echo "<a class='btn btn-success' href='staff_medical_records_page.php?staff_id=" . $row['id_no'] . "'>View Medical Records</a> ";
     echo "</td>";
     echo "</tr>";
 
@@ -111,9 +104,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='col-md-6'>";
     echo "<p><strong>Last Name:</strong> " . $row['last_name'] . "</p>";
     echo "<p><strong>Email:</strong> " . $row['email'] . "</p>";
-    echo "<p><strong>Year:</strong> " . $row['date_hired'] . "</p>";
-    echo "<p><strong>position:</strong> " . $row['position'] . "</p>";
-    echo "<p><strong>department:</strong> " . $row['department'] . "</p>";
+    echo "<p><strong>Year:</strong> " . $row['year'] . "</p>";
+    echo "<p><strong>Section:</strong> " . $row['section'] . "</p>";
+    echo "<p><strong>Course:</strong> " . $row['course'] . "</p>";
     echo "</div>";
     echo "</div>";
     echo "</div>";
@@ -136,7 +129,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
     echo "<div class='modal-body'>";
     echo "<form action='process_code/staff_edit_information.php' method='POST'>";
-    echo "<input type='hidden' name='staff_id' value='" . $row['staff_id'] . "'>";
+    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
     echo "<input type='hidden' name='edit_password' value='" . $row['password'] . "'>";
     echo "<div class='row'>";
 
@@ -161,10 +154,9 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
 
-
     echo "<div class='form-group'>";
-    echo "<label for='dob" . $row['staff_id'] . "'>Date Hired</label>";
-    echo "<input type='date' class='form-control' id='dob" . $row['dob'] . "' name='edit_date_hired' value='" . $row['date_hired'] . "' required>";
+    echo "<label for='year" . $row['staff_id'] . "'>School Year</label>";
+    echo "<input type='text' class='form-control' id='year" . $row['staff_id'] . "' name='edit_year' value='" . $row['year'] . "' required>";
     echo "</div>";
 
     echo "</div>";
@@ -202,19 +194,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
 
-   $position_options = ['Administrator', 'Staff'];
+
     echo "<div class='form-group'>";
-    echo "<label for='position" . $row['staff_id'] . "'>Position</label>";
-    echo "<select class='form-control' id='position" . $row['staff_id'] . "' name='edit_position' required>";
-
-    // Populate the dropdown options
-    foreach ($position_options as $position) {
-        // Check if this option should be selected
-        $selected = ($row['position'] === $position) ? 'selected' : '';
-        echo "<option value='" . $position . "' " . $selected . ">" . $position . "</option>";
-    }
-
-    echo "</select>";
+    echo "<label for='section" . $row['staff_id'] . "'>School Section</label>";
+    echo "<input type='text' class='form-control' id='section" . $row['staff_id'] . "' name='edit_section' value='" . $row['section'] . "' required>";
     echo "</div>";
 
     echo "</div>";
@@ -223,13 +206,13 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 
 
-    $department_option = ['Administration','Finance','Human Resources','IT','Maintenance','Library'];
+    $course_option = ['Computer Science','Information Technology','Engineering','Business Administration','Psychology','Nursing'];
     echo "<div class='form-group'>";
-    echo "<label for='department" . $row['staff_id'] . "'>Department</label>";
-    echo "<select class='form-control' id='department" . $row['staff_id'] . "' name='edit_department' required>";
-        foreach($department_option as $department){
-            $selected_department  = ($row['department'] === $department) ? 'selected' : '';
-            echo "<option value='" . $department . "' " . $selected_department . ">". $department . "</option>";
+    echo "<label for='course" . $row['staff_id'] . "'>Bachelor Course</label>";
+    echo "<select class='form-control' id='course" . $row['staff_id'] . "' name='edit_course' required>";
+        foreach($course_option as $course){
+            $selected_course  = ($row['course'] === $course) ? 'selected' : '';
+            echo "<option value='" . $course . "' " . $selected_course . ">". $course . "</option>";
         }
 
         echo "</select>";
@@ -300,7 +283,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<div class='modal-footer'>";
     echo "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>";
     echo "<form action='process_code/staff_delete_information.php' method='POST'>";
-    echo "<input type='hidden' name='id' value='" . $row['staff_id'] . "'>";
+    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
     echo "<button type='submit' class='btn btn-danger'>Delete</button>";
     echo "</form>";
     echo "</div>";
@@ -331,10 +314,3 @@ while ($row = mysqli_fetch_assoc($result)) {
     <?php
     include("admin_footer.php");
     ?>
-<script>
-    $(document).ready(function() {
-    $('#staffTable').DataTable();
-  
-});
-
-</script>

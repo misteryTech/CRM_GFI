@@ -99,9 +99,9 @@ include("../include/connection.php");
                                             <th>Document</th>
                                             <th>Chief Complaint</th>
                                             <th>Illness</th>
-                                            <th>Allergic Reaction</th>
+                                            <th>Allergies</th>
                                             <th>Medication</th>
-                                            <th>Dose</th>
+                                            <th>Dosage</th>
                                             <th>Times Per Day</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>

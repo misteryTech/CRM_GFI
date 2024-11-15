@@ -95,7 +95,7 @@ include("../include/connection.php");
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -190,6 +190,12 @@ include("../include/connection.php");
     ?>
     </div>
     <script>
+
+document.getElementById('phone').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Allow only numbers
+    });
+
+    
                     $(document).ready(function() {
                         // AJAX check for duplicate student ID
                         $("#studentId").blur(function() {

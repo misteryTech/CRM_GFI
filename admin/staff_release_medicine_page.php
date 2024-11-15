@@ -16,7 +16,7 @@ if (isset($_GET['record_id'])) {
     $record_id = $_GET['record_id'];
 
     // Prepare the SQL statement
-    $stmt = $connection->prepare("SELECT * FROM prescribed_medicine_table WHERE record_id = ? ");
+    $stmt = $connection->prepare("SELECT * FROM prescribed_medicine_table WHERE record_id = ? AND role='2' ");
 
     if ($stmt) {
         // Bind the student_id parameter
@@ -64,7 +64,7 @@ if (isset($_GET['record_id'])) {
                         </div>
                     <?php endif; ?>
 
-                    <h2>Student Release Record</h2>
+                    <h2>Staff Release Record</h2>
 
                     <!-- Student Information -->
 
@@ -72,7 +72,7 @@ if (isset($_GET['record_id'])) {
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Student Release Data</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Staff Release Data</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -97,7 +97,7 @@ if (isset($_GET['record_id'])) {
                                                 FROM prescribed_medicine_table AS smt
                                                 INNER JOIN medicines AS m ON m.id = smt.medicine_id
                                                 INNER JOIN student_clinic_record_table AS scrt ON scrt.record_id = smt.record_id
-                                                WHERE smt.record_id = ? AND smt.role = '1'
+                                                WHERE smt.record_id = ? AND smt.role = '2'
                                             ");
 
                                             if ($stmt) {

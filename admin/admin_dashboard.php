@@ -16,6 +16,29 @@ if (!isset($_SESSION['staff_id'])) {
 }
 
 
+// Query for monthly visits data
+$monthlyVisitsQuery = "
+    SELECT DATE_FORMAT(date_diagnosed, '%Y-%m') AS month, COUNT(*) AS visit_count
+    FROM student_clinic_record_table
+    GROUP BY month
+    ORDER BY month ASC";
+$monthlyVisitsResult = mysqli_query($connection, $monthlyVisitsQuery);
+
+// Initialize an array with all months set to 0
+$allMonths = array_fill_keys(array_map(function ($n) {
+    return date("Y-m", strtotime("first day of -$n month"));
+}, range(11, 0)), 0);
+
+// Populate with actual visit counts
+while ($row = mysqli_fetch_assoc($monthlyVisitsResult)) {
+    $allMonths[$row['month']] = (int)$row['visit_count'];
+}
+
+$monthlyLabels = array_keys($allMonths);
+$monthlyVisitsData = array_values($allMonths);
+
+
+
 
 
 // Prepare the SQL statement
@@ -44,39 +67,6 @@ $stmt->fetch();
 $stmt->close();
 ?>
 
-
-<style>
-    .dataTables_paginate {
-    display: flex;
-    justify-content: center; /* Center the pagination */
-    margin-top: 20px; /* Add some space above the pagination */
-}
-
-.dataTables_paginate .paginate_button {
-    margin: 0 15px; /* Add space between buttons */
-    padding: 8px 12px; /* Add padding for better appearance */
-    border: 1px solid #007bff; /* Border color */
-    border-radius: 5px; /* Rounded corners */
-    background: #f8f9fa; /* Background color */
-    color: #007bff; /* Text color */
-    transition: background 0.3s, color 0.3s; /* Smooth transition for hover effect */
-}
-
-.dataTables_paginate .paginate_button:hover {
-    background: #007bff; /* Background color on hover */
-    color: white; /* Text color on hover */
-}
-
-.dataTables_paginate .paginate_button.current {
-    background: #007bff; /* Background for the active button */
-    color: white; /* Text color for the active button */
-}
-
-.dataTables_info{
-    display: hide;
-}
-
-</style>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -245,7 +235,7 @@ $stmt->close();
 
 
             <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-4 col-md-6 mb-4">
+        <div class="col-xl-6 col-md-6 mb-4">
                  <div class="card border-left-primary shadow h-100 py-2">
                        <div class="card-body">
                              <div class="row no-gutters align-items-center">
@@ -271,33 +261,7 @@ $stmt->close();
     </div>
 
     <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-4 col-md-6 mb-4">
-        <div class="card border-left-success shadow h-100 py-2">
-            <div class="card-body">
-                <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            Request Teacher
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div>
-                </div>
-
-                <a href="#" class="btn btn-primary btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                        <span class="text">Release Form</span>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Earnings (Monthly) Card Example -->
-    <div class="col-xl-4 col-md-6 mb-4">
+    <div class="col-xl-6 col-md-6 mb-4">
         <div class="card border-left-info shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -319,7 +283,7 @@ $stmt->close();
                     </div>
                 </div>
 
-                <a href="#" class="btn btn-primary btn-icon-split">
+                <a href="staff_release_form.php" class="btn btn-primary btn-icon-split">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-info-circle"></i>
                                         </span>
@@ -330,16 +294,17 @@ $stmt->close();
     </div>
 
 
+
     </div>
 
 
     <div class="row">
 
 <!-- Area Chart -->
-<div class="col-xl-8 col-lg-7">
+<div class="col-xl-6 col-lg-6">
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Clinic Record Log </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Patient Record Log </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -347,7 +312,7 @@ $stmt->close();
                                     <thead>
                                         <tr>
                                          
-                                            <th>Student Name</th>
+                                            <th>Patient Name</th>
                                             <th>Illness</th>
                                             <th>symptoms</th>
                                             <th>Date Released</th>
@@ -362,7 +327,7 @@ $stmt->close();
                                     
                                     FROM student_clinic_record_table AS scrt
                                      INNER JOIN students_table AS s ON scrt.student_id = s.student_id
-                                    
+                                    ORDER BY scrt.record_id DESC
                                     ";
                                     $result = mysqli_query($connection, $query);
                                         while ($record = mysqli_fetch_assoc($result)) {
@@ -388,15 +353,102 @@ $stmt->close();
                             </div>
                         </div>
                     </div>
+                    
 </div>
 
-<!-- Pie Chart -->
+
+
+<div class="col-xl-6 col-lg-6">
+<div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Staff Record Log </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="staffmedicalRecordTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                         
+                                            <th>Staff Name</th>
+                                            <th>Illness</th>
+                                            <th>symptoms</th>
+                                            <th>Department</th>
+                                            <th>Date Released</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    // Placeholder for fetching and displaying medical records
+                                    $query = "SELECT scrts.* , tb.*
+                                    
+                                    
+                                    FROM staff_clinic_record_table AS scrts
+                                     INNER JOIN staff_table AS  tb  ON scrts.staff_id = tb.id_no
+                                    ORDER BY scrts.record_id DESC
+                                    ";
+                                    $result = mysqli_query($connection, $query);
+                                        while ($record = mysqli_fetch_assoc($result)) {
+
+                                            $month_name = date("F-m-y", strtotime($record['date_diagnosed']));
+
+
+                                            echo "<tr>";
+                                 
+                                            echo "<td>" . htmlspecialchars($record['first_name']).' ' . htmlspecialchars($record['last_name']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['department']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($month_name) . "</td>";
+                                            echo "</tr>";
+
+
+                                        }
+
+
+                                    ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+</div>
+
+
+
+
+
+
+
+
+    </div>
+
+    
+</div>
+</div>
+
+
+
+<div class="row">
+                        <div class="col-xl-8 col-lg-7">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Monthly Clinic Visits</h6>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="monthlyVisitChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pie Chart -->
 <div class="col-xl-4 col-lg-5">
     <div class="card shadow mb-4">
         <!-- Card Header - Dropdown -->
         <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Registered Student Gender</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Registered Patient Gender</h6>
             <div class="dropdown no-arrow">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -421,11 +473,8 @@ $stmt->close();
 </div>
 
 
-    </div>
-</div>
-</div>
-
-
+        
+     </div>
 
 
 
@@ -444,6 +493,58 @@ $stmt->close();
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+// Data for Monthly Visits Chart
+var monthlyLabels = <?php echo json_encode($monthlyLabels); ?>;
+var monthlyVisitsData = <?php echo json_encode($monthlyVisitsData); ?>;
+
+// Convert numeric month labels to month names
+var monthNames = ["January", "February", "March", "April", "May", "June", 
+                  "July", "August", "September", "October", "November", "December"];
+
+monthlyLabels = monthlyLabels.map(function(month) {
+    var parts = month.split("-");
+    var year = parts[0];
+    var monthIndex = parseInt(parts[1], 10) - 1;
+    return monthNames[monthIndex] + " " + year;
+});
+
+// Monthly Visits Line Chart
+var ctxLine = document.getElementById('monthlyVisitChart').getContext('2d');
+var monthlyVisitChart = new Chart(ctxLine, {
+    type: 'line',
+    data: {
+        labels: monthlyLabels,
+        datasets: [{
+            label: 'Patients Inquired',
+            data: monthlyVisitsData,
+            backgroundColor: 'rgba(78, 115, 223, 0.05)',
+            borderColor: 'rgba(78, 115, 223, 1)',
+            pointBackgroundColor: 'rgba(78, 115, 223, 1)',
+            pointBorderColor: 'rgba(78, 115, 223, 1)',
+            pointHoverBackgroundColor: 'rgba(78, 115, 223, 1)',
+            pointHoverBorderColor: 'rgba(78, 115, 223, 1)',
+        }],
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { 
+                title: { display: true, text: 'Month' },
+            },
+            y: { 
+                title: { display: true, text: 'Number of Visits' }, 
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1, // Forces y-axis to increment by whole numbers
+                    callback: function(value) { return Number.isInteger(value) ? value : null; }
+                }
+            }
+        }
+    }
+});
+
 
 var maleCount = <?php echo $male_count; ?>;
 var femaleCount = <?php echo $female_count; ?>;

@@ -64,7 +64,9 @@ $reorder_threshold = 5; // Set reorder threshold
                                     $query = "SELECT s.first_name, m.message, m.date_send, m.message_id
                                               FROM message_request_tbl AS m
                                               INNER JOIN students_table AS s ON m.student_id = s.student_id
-                                              WHERE m.status = 'Request'";
+                                              WHERE m.status = 'Request'
+                                                ORDER BY message_id DESC
+                                              ";
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
@@ -108,8 +110,10 @@ $reorder_threshold = 5; // Set reorder threshold
                                     <?php
                                     $query = "SELECT s.first_name, m.message, m.date_send, m.message_id
                                               FROM message_request_tbl AS m
-                                              INNER JOIN student AS s ON m.student_id = s.student_id
-                                              WHERE m.status = 'Read'";
+                                              INNER JOIN students_table AS s ON m.student_id = s.student_id
+                                              WHERE m.status = 'Read'
+                                              ORDER BY message_id DESC
+                                              ";
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
@@ -156,5 +160,13 @@ $reorder_threshold = 5; // Set reorder threshold
     </div>
     <!-- End of Page Wrapper -->
 
-    <?php include("admin_footer.php"); ?>
-</body>
+    <?php
+         include("admin_footer.php");
+         ?>
+
+<script>
+$(document).ready(function() {
+    $('#Unread').DataTable();
+    $('#stocktable').DataTable();
+});
+</script>

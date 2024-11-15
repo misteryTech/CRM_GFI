@@ -51,6 +51,10 @@ include("../include/connection.php");
                                 <div class="col-md-4">
                                     <label for="staffId">Staff ID</label>
                                     <input type="text" class="form-control" id="staffId" name="staff_id" required>
+
+                                    <span id="staffIdError" style="color:red; display:none;">Staff ID already exists!</span>
+                                    <span id="staffIdAvail" style="color:green; display:none;">Staff ID Available!</span>
+
                                 </div>
                                 <div class="col-md-4">
                                     <label for="username">Username</label>
@@ -93,7 +97,7 @@ include("../include/connection.php");
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -120,7 +124,16 @@ include("../include/connection.php");
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="position">Position</label>
-                                    <input type="text" class="form-control" id="position" name="position" required>
+                             
+                                    <select class="form-control" id="position" name="position" required>
+                                        <option value="">Select Position</option>
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="Staff">Staff</option>
+                              
+                                    </select>
+
+
+
                                 </div>
                                 <div class="col-md-6">
                                     <label for="department">Department</label>
@@ -132,7 +145,17 @@ include("../include/connection.php");
                                         <option value="IT">IT</option>
                                         <option value="Maintenance">Maintenance</option>
                                         <option value="Library">Library</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Science">Science</option>
+                                        <option value="English">English</option>
+                                        <option value="Social Studies">Social Studies</option>
+                                        <option value="Physical Education">Physical Education</option>
+                                        <option value="Arts">Arts</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Foreign Languages">Foreign Languages</option>
+                                        <option value="Special Education">Special Education</option>
                                     </select>
+
                                 </div>
                                 <div class="col-md-6">
 
@@ -163,3 +186,40 @@ include("../include/connection.php");
     include("admin_footer.php");
     ?>
     </div>
+
+
+    <script>
+
+document.getElementById('phone').addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Allow only numbers
+    });
+
+    
+                    $(document).ready(function() {
+                        // AJAX check for duplicate staff ID
+                        $("#staffId").blur(function() {
+                            var staffId = $(this).val();
+                            $.ajax({
+                                url: "validation/check_staff_id.php",
+                                method: "POST",
+                                data: { staff_id: staffId },
+                                success: function(response) {
+                                    if (response == "exists") {
+    $("#staffIdError").show();
+    $("#staffIdAvail").hide();
+    $("#staffIdError").html('staff ID already exists.');
+    $("button[type='submit']").prop('disabled', true);
+    $("#staffId").css('border-color', 'red');  // Red border for duplicate ID
+} else {
+    $("#staffIdError").hide();
+    $("#staffIdAvail").show();
+    $("#staffIdError").html('staff is Available.');
+    $("button[type='submit']").prop('disabled', false);
+    $("#staffId").css('border-color', 'green');  // Green border for available ID
+}
+                                }
+                            });
+                        });
+                    });
+                </script>
+

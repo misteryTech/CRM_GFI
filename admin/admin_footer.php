@@ -141,6 +141,18 @@
         });
 
 
+        
+        $(document).ready(function() {
+            $('#staffMedicalRecords').DataTable();
+        });
+
+
+        
+        $(document).ready(function() {
+            $('#staffmedicalRecordTable').DataTable();
+        });
+
+
         $(document).ready(function() {
             $('#medicineTable').DataTable();
         });

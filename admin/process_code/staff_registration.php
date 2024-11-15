@@ -3,6 +3,7 @@ session_start();
 include("connection.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $staff_id = mysqli_real_escape_string($connection, $_POST['staff_id']);
     $username = mysqli_real_escape_string($connection, $_POST['username']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
@@ -21,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $query = "INSERT INTO staff_table (
-        username, password, first_name, last_name, dob, gender, email, phone, street, barangay, municipality, province, position, department, date_hired
+        username, password, first_name, last_name, dob, gender, email, phone, street, barangay, municipality, province, position, department, date_hired, id_no
     ) VALUES (
-        '$username', '$password', '$first_name', '$last_name', '$dob', '$gender', '$email', '$phone', '$street', '$barangay', '$municipality', '$province', '$position', '$department', '$date_hired'
+        '$username', '$password', '$first_name', '$last_name', '$dob', '$gender', '$email', '$phone', '$street', '$barangay', '$municipality', '$province', '$position', '$department', '$date_hired', '$staff_id'
     )";
 
     if (mysqli_query($connection, $query)) {

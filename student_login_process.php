@@ -27,13 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             // Incorrect password
             $_SESSION['error'] = "Invalid username or password!";
-            header("Location: login.php");
+            header("Location: index.php");
             exit();
         }
     } else {
         // Username not found
         $_SESSION['error'] = "Invalid username or password!";
-        header("Location: login.php");
+        header("Location: index.php");
         exit();
     }
 }
