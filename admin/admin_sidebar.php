@@ -71,7 +71,7 @@ $request_count = $row['request_count'] ?? 0;
             <h6 class="collapse-header">Patient:</h6>
             <a class="collapse-item" href="student_registration_page.php">Patient Registration</a>
             <a class="collapse-item" href="student_information_page_data.php">Patient Data</a>
-            <a class="collapse-item" href="student_medical_records.php">Patient Records</a>
+            <a class="collapse-item" href="student_medical_records.php">Patient Medical Records</a>
             <a class="collapse-item" href="archived_students_data.php">Archive Patients</a>
         </div>
     </div>

@@ -17,6 +17,14 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 
+
+         
+<a class="nav-link" href="student_medical_records.php?user_id=<?php echo htmlspecialchars($studentId); ?>">
+    <i class="fas fa-fw fa-hospital"></i>
+    <span>My Records</span>
+
+    </a> 
+    
         
     <a class="nav-link" href="pre_existing_medical_records.php">
         <i class="fas fa-fw fa-plus"></i>
@@ -26,11 +34,6 @@
 
         
         
- 
-<a class="nav-link" href="student_medical_records.php?user_id=<?php echo htmlspecialchars($studentId); ?>">
-    <i class="fas fa-fw fa-hospital"></i>
-    <span>Student Records</span>
-
 
          
 <a class="nav-link" href="message_page.php?user_id=<?php echo htmlspecialchars($studentId); ?>">
