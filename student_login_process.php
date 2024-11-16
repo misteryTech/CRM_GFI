@@ -4,35 +4,46 @@ include("include/connection.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = mysqli_real_escape_string($connection, $_POST['username']);
-    $password = mysqli_real_escape_string($connection, $_POST['password']);
+    $password = $_POST['password']; // No need to sanitize, as it's not directly used in the query
 
     // Query to find the user with the provided username
-    $query = "SELECT * FROM students_table WHERE username = '$username'";
-    $result = mysqli_query($connection, $query);
+    $query = "SELECT * FROM students_table WHERE username = ?";
+    $stmt = mysqli_prepare($connection, $query);
 
-    if (mysqli_num_rows($result) == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $stored_password = $row['password'];
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
 
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            $stored_password = $row['password'];
 
-        // Verify the password
-        if ($password === $stored_password) {
-            // Password is correct, set the session variables
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['student_id'] = $row['student_id'];
+            // Verify the password
+            if (password_verify($password, $stored_password)) {
+                // Password is correct, set the session variables
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['student_id'] = $row['student_id'];
 
-            header("Location: student/student_dashboard.php");
-            // Redirect based on role
-            exit();
+                header("Location: student/student_dashboard.php");
+                exit();
+            } else {
+                // Incorrect password
+                $_SESSION['error'] = "Invalid username or password!";
+                header("Location: index.php");
+                exit();
+            }
         } else {
-            // Incorrect password
+            // Username not found
             $_SESSION['error'] = "Invalid username or password!";
             header("Location: index.php");
             exit();
         }
+
+        mysqli_stmt_close($stmt);
     } else {
-        // Username not found
-        $_SESSION['error'] = "Invalid username or password!";
+        // Query preparation failed
+        $_SESSION['error'] = "Error preparing query: " . mysqli_error($connection);
         header("Location: index.php");
         exit();
     }

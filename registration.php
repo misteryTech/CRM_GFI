@@ -51,76 +51,76 @@ include("header.php");
                         </div>
 
                         <!-- Student Registration Form -->
-                        <form id="studentForm" action="admin/process_code/student_registration.php" method="POST" enctype="multipart/form-data" style="display: block;">
-                            <h3>Student Registration</h3>
-                            <!-- Student Information -->
-                            <div class="form-group">
-                                <div class="form-row">
-                                    <div class="col-md-4">
-                                        <label for="studentId">Student ID</label>
-                                        <input type="text" class="form-control" id="studentId" name="student_id" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="username">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" required>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-4">
-                                        <label for="firstName">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="first_name" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="lastName">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" name="last_name" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="dob">Date of Birth</label>
-                                        <input type="date" class="form-control" id="dob" name="dob" required>
-                                    </div>
-                                </div>
+                            <form id="studentForm" action="student_registration.php" method="POST" enctype="multipart/form-data" style="display: block;">
+                                <h3>Student Registration</h3>
+                                <!-- Student Information -->
                                 <div class="form-group">
-                                    <label for="gender">Gender</label>
-                                    <select class="form-control" id="gender" name="gender" required>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Additional Student Fields -->
-                            <div class="form-group">
-                                <h3>Course Details</h3>
-                                <div class="form-row">
-                                    <div class="col-md-4">
-                                        <label for="year">Year</label>
-                                        <input type="text" class="form-control" id="year" name="year" required>
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="studentId">Student ID</label>
+                                            <input type="text" class="form-control" id="studentId" name="student_id" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="username">Username</label>
+                                            <input type="text" class="form-control" id="username" name="username" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="password">Password</label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="section">Section</label>
-                                        <input type="text" class="form-control" id="section" name="section" required>
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="firstName">First Name</label>
+                                            <input type="text" class="form-control" id="firstName" name="first_name" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="lastName">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName" name="last_name" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="dob">Date of Birth</label>
+                                            <input type="date" class="form-control" id="dob" name="dob" required>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label for="course">Course</label>
-                                        <select class="form-control" id="course" name="course" required>
-                                            <option value="">Select Course</option>
-                                            <option value="Computer Science">Computer Science</option>
-                                            <option value="Information Technology">Information Technology</option>
-                                            <option value="Engineering">Engineering</option>
-                                            <option value="Business Administration">Business Administration</option>
-                                            <option value="Psychology">Psychology</option>
-                                            <option value="Nursing">Nursing</option>
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select class="form-control" id="gender" name="gender" required>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select>
                                     </div>
                                 </div>
-                            </div>
 
-                            <button type="submit" class="btn btn-success">Register</button>
-                        </form>
+                                <!-- Additional Student Fields -->
+                                <div class="form-group">
+                                    <h3>Course Details</h3>
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="year">Year</label>
+                                            <input type="text" class="form-control" id="year" name="year" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="section">Section</label>
+                                            <input type="text" class="form-control" id="section" name="section" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="course">Course</label>
+                                            <select class="form-control" id="course" name="course" required>
+                                                <option value="">Select Course</option>
+                                                <option value="Computer Science">Computer Science</option>
+                                                <option value="Information Technology">Information Technology</option>
+                                                <option value="Engineering">Engineering</option>
+                                                <option value="Business Administration">Business Administration</option>
+                                                <option value="Psychology">Psychology</option>
+                                                <option value="Nursing">Nursing</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">Register</button>
+                            </form>
 
                         <!-- Staff Registration Form -->
                         <form id="staffForm" action="admin/process_code/staff_registration.php" method="POST" enctype="multipart/form-data" style="display: none;">

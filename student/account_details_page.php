@@ -1,6 +1,5 @@
 <?php
 include("student_header.php");
-session_start();
 include("../include/connection.php");
 
 // Check if student is logged in
@@ -16,8 +15,32 @@ $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
 // Fetch student details from the database
 $studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
 $studentResult = mysqli_query($connection, $studentQuery);
-$student = mysqli_fetch_assoc($studentResult);
 
+// Check if data was fetched successfully
+if (mysqli_num_rows($studentResult) == 1) {
+    $student = mysqli_fetch_assoc($studentResult);
+
+    // Check for missing details
+    $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email', 'year', 'section', 'course'];
+    $missingDetails = false;
+
+    foreach ($requiredFields as $field) {
+        if (empty($student[$field])) {
+            $missingDetails = true;
+            break;
+        }
+    }
+
+    // Set a session error if details are missing
+    if ($missingDetails) {
+        $_SESSION['error'] = "Please complete your account details.";
+    }
+} else {
+    // Student not found in the database
+    $_SESSION['error'] = "Student record not found.";
+    header("Location: ../login_student.php");
+    exit();
+}
 ?>
 
 <body id="page-top">
@@ -62,6 +85,8 @@ $student = mysqli_fetch_assoc($studentResult);
                         <!-- student Information -->
                         <div class="form-group">
                             <div class="form-row">
+
+                                    <input type="hidden" name="archive" value="<?php echo $student['archive']; ?>">
                                 <div class="col-md-4">
                                     <label for="studentId">student ID</label>
                                     <input type="text" class="form-control" id="studentId" name="student_id" value="<?php echo $student['student_id']; ?>" required readonly>
@@ -98,6 +123,72 @@ $student = mysqli_fetch_assoc($studentResult);
                             </div>
                         </div>
 
+                            <!-- Contact Details -->
+                            <div class="form-group">
+                            <h3>Contact Details</h3>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $student['email']; ?>" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" value="<?php echo $student['phone']; ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="street">Street</label>
+                                <input type="text" class="form-control" id="street" name="street"  value="<?php echo $student['street']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="barangay">Barangay</label>
+                                <input type="text" class="form-control" id="barangay" name="barangay" value="<?php echo $student['barangay']; ?>"  required>
+                            </div>
+                            <div class="form-group">
+                                <label for="municipality">Municipality</label>
+                                <input type="text" class="form-control" id="municipality" name="municipality" value="<?php echo $student['municipality']; ?>"  required>
+                            </div>
+                            <div class="form-group">
+                                <label for="province">Province</label>
+                                <input type="text" class="form-control" id="province" name="province" value="<?php echo $student['province']; ?>"  required>
+                            </div>
+                        </div>
+
+                           <!-- Course -->
+                        <div class="form-group">
+                            <h3>Course</h3>
+                            <div class="form-row">
+                                <div class="col-md-4">
+                                    <label for="year">Year</label>
+                                    <input type="text" class="form-control" id="year" name="year" value="<?php echo $student['year']; ?>"  required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="section">Section</label>
+                                    <input type="text" class="form-control" id="section" name="section" value="<?php echo $student['section']; ?>"  required>
+                                </div>
+
+                                <div class="col-md-4">
+                                <label for="course">Course</label>
+                                  <select class="form-control" id="course" name="course" required>
+                                      <option value="<?php echo $student['course']; ?>" selected><?php echo $student['course']; ?></option>
+                                      <option value="Computer Science">Computer Science</option>
+                                      <option value="Information Technology">Information Technology</option>
+                                      <option value="Engineering">Engineering</option>
+                                      <option value="Business Administration">Business Administration</option>
+                                      <option value="Psychology">Psychology</option>
+                                      <option value="Nursing">Nursing</option>
+                                  </select>
+                                </div>
+
+
+                            </div>
+                   
+
+                        </div>
+
+                        
+
+
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
                 </div>
@@ -115,3 +206,21 @@ $student = mysqli_fetch_assoc($studentResult);
     ?>
 </body>
 </html>
+<!-- JavaScript to show notification at the bottom if details are incomplete -->
+<?php if (isset($_SESSION['error'])): ?>
+    <script>
+        // Show notification at the bottom
+        const errorMessage = "<?php echo $_SESSION['error']; ?>";
+        const notification = document.createElement('div');
+        notification.classList.add('alert', 'alert-danger', 'fixed-bottom', 'mb-5', 'w-100');
+        notification.style.zIndex = '9999';
+        notification.innerText = errorMessage;
+        document.body.appendChild(notification);
+
+        // Auto-hide the notification after 5 seconds
+        setTimeout(function() {
+            notification.remove();
+        }, 5000);
+    </script>
+    <?php unset($_SESSION['error']); ?>
+<?php endif; ?>

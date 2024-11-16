@@ -262,6 +262,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
+
                 <button type="button" class="close" data-diss miss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -269,9 +270,23 @@
               </div>
               <div class="modal-body">
                 <form action="student_login_process.php" method="POST">
+
+
+                <?php
+                        if (isset($_SESSION['error'])) {
+                            echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
+                            unset($_SESSION['error']);
+                        }
+                        if (isset($_SESSION['success'])) {
+                            echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+                            unset($_SESSION['success']);
+                        }
+                        ?>
+
+                        
                   <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your email">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
                   </div>
                   <div class="form-group">
                     <label for="password">Password</label>

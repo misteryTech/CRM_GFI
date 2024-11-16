@@ -20,6 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
     $dob = mysqli_real_escape_string($connection, $_POST['dob']);
     $gender = mysqli_real_escape_string($connection, $_POST['gender']);
+    $email = mysqli_real_escape_string($connection, $_POST['email']);
+    $phone = mysqli_real_escape_string($connection, $_POST['phone']);
+    $street = mysqli_real_escape_string($connection, $_POST['street']);
+    $barangay = mysqli_real_escape_string($connection, $_POST['barangay']);
+    $municipality = mysqli_real_escape_string($connection, $_POST['municipality']);
+    $province = mysqli_real_escape_string($connection, $_POST['province']);
+    $year = mysqli_real_escape_string($connection, $_POST['year']);
+    $section = mysqli_real_escape_string($connection, $_POST['section']);
+    $course = mysqli_real_escape_string($connection, $_POST['course']);
+    $archive = mysqli_real_escape_string($connection, $_POST['archive']);
+    
 
     // Update query
     $updateQuery = "
@@ -30,7 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             first_name = '$first_name',
             last_name = '$last_name',
             dob = '$dob',
-            gender = '$gender'
+            gender = '$gender',
+            email = '$email',
+            phone = '$phone',
+            street = '$street',
+            barangay = '$barangay',
+            municipality = '$municipality',
+            province = '$province',
+            year = '$year',
+            section = '$section',
+            course = '$course',
+            archive = '$archive'
         WHERE student_id = '$student_id'
     ";
 
