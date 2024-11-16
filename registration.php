@@ -28,7 +28,7 @@ include("header.php");
                 <div class="card o-hidden border-0 shadow-lg">
                     <div class="card-body p-4">
                         <div class="text-center">
-                            <h1 class="h5 text-gray-900 mb-4">Patient Registration</h1>
+                            <h1 class="h5 text-gray-900 mb-4">Registration</h1>
                         </div>
                         <?php
                         if (isset($_SESSION['error'])) {
@@ -40,15 +40,25 @@ include("header.php");
                             unset($_SESSION['success']);
                         }
                         ?>
-                        <form action="admin/process_code/student_registration.php" method="POST" enctype="multipart/form-data">
+                        
+                        <!-- Registration Type Selector -->
+                        <div class="form-group text-center">
+                            <label for="registrationType">Select Registration Type:</label>
+                            <select id="registrationType" class="form-control" style="width: 200px; margin: 0 auto;">
+                                <option value="student">Student</option>
+                                <option value="staff">Staff</option>
+                            </select>
+                        </div>
+
+                        <!-- Student Registration Form -->
+                        <form id="studentForm" action="admin/process_code/student_registration.php" method="POST" enctype="multipart/form-data" style="display: block;">
+                            <h3>Student Registration</h3>
                             <!-- Student Information -->
                             <div class="form-group">
                                 <div class="form-row">
                                     <div class="col-md-4">
                                         <label for="studentId">Student ID</label>
                                         <input type="text" class="form-control" id="studentId" name="student_id" required>
-                                        <span id="studentIdError" style="color:red; display:none;">Student ID already exists!</span>
-                                        <span id="studentIdAvail" style="color:green; display:none;">Student ID Available!</span>
                                     </div>
                                     <div class="col-md-4">
                                         <label for="username">Username</label>
@@ -56,7 +66,7 @@ include("header.php");
                                     </div>
                                     <div class="col-md-4">
                                         <label for="password">Password</label>
-                                        <input type="text" class="form-control" id="password" name="password" required>
+                                        <input type="password" class="form-control" id="password" name="password" required>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -82,40 +92,9 @@ include("header.php");
                                 </div>
                             </div>
 
-                            <!-- Contact Details -->
+                            <!-- Additional Student Fields -->
                             <div class="form-group">
-                                <h3>Contact Details</h3>
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <label for="email">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="phone">Phone Number</label>
-                                        <input type="text" class="form-control" id="phone" name="phone" maxlength="11" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="street">Street</label>
-                                    <input type="text" class="form-control" id="street" name="street" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="barangay">Barangay</label>
-                                    <input type="text" class="form-control" id="barangay" name="barangay" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="municipality">Municipality</label>
-                                    <input type="text" class="form-control" id="municipality" name="municipality" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="province">Province</label>
-                                    <input type="text" class="form-control" id="province" name="province" required>
-                                </div>
-                            </div>
-
-                            <!-- Course -->
-                            <div class="form-group">
-                                <h3>Course</h3>
+                                <h3>Course Details</h3>
                                 <div class="form-row">
                                     <div class="col-md-4">
                                         <label for="year">Year</label>
@@ -140,19 +119,51 @@ include("header.php");
                                 </div>
                             </div>
 
-                            <!-- Medical History -->
+                            <button type="submit" class="btn btn-success">Register</button>
+                        </form>
+
+                        <!-- Staff Registration Form -->
+                        <form id="staffForm" action="admin/process_code/staff_registration.php" method="POST" enctype="multipart/form-data" style="display: none;">
+                            <h3>Staff Registration</h3>
+                            <!-- Staff Information -->
                             <div class="form-group">
-                                <h3>Medical History</h3>
                                 <div class="form-row">
-                                    <div class="col-md-6">
-                                        <label for="pre_condition">Pre-existing Condition</label>
-                                        <input type="text" class="form-control" id="pre_condition" name="pre_condition">
+                                    <div class="col-md-4">
+                                        <label for="staffId">Staff ID</label>
+                                        <input type="text" class="form-control" id="staffId" name="staff_id" required>
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="documents">Documents</label>
-                                        <input type="file" class="form-control" id="documents" name="documents">
+                                    <div class="col-md-4">
+                                        <label for="usernameStaff">Username</label>
+                                        <input type="text" class="form-control" id="usernameStaff" name="username" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="passwordStaff">Password</label>
+                                        <input type="password" class="form-control" id="passwordStaff" name="password" required>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <label for="firstNameStaff">First Name</label>
+                                        <input type="text" class="form-control" id="firstNameStaff" name="first_name" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastNameStaff">Last Name</label>
+                                        <input type="text" class="form-control" id="lastNameStaff" name="last_name" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+    <label for="position">Position</label>
+    <select class="form-control" id="position" name="position" required>
+        <option value="">Select Position</option>
+        <option value="Teacher">Teacher</option>
+        <option value="Administrative Staff">Administrative Staff</option>
+        <option value="Librarian">Librarian</option>
+        <option value="Guidance Counselor">Guidance Counselor</option>
+        <option value="Janitor">Janitor</option>
+        <option value="Security Guard">Security Guard</option>
+    </select>
+</div>
+
                             </div>
 
                             <button type="submit" class="btn btn-success">Register</button>
@@ -162,6 +173,20 @@ include("header.php");
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('registrationType').addEventListener('change', function() {
+            const studentForm = document.getElementById('studentForm');
+            const staffForm = document.getElementById('staffForm');
+            if (this.value === 'student') {
+                studentForm.style.display = 'block';
+                staffForm.style.display = 'none';
+            } else {
+                studentForm.style.display = 'none';
+                staffForm.style.display = 'block';
+            }
+        });
+    </script>
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
