@@ -6,11 +6,16 @@
         <i class="fas fa-user"></i>
     </div>
     <div class="sidebar-brand-text mx-3">Clinic Management<sup><br></sup></div>
+
+
 </a>
 
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
 
+
+<h5>Welcome Back!</h5>
+<div class="sidebar-brand-text mx-3"><?php echo $username; ?><sup><br></sup></div>
 <!-- Nav Item - Dashboard -->
 <li class="nav-item">
     <a class="nav-link" href="student_dashboard.php">

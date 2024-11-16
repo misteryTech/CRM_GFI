@@ -73,6 +73,7 @@ $reorder_table = "5";
                                         echo "<thead>";
                                         echo "<tr>";
                            
+                                        echo "<th>#</th>";
                                         echo "<th>Medicine Name</th>";
                                         echo "<th>Stock</th>";
                                         echo "</tr>";
@@ -82,6 +83,7 @@ $reorder_table = "5";
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             echo "<tr>";
                                          
+                                            echo "<td>" . $row['id'] . "</td>";
                                             echo "<td>" . $row['medicine_name'] . "</td>";
                                             echo "<td>" . $row['stock'] . "</td>";
                                             echo "</tr>";
@@ -109,10 +111,10 @@ $reorder_table = "5";
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
-                                        echo "<table class='table table-bordered'>";
+                                        echo "<table class='table table-bordered' id='reorder'>";
                                         echo "<thead>";
                                         echo "<tr>";
-                                        echo "<th>Medicine ID</th>";
+                                        echo "<th>#</th>";
                                         echo "<th>Medicine Name</th>";
                                         echo "<th>Stock</th>";
                                         echo "<th>Status</th>";

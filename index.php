@@ -233,8 +233,10 @@
               </button>
               <a href="#" class="navbar-brand">
                 <!-- Logo of the website -->
-                <img class="brand-logo" src="#" height="80px" alt="GFI LOGO" />
+                <img class="brand-logo" src="PICTURE/clinic_picture.png" height="80px" alt="GFI LOGO" />
+              
               </a>
+              <h5>Gensantos Foundation College</h5>
             </div>
 
             <div class="navbar-collapse collapse" id="mobile_menu">

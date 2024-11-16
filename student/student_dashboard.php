@@ -14,6 +14,7 @@ if (!isset($_SESSION['student_id'])) {
 
 
 $student_id = $_SESSION['student_id'];
+$username = $_SESSION['username'];
 
 
 // Prepare the SQL statement
@@ -112,7 +113,7 @@ $stmt->close();
                                         <table class="table table-bordered" id="medicalRecordTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>Record Id</th>
+                                                    <th>#</th>
                                                     <th>Student ID</th>
                                                     <th>Illness</th>
                                                     <th>Symptoms</th>

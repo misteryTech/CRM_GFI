@@ -137,11 +137,32 @@
 
 
     
-
-
         $(document).ready(function() {
-            $('#stocktable').DataTable();
+            $('#stocktable').DataTable(
+                {
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
+            });
+
+
         });
+
+         
+        $(document).ready(function() {
+            $('#reorder').DataTable(
+                {
+                dom: 'Bfrtip',
+                buttons: [
+                    'print'
+                ]
+            });
+
+
+        });
+
+
 
 
         
