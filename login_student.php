@@ -18,7 +18,7 @@ include("header.php");
   background-repeat: no-repeat;
 }
 
-
+/* this is comment */
 
 </style>
 <body class="bg-gfi-school">
