@@ -36,7 +36,7 @@
         color: #000 !important;
       }
 
-      /* Add hover animation on navbar submenu items */
+      /* Add hover animation on navbar submenu*/
       .navbar-inverse .navbar-nav > li > .dropdown-menu li > a:hover,
       .navbar-inverse .navbar-nav > li > .dropdown-menu li > a:focus {
         background-color: #800020 !important;
