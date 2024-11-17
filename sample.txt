@@ -1,1 +1,1 @@
-this is sample to test the git changes
+this is sample
