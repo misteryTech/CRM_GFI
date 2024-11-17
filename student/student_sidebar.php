@@ -14,8 +14,8 @@
 <hr class="sidebar-divider my-0">
 
 
-<h5>Welcome Back!</h5>
-<div class="sidebar-brand-text mx-3"><?php echo $username; ?><sup><br></sup></div>
+<!-- <h5>Welcome Back!</h5>
+<div class="sidebar-brand-text mx-3"><?php echo $username; ?><sup><br></sup></div> -->
 <!-- Nav Item - Dashboard -->
 <li class="nav-item">
     <a class="nav-link" href="student_dashboard.php">
