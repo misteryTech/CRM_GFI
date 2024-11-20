@@ -71,7 +71,7 @@ include("header.php");
                                         </div>
                                         <div class="col-md-6">
                                             <label for="username">Username <span class="validation">*</span></label>
-                                            <input type="text" class="form-control" id="username" name="username" disabled required>
+                                            <input type="text" class="form-control" id="username" name="username" required>
 
                                         </div>
                                         <div class="col-md-6">
