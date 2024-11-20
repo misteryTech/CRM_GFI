@@ -11,6 +11,12 @@ include("header.php");
   background-size: cover;
 }
 
+
+.validation{
+    color: red;
+    font-size: 25px;
+}
+
 .card {
   margin-top: 50px;
 }
@@ -56,118 +62,47 @@ include("header.php");
                                 <!-- Student Information -->
                                 <div class="form-group">
                                     <div class="form-row">
-                                        <div class="col-md-4">
-                                            <label for="studentId">Student ID</label>
-                                            <input type="text" class="form-control" id="studentId" name="student_id" required>
+                                        <div class="col-md-6">
+                                        <label for="studentId">Student Id  <span class="validation">*</span></label>
+                                        <input type="text" class="form-control" id="studentId" name="student_id" onblur="checkStudentId()" required>
+
+                                    <span id="studentIdError" style="color:green; display:none;">Complete Registration!</span>
+                                    <span id="studentIdAvail" style="color:red; display:none;">You are not Registered in clinic!</span>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" required>
+                                        <div class="col-md-6">
+                                            <label for="username">Username <span class="validation">*</span></label>
+                                            <input type="text" class="form-control" id="username" name="username" disabled required>
+
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required>
-                                        </div>
+                                        <div class="col-md-6">
+    <label for="password">Password <span class="validation">*</span></label>
+    <div class="input-group">
+    <input type="password" class="form-control" id="password" name="password" oninput="passwordValidation()" required>
+    <span class="input-group-addon" style="cursor: pointer;" onclick="togglePasswordVisibility('password', 'passwordToggle')">
+        <i class="fas fa-eye-slash" id="passwordToggle"></i> <!-- Toggle Icon -->
+    </span>
+    <div id="passwordError" class="text-danger" style="display: none;">Password must be at least 5 characters long.</div>
+</div>
+
+</div>
+
+
+
+
+<!-- Validation Error Messages -->
+
+
+
                                     </div>
-                                    <div class="form-row">
-                                        <div class="col-md-4">
-                                            <label for="firstName">First Name</label>
-                                            <input type="text" class="form-control" id="firstName" name="first_name" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="lastName">Last Name</label>
-                                            <input type="text" class="form-control" id="lastName" name="last_name" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="dob">Date of Birth</label>
-                                            <input type="date" class="form-control" id="dob" name="dob" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="gender">Gender</label>
-                                        <select class="form-control" id="gender" name="gender" required>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select>
-                                    </div>
+                             
                                 </div>
 
-                                <!-- Additional Student Fields -->
-                                <div class="form-group">
-                                    <h3>Course Details</h3>
-                                    <div class="form-row">
-                                        <div class="col-md-4">
-                                            <label for="year">Year</label>
-                                            <input type="text" class="form-control" id="year" name="year" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="section">Section</label>
-                                            <input type="text" class="form-control" id="section" name="section" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label for="course">Course</label>
-                                            <select class="form-control" id="course" name="course" required>
-                                                <option value="">Select Course</option>
-                                                <option value="Computer Science">Computer Science</option>
-                                                <option value="Information Technology">Information Technology</option>
-                                                <option value="Engineering">Engineering</option>
-                                                <option value="Business Administration">Business Administration</option>
-                                                <option value="Psychology">Psychology</option>
-                                                <option value="Nursing">Nursing</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button type="submit" class="btn btn-success">Register</button>
+                    
+                                <button type="submit" class="btn btn-success" >Register</button>
                             </form>
 
                         <!-- Staff Registration Form -->
-                        <form id="staffForm" action="admin/process_code/staff_registration.php" method="POST" enctype="multipart/form-data" style="display: none;">
-                            <h3>Staff Registration</h3>
-                            <!-- Staff Information -->
-                            <div class="form-group">
-                                <div class="form-row">
-                                    <div class="col-md-4">
-                                        <label for="staffId">Staff ID</label>
-                                        <input type="text" class="form-control" id="staffId" name="staff_id" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="usernameStaff">Username</label>
-                                        <input type="text" class="form-control" id="usernameStaff" name="username" required>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label for="passwordStaff">Password</label>
-                                        <input type="password" class="form-control" id="passwordStaff" name="password" required>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        <label for="firstNameStaff">First Name</label>
-                                        <input type="text" class="form-control" id="firstNameStaff" name="first_name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="lastNameStaff">Last Name</label>
-                                        <input type="text" class="form-control" id="lastNameStaff" name="last_name" required>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-    <label for="position">Position</label>
-    <select class="form-control" id="position" name="position" required>
-        <option value="">Select Position</option>
-        <option value="Teacher">Teacher</option>
-        <option value="Administrative Staff">Administrative Staff</option>
-        <option value="Librarian">Librarian</option>
-        <option value="Guidance Counselor">Guidance Counselor</option>
-        <option value="Janitor">Janitor</option>
-        <option value="Security Guard">Security Guard</option>
-    </select>
-</div>
-
-                            </div>
-
-                            <button type="submit" class="btn btn-success">Register</button>
-                        </form>
+                    
                     </div>
                 </div>
             </div>
@@ -175,17 +110,136 @@ include("header.php");
     </div>
 
     <script>
-        document.getElementById('registrationType').addEventListener('change', function() {
-            const studentForm = document.getElementById('studentForm');
-            const staffForm = document.getElementById('staffForm');
-            if (this.value === 'student') {
-                studentForm.style.display = 'block';
-                staffForm.style.display = 'none';
+// Function to toggle the visibility of the password input field
+function togglePasswordVisibility(inputId, iconId) {
+    var inputField = document.getElementById(inputId);
+    var icon = document.getElementById(iconId);
+    var type = inputField.type === "password" ? "text" : "password"; // Toggle between text and password
+    inputField.type = type;
+
+    // Toggle the eye icon based on the visibility type
+    if (type === "text") {
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    } else {
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    }
+}
+
+// Function to validate the password length
+function passwordValidation() {
+    var password = document.getElementById("password").value;
+    var passwordError = document.getElementById("passwordError");
+
+    // Check if the password length is less than 5 characters
+    if (password.length < 5) {
+        passwordError.style.display = "block"; // Show error message
+        document.getElementById("password").style.borderColor = "red"; // Red border for password
+    } else {
+        passwordError.style.display = "none"; // Hide error message
+        document.getElementById("password").style.borderColor = "green"; // Green border for password
+    }
+}
+
+
+
+// Additional password validation (optional) for minimum length or other criteria
+function checkPassword() {
+    var password = document.getElementById("password").value;
+    var passwordError = document.getElementById("passwordError");
+
+    // Example: Check if the password is at least 8 characters long
+    if (password.length < 8) {
+        passwordError.style.display = "block"; // Show error message
+        document.getElementById("password").style.borderColor = "red"; // Red border for password
+    } else {
+        passwordError.style.display = "none"; // Hide error message
+        document.getElementById("password").style.borderColor = "green"; // Green border for password
+    }
+}
+
+
+function checkStudentId() {
+    var studentId = document.getElementById('studentId').value.trim(); // Get input value and trim whitespace
+
+    if (!studentId) {
+        // Reset validation if input is empty
+        resetStudentIdValidation();
+        return;
+    }
+
+    // AJAX call to validate Student ID
+    $.ajax({
+        url: "validation/check_student_id.php", // Update with your correct path
+        method: "POST",
+        data: { student_id: studentId },
+        success: function (response) {
+            var data = JSON.parse(response);  // Assuming the response is in JSON format
+            if (data.status === "exists") {
+                // If the student ID exists, proceed to registration
+                $("#studentIdError").hide();
+                $("#studentIdAvail").show().html('Student ID found! Proceeding with registration.');
+                $("button[type='submit']").prop('disabled', false); // Enable button
+
+                // Apply green border and text color to the input field
+                $("#studentId").css({
+                    'border-color': 'green', // Green border for valid ID
+                    'color': 'green'         // Green text color for input field
+                });
+
+                $("#studentIdAvail").css('color', 'green');
+
+                // Set the username field with the returned username from the server
+                $("#username").val(data.username); // Auto-fill the username field
+
+            } else if (data.status === "available") {
+                // If the student ID is not found, prompt to walk-in registration
+                $("#studentIdError").show().html('Student ID not found! Please proceed to walk-in clinic registration.');
+                $("#studentIdAvail").hide();
+                $("button[type='submit']").prop('disabled', true); // Disable button
+                $("#studentId").css('border-color', 'red'); // Red border for unavailable ID
+                
+                // Optionally, offer a prompt to redirect to walk-in registration
+                if (confirm("Student ID not found. Do you want to proceed to walk-in clinic registration?")) {
+                    window.location.href = "clinic-schedule.php"; // Replace with the correct URL
+                }
             } else {
-                studentForm.style.display = 'none';
-                staffForm.style.display = 'block';
+                // Handle unexpected response
+                alert("Unexpected response from server: " + response);
+                resetStudentIdValidation();
             }
-        });
+        },
+        error: function () {
+            // Handle AJAX error
+            alert("Error occurred while validating the Student ID.");
+            resetStudentIdValidation();
+        }
+    });
+}
+
+// Reset Validation Function
+function resetStudentIdValidation() {
+    $("#studentIdError").hide();
+    $("#studentIdAvail").hide();
+    $("button[type='submit']").prop('disabled', true); // Disable button by default
+    $("#studentId").css('border-color', '');
+    $("#username").val(''); // Clear the username field
+}
+
+// Handle registration type selection
+document.getElementById('registrationType').addEventListener('change', function() {
+    const studentForm = document.getElementById('studentForm');
+    const staffForm = document.getElementById('staffForm');
+    if (this.value === 'student') {
+        studentForm.style.display = 'block';
+        staffForm.style.display = 'none';
+    } else {
+        studentForm.style.display = 'none';
+        staffForm.style.display = 'block';
+    }
+});
+
     </script>
 
     <script src="vendor/jquery/jquery.min.js"></script>

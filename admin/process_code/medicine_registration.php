@@ -14,13 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $storage_temperature = mysqli_real_escape_string($connection, $_POST['storage_temperature']);
     $storage_instructions = mysqli_real_escape_string($connection, $_POST['storage_instructions']);
     $stock = mysqli_real_escape_string($connection, $_POST['stock']);
+    $reorder = mysqli_real_escape_string($connection, $_POST['reorder']);
 
     $query = "INSERT INTO medicines (
-        medicine_name, brand_name, medicine_type, expiry_date, manufacturer, dosage, frequency, duration, storage_temperature, storage_instructions, stock
+        medicine_name, brand_name, medicine_type, expiry_date, manufacturer, dosage, frequency, duration, storage_temperature, storage_instructions, stock, reorder_point
     ) VALUES (
-        '$medicine_name', '$brand_name', '$medicine_type', '$expiry_date', '$manufacturer', '$dosage', '$frequency', '$duration', '$storage_temperature', '$storage_instructions', '$stock'
+        '$medicine_name', '$brand_name', '$medicine_type', '$expiry_date', '$manufacturer', '$dosage', '$frequency', '$duration', '$storage_temperature', '$storage_instructions', '$stock', '$reorder'
     )";
 
+
+// Assuming the connection and query are already set up
     if (mysqli_query($connection, $query)) {
         $_SESSION['success'] = "Medicine registered successfully!";
         header("Location: ../admin_medicine_registration.php");
@@ -30,6 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../admin_medicine_registration.php");
         exit();
     }
+
+
 }
 
 mysqli_close($connection);

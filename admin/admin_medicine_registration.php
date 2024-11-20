@@ -1,6 +1,5 @@
 <?php
 include("admin_header.php");
-session_start();
 include("../include/connection.php");
 ?>
 
@@ -24,7 +23,7 @@ include("../include/connection.php");
                 ?>
 
                 <div class="container mt-5 mb-5">
-                    <?php if (isset($_SESSION['success'])): ?>
+                <?php if (isset($_SESSION['success'])): ?>
                         <div class="alert alert-success">
                             <?php
                             echo $_SESSION['success'];
@@ -40,8 +39,6 @@ include("../include/connection.php");
                             ?>
                         </div>
                     <?php endif; ?>
-
-
                     <h2>Medicine Registration Form</h2>
                     <form action="process_code/medicine_registration.php" method="POST">
                         <!-- Medicine Information -->
@@ -77,10 +74,23 @@ include("../include/connection.php");
                                 <label for="manufacturer">Manufacturer</label>
                                 <input type="text" class="form-control" id="manufacturer" name="manufacturer" required>
                             </div>
+                    
+                            <div class="form-row">
+                           
+                  
 
-                            <div class="form-group">
-                                <label for="manufacturer">Stock</label>
-                                <input type="number" class="form-control" id="stock" name="stock" required>
+                            <div class="col-md-6">
+                            <label for="manufacturer">Stock</label>
+                            <input type="number" class="form-control" id="stock" name="stock" required>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                <label for="manufacturer">Reorder Point</label>
+                                <input type="number" class="form-control" id="reorder" name="reorder" required>
+                                </div>
+
+
                             </div>
 
 

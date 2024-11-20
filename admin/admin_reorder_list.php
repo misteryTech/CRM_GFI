@@ -1,17 +1,10 @@
 <?php
 include("admin_header.php");
-session_start();
+
 include("../include/connection.php");
 
 // Fetch reorder medicine information with corresponding medicine details from the database
-$query = "
-    SELECT rm.*, m.medicine_name
-    FROM reorder_medicine rm
-    INNER JOIN medicines m ON rm.medicine_id = m.id
 
-    WHERE rm.reorder_status = 'Pending'
-";
-$result = mysqli_query($connection, $query);
 ?>
 
 <body id="page-top">
@@ -39,11 +32,11 @@ $result = mysqli_query($connection, $query);
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Reorder Medicine Information</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Medicine Information Logs</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="medicineTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="medicineTables" width="100%" cellspacing="0">
                                     <?php if (isset($_SESSION['success'])): ?>
                                         <div class="alert alert-success">
                                             <?php
@@ -65,27 +58,43 @@ $result = mysqli_query($connection, $query);
                                         <tr>
                                             <th>Medicine ID</th>
                                             <th>Medicine Name</th>
-                                            <th>Reorder Quantity</th>
+                                            <th>Stock Onhand</th>
+                                            <th>Additional Stocks</th>
+                                            <th>Total Request</th>
+                                            <th>Reording Point</th>
                                             <th>Reorder Date</th>
-                                            <th>Reorder Status</th>
+                                     
                                             <th>Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                     <?php
+
+                                        $query = "
+                                        SELECT rm.*, m.medicine_name , m.reorder_point
+                                        FROM reorder_medicine rm
+                                        INNER JOIN medicines m ON rm.medicine_id = m.id
+
+                                        WHERE rm.reorder_status = 'Pending'
+                                        ";
+                                        $result = mysqli_query($connection, $query);
+
+
                                     // Loop through each row of the result set
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         echo "<td>" . $row['medicine_id'] . "</td>";
                                         echo "<td>" . $row['medicine_name'] . "</td>";
+                                        echo "<td>" . $row['current_stock'] . "</td>";
                                         echo "<td>" . $row['reorder_quantity'] . "</td>";
+                                        echo "<td>" . $row['total_request'] . "</td>";
+                                        echo "<td>" . $row['reorder_point'] . "</td>";
                                         echo "<td>" . $row['reorder_date'] . "</td>";
-                                        echo "<td>" . $row['reorder_status'] . "</td>";
+                                    
                                         echo "<td>";
                                         echo "<button class='btn btn-primary' data-toggle='modal' data-target='#viewModal" . $row['medicine_id'] . "'>View</button> ";
-                                        echo "<button class='btn btn-success' data-toggle='modal' data-target='#acceptModal" . $row['medicine_id'] . "'>Accept</button> ";
-                                        echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['medicine_id'] . "'>Delete</button>";
+                                        echo "<button class='btn btn-danger' data-toggle='modal' data-target='#deleteModal" . $row['medicine_id'] . "'>Archive</button>";
                                         echo "</td>";
                                         echo "</tr>";
 
@@ -229,3 +238,33 @@ echo "</div>";
     <?php
     include("admin_footer.php");
     ?>
+    <script>
+     $(document).ready(function() {
+            $('#medicineTables').DataTable({
+                dom: 'Bfrtip', // Adds the Buttons container
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Print Table', // Customize the print button text
+                        exportOptions: {
+                            columns: ':visible' // Print only visible columns
+                        },
+                        customize: function (win) {
+                            // Get the current date
+                            const currentDate = new Date().toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            });
+
+                            // Add a header to the print view
+                            $(win.document.body)
+                                .prepend('<h3 style="text-align:center;">Medicine Stock Report</h3>')
+                                .prepend('<h5 style="text-align:center;">Printed on: ' + currentDate + '</h5>');
+                        }
+                    }
+                ]
+            });
+        });
+
+    </script>
