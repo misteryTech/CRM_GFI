@@ -40,12 +40,12 @@ if (mysqli_num_rows($studentResult) == 1) {
     // Set a session error if details are missing
     if ($missingDetails) {
         $_SESSION['error'] = "Please complete your account details.";
-        header("Location: ../login_student.php");
+
     }
 } else {
     // Student not found in the database
     $_SESSION['error'] = "Student record not found.";
- 
+    header("Location: ../login_student.php");
     exit();
 }
 ?>
@@ -176,15 +176,19 @@ if (mysqli_num_rows($studentResult) == 1) {
 
                                 <div class="col-md-4">
                                 <label for="course">Course</label>
-                                  <select class="form-control" id="course" name="course" required>
-                                      <option value="<?php echo $student['course']; ?>" selected><?php echo $student['course']; ?></option>
-                                      <option value="Computer Science">Computer Science</option>
-                                      <option value="Information Technology">Information Technology</option>
-                                      <option value="Engineering">Engineering</option>
-                                      <option value="Business Administration">Business Administration</option>
-                                      <option value="Psychology">Psychology</option>
-                                      <option value="Nursing">Nursing</option>
-                                  </select>
+                                <select class="form-control" id="course" name="course" required>
+    <option value="<?php echo $student['course']; ?>" selected><?php echo $student['course']; ?></option>
+    <option value="BS in Accountancy">𝐁𝐒 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲</option>
+    <option value="BS in Management Accounting">BS in Management Accounting</option>
+    <option value="BS in Secondary Education">BS Secondary Education</option>
+    <option value="BS in Computer Science">BS in Computer Science</option>
+    <option value="BS in Information Technology">BS in Information Technology</option>
+    <option value="BS in Engineering">BS in Engineering</option>
+    <option value="BS in Business Administration">BS in Business Administration</option>
+    <option value="BS in Psychology">BS in Psychology</option>
+    <option value="BS in Nursing">BS in Nursing</option>
+</select>
+
                                 </div>
 
 
