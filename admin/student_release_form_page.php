@@ -97,7 +97,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
 
                             <div class="col-md-4">
                                 <label for="course">Course</label>
-                                <h4><?php echo htmlspecialchars($student_data['course'] . ' ' . $student_data['year']); ?></h4>
+                                <h4><?php echo htmlspecialchars($student_data['course'] ); ?></h4>
                             </div>
                         </div>
 
