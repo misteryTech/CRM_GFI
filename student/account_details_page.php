@@ -167,7 +167,16 @@ if (mysqli_num_rows($studentResult) == 1) {
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <label for="year">Year</label>
-                                    <input type="text" class="form-control" id="year" name="year" value="<?php echo $student['year']; ?>"  required>
+                              
+
+                                    <select class="form-control" id="gender" name="year" required>
+                                    <option value="First Year" <?php echo ($student['year'] == 'First Year') ? 'selected' : ''; ?>>First Year</option>
+                                    <option value="Second Year" <?php echo ($student['year'] == 'Second Year') ? 'selected' : ''; ?>>Second Year</option>
+                                    <option value="Third Year" <?php echo ($student['year'] == 'Third Year') ? 'selected' : ''; ?>>Third Year</option>
+                                    <option value="Fourth Year" <?php echo ($student['year'] == 'Fourth Year') ? 'selected' : ''; ?>>Fourth Year</option>
+                                </select>
+
+
                                 </div>
                                 <div class="col-md-4">
                                     <label for="section">Section</label>
@@ -178,15 +187,24 @@ if (mysqli_num_rows($studentResult) == 1) {
                                 <label for="course">Course</label>
                                 <select class="form-control" id="course" name="course" required>
     <option value="<?php echo $student['course']; ?>" selected><?php echo $student['course']; ?></option>
-    <option value="BS in Accountancy">𝐁𝐒 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲</option>
-    <option value="BS in Management Accounting">BS in Management Accounting</option>
-    <option value="BS in Secondary Education">BS Secondary Education</option>
-    <option value="BS in Computer Science">BS in Computer Science</option>
-    <option value="BS in Information Technology">BS in Information Technology</option>
-    <option value="BS in Engineering">BS in Engineering</option>
-    <option value="BS in Business Administration">BS in Business Administration</option>
-    <option value="BS in Psychology">BS in Psychology</option>
-    <option value="BS in Nursing">BS in Nursing</option>
+    <option value="𝐁𝐒 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲">BS 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲</option>
+  <option value="𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠">𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠</option>
+  <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧</option>
+  <option value="𝐌𝐚𝐣𝐨𝐫 𝐢𝐧 𝐄𝐧𝐠𝐥𝐢𝐬𝐡 & 𝐌𝐚𝐭𝐡">𝐌𝐚𝐣𝐨𝐫 𝐢𝐧 𝐄𝐧𝐠𝐥𝐢𝐬𝐡 & 𝐌𝐚𝐭𝐡</option>
+  <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐢𝐧 𝐏𝐡𝐲𝐬𝐢𝐜𝐚𝐥 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐢𝐧 𝐏𝐡𝐲𝐬𝐢𝐜𝐚𝐥 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧</option>
+  <option value="𝐁𝐒 𝐢𝐧 𝐂𝐫𝐢𝐦𝐢𝐧𝐨𝐥𝐨𝐠𝐲">𝐁𝐒 𝐢𝐧 𝐂𝐫𝐢𝐦𝐢𝐧𝐨𝐥𝐨𝐠𝐲</option>
+  <option value="𝐁𝐒 𝐢𝐧 𝐎𝐟𝐟𝐢𝐜𝐞 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧">𝐁𝐒 𝐢𝐧 𝐎𝐟𝐟𝐢𝐜𝐞 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧</option>
+  <option value="𝐁𝐒 𝐢𝐧 𝐓𝐨𝐮𝐫𝐢𝐬𝐦 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">𝐁𝐒 𝐢𝐧 𝐓𝐨𝐮𝐫𝐢𝐬𝐦 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭</option>
+  <option value="𝐁𝐒 𝐢𝐧 𝐁𝐮𝐬𝐢𝐧𝐞𝐬𝐬 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧">𝐁𝐒 𝐢𝐧 𝐁𝐮𝐬𝐢𝐧𝐞𝐬𝐬 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧</option>
+  <optgroup label="Major in Business Administration">
+    <option value="𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">Financial Management</option>
+    <option value="𝐌𝐚𝐫𝐤𝐞𝐭𝐢𝐧𝐠 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">Marketing Management</option>
+    <option value="𝐇𝐮𝐦𝐚𝐧 𝐑𝐞𝐬𝐨𝐮𝐫𝐜𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐦𝐞𝐧𝐭 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">Human Resource Development Management</option>
+  </optgroup>
+  <option value="𝐁𝐒 𝐢𝐧 𝐄𝐧𝐭𝐫𝐞𝐩𝐫𝐞𝐧𝐞𝐮𝐫𝐬𝐡𝐢𝐩">𝐁𝐒 𝐢𝐧 𝐄𝐧𝐭𝐫𝐞𝐩𝐫𝐞𝐧𝐞𝐮𝐫𝐬𝐡𝐢𝐩</option>
+  <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐀𝐫𝐭𝐬 𝐢𝐧 𝐋𝐢𝐭𝐞𝐫𝐚𝐫𝐲 & 𝐂𝐮𝐥𝐭𝐮𝐫𝐚𝐥 𝐒𝐭𝐮𝐝𝐢𝐞𝐬">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐀𝐫𝐭𝐬 𝐢𝐧 𝐋𝐢𝐭𝐞𝐫𝐚𝐫𝐲 & 𝐂𝐮𝐥𝐭𝐮𝐫𝐚𝐥 𝐒𝐭𝐮𝐝𝐢𝐞𝐬</option>
+  <option value="𝐁𝐒 𝐢𝐧 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 𝐒𝐲𝐬𝐭𝐞𝐦">𝐁𝐒 𝐢𝐧 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 𝐒𝐲𝐬𝐭𝐞𝐦</option>
+  <option value="𝐀𝐬𝐬𝐨𝐜𝐢𝐚𝐭𝐞 𝐢𝐧 𝐂𝐨𝐦𝐩𝐮𝐭𝐞𝐫 𝐓𝐞𝐜𝐡𝐧𝐨𝐥𝐨𝐠𝐲">𝐀𝐬𝐬𝐨𝐜𝐢𝐚𝐭𝐞 𝐢𝐧 𝐂𝐨𝐦𝐩𝐮𝐭𝐞𝐫 𝐓𝐞𝐜𝐡𝐧𝐨𝐥𝐨𝐠𝐲</option>
 </select>
 
                                 </div>

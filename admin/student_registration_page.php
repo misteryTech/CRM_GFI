@@ -44,7 +44,7 @@ include("../include/connection.php");
                                 <!-- Student ID -->
                                 <div class="col-md-6">
                                     <label for="studentId">Student ID</label>
-                                    <input type="text" class="form-control" id="studentId" name="student_id" required>
+                                    <input type="number" class="form-control" id="studentId" name="student_id" required>
                                     <span id="studentIdError" style="color:red; display:none;">Student ID already exists!</span>
                                     <span id="studentIdAvail" style="color:green; display:none;">Student ID Available!</span>
                                 </div>
@@ -87,7 +87,7 @@ include("../include/connection.php");
 
     // Initialize studentId to 2101 and ensure it's 7 digits long
     let studentIdInput = $("#studentId");
-    studentIdInput.val("2101-"); // Initialize with 2101
+    studentIdInput.val("2101"); // Initialize with 2101
 
     // Automatically adjust the studentId to 7 digits when the user types
     studentIdInput.on("input", function () {

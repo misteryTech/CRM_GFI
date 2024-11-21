@@ -55,14 +55,7 @@ if (mysqli_num_rows($studentResult) == 1) {
 // Get student ID from session
 $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
 
-// Fetch student details from the database
-$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
-$studentResult = mysqli_query($connection, $studentQuery);
-$student = mysqli_fetch_assoc($studentResult);
 
-// Fetch message requests sent by the student
-$messageQuery = "SELECT * FROM message_request_tbl WHERE student_id = '$student_id'";
-$messageResult = mysqli_query($connection, $messageQuery);
 
 ?>
 
@@ -134,7 +127,19 @@ $messageResult = mysqli_query($connection, $messageQuery);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($message = mysqli_fetch_assoc($messageResult)): ?>
+
+                        
+                            <?php
+                            // Fetch student details from the database
+$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
+$studentResult = mysqli_query($connection, $studentQuery);
+$student = mysqli_fetch_assoc($studentResult);
+
+// Fetch message requests sent by the student
+$messageQuery = "SELECT * FROM message_request_tbl WHERE student_id = '$student_id'";
+$messageResult = mysqli_query($connection, $messageQuery);
+
+                            while ($message = mysqli_fetch_assoc($messageResult)): ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($message['message_id']); ?></td>
                                     <td><?php echo nl2br(htmlspecialchars($message['message'])); ?></td>
