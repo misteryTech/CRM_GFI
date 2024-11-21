@@ -101,7 +101,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                             </div>
                         </div>
 
-
+                        <input type="hidden" class="form-control" id="student_id" name="student_id"  value="<?php echo htmlspecialchars($student_data['student_id']); ?>" >
                         
                         </div>
 

@@ -40,11 +40,12 @@ if (mysqli_num_rows($studentResult) == 1) {
     // Set a session error if details are missing
     if ($missingDetails) {
         $_SESSION['error'] = "Please complete your account details.";
+        header("Location: ../login_student.php");
     }
 } else {
     // Student not found in the database
     $_SESSION['error'] = "Student record not found.";
-    header("Location: ../login_student.php");
+ 
     exit();
 }
 ?>

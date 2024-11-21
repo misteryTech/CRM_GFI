@@ -294,9 +294,10 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
                   </div>
-                  <a href="registration.php" class="btn btn-primary">Register</a>
+          
 
                   <button type="submit" class="btn btn-success">Login</button>
+                  <a href="registration.php" class="btn btn-primary">Register</a>
                 </form>
               </div>
             </div>
