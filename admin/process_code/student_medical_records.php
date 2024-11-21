@@ -9,6 +9,7 @@ $date_diagnosed = $_POST['date_diagnosed'];
 $note = $_POST['note'];
 $medicines = $_POST['medicine_id']; // Array of medicine IDs
 $quantities = $_POST['quantity']; // Array of corresponding quantities
+$recommendation = $_POST['recommendation']; // Array of corresponding quantities
 $role = 1; // Assuming role is an integer
 
 // Begin a transaction
@@ -16,8 +17,8 @@ $connection->begin_transaction();
 
 try {
     // Insert into student_clinic_record_table
-    $stmt = $connection->prepare("INSERT INTO student_clinic_record_table (student_id, illness, symptoms, date_diagnosed, note) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issss", $student_id, $illness, $symptoms, $date_diagnosed, $note);
+    $stmt = $connection->prepare("INSERT INTO student_clinic_record_table (student_id, illness, symptoms, date_diagnosed, note, recommendation) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssss", $student_id, $illness, $symptoms, $date_diagnosed, $note, $recommendation);
     $stmt->execute();
 
     // Get the last inserted record ID

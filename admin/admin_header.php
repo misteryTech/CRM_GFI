@@ -80,5 +80,12 @@
 
 
 
+    .studentinfo{
+        color: black;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+
 
 </style>

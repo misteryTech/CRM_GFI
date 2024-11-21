@@ -69,9 +69,9 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
 
                         <!-- Illness Details -->
                         <div class="form-group">
-                            <h3>Illness Details</h3>
+                     
                             <div class="form-group">
-                                <label for="illness">Illness</label>
+                                <label for="Chief Complain">Chief Complain</label>
                                 <input type="text" class="form-control" id="illness" name="illness" required>
                             </div>
                             <div class="form-group">
@@ -113,6 +113,12 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                     <button type="button" id="add-medicine" class="btn btn-primary">Add Medicine</button>
                                 </div>
                             </div>
+
+                            <div class="form-group mt-4">
+                                <label for="note">Reccomendation</label>
+                                <textarea class="form-control" id="recommendation" name="recommendation" rows="3" required></textarea>
+                            </div>
+
                             <div class="form-group mt-4">
                                 <label for="note">Note</label>
                                 <textarea class="form-control" id="note" name="note" rows="3" required></textarea>

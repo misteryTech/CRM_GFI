@@ -3,14 +3,7 @@ include("admin_header.php");
 session_start();
 include("../include/connection.php");
 
-// Fetch all student information from the database
-$query = "SELECT m.id,m.medicine_name,rm.current_stock,rm.reorder_quantity,rm.reorder_status,rm.reorder_status,rm.reorder_date,rm.reorder_process_date,rm.medicine_id
 
-
-
-FROM reorder_medicine AS rm
-INNER JOIN medicines AS m ON rm.medicine_id = m.id";
-$result = mysqli_query($connection, $query);
 ?>
 
 <body id="page-top">
@@ -83,12 +76,23 @@ $result = mysqli_query($connection, $query);
                                             <th>Reorder Quantity</th>
                                             <th>Reorder Status</th>
                                             <th>Reorder Date</th>
-                                            <th>Process Date</th>
+                                    
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                     <?php
+
+                                    // Fetch all student information from the database
+$query = "SELECT m.id,m.medicine_name,rm.current_stock,rm.reorder_quantity,rm.reorder_status,rm.reorder_status,rm.reorder_date,rm.reorder_process_date,rm.medicine_id
+
+
+
+FROM reorder_medicine AS rm
+INNER JOIN medicines AS m ON rm.medicine_id = m.id";
+$result = mysqli_query($connection, $query);
+
+
                                     // Loop through each row of the result set
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
@@ -97,7 +101,7 @@ $result = mysqli_query($connection, $query);
                                         echo "<td>" . $row['reorder_quantity']."</td>";
                                         echo "<td>" . $row['reorder_status'] . "</td>";
                                         echo "<td>" . $row['reorder_date'] . "</td>";
-                                        echo "<td>" . $row['reorder_process_date'] . "</td>";
+                                
 
                                         echo "</tr>";
                                     }

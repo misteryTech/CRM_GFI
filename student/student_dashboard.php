@@ -42,16 +42,19 @@ $stmt->close();
 
 
 <style>
- #bannerCarousel {
-        max-width: 100%; /* Ensure carousel takes full width of container */
-        max-height: 400px; /* Set your fixed height */
-        overflow: hidden; /* Hide overflow */
-    }
-    #bannerCarousel img {
-        object-fit: cover; /* Maintain aspect ratio and cover the entire area */
-        width: 100%; /* Ensure the image takes full width of the carousel */
-        height: 100%; /* Ensure the image takes full height of the carousel */
-    }
+#bannerCarousel {
+    max-width: 100%; /* Ensure carousel takes full width of container */
+    max-height: 800px; /* Set your fixed height or remove for a responsive height */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 10px;
+    
+}
+
+#bannerCarousel img {
+    object-fit: cover; /* Ensure image fills the container while maintaining aspect ratio */
+    width: 100%; /* Ensure the image takes full width of the carousel */
+    height: 100%; /* Ensure the image takes full height of the carousel */
+}
 
 
 </style>
@@ -78,15 +81,22 @@ $stmt->close();
     <div class="col-lg-12">
         <div id="bannerCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="../PICTURE/clinic_picture.png" class="d-block w-100" alt="Banner Image 1">
+
+            <div class="carousel-item active">
+                    <img src="../PICTURE/entrance.jpg" class="d-block w-100" alt="Banner Image 3">
+                </div>
+
+                <div class="carousel-item ">
+                    <img src="../PICTURE/clinic-information-desk.jpg" class="d-block w-100" alt="Banner Image 1">
                 </div>
                 <div class="carousel-item">
-                    <img src="../PICTURE/clinic_picture.png" class="d-block w-100" alt="Banner Image 2">
+                    <img src="../PICTURE/clinic-kitchen.jpg" class="d-block w-100" alt="Banner Image 2">
                 </div>
+
                 <div class="carousel-item">
-                    <img src="../PICTURE/clinic_picture.png" class="d-block w-100" alt="Banner Image 3">
+                    <img src="../PICTURE/patient-bed.jpg" class="d-block w-100" alt="Banner Image 2">
                 </div>
+              
             </div>
             <a class="carousel-control-prev" href="#bannerCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -103,7 +113,7 @@ $stmt->close();
 
                     <div class="row">
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-12 col-lg-7">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Clinic Record Log</h6>
@@ -115,9 +125,11 @@ $stmt->close();
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Student ID</th>
-                                                    <th>Illness</th>
+                                                    <th>Chief Complain</th>
                                                     <th>Symptoms</th>
+                                                    <th>Reccomendation</th>
                                                     <th>Date Released</th>
+                                                    <th>Note</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -132,7 +144,9 @@ $stmt->close();
                                                     echo "<td>" . htmlspecialchars($record['student_id']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($record['recommendation']) . "</td>";
                                                     echo "<td>" . htmlspecialchars($month_name) . "</td>";
+                                                    echo "<td>" . htmlspecialchars($record['note']) . "</td>";
                                                     echo "</tr>";
                                                 }
                                                 ?>

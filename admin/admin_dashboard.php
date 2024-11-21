@@ -301,10 +301,10 @@ $stmt->close();
     <div class="row">
 
 <!-- Area Chart -->
-<div class="col-xl-6 col-lg-6">
+<div class="col-xl-12 col-lg-6">
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Patient Record Log </h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Student Record Log </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -312,10 +312,12 @@ $stmt->close();
                                     <thead>
                                         <tr>
                                          
-                                            <th>Patient Name</th>
-                                            <th>Illness</th>
-                                            <th>symptoms</th>
+                                            <th>Student Name</th>
+                                            <th>Chief Complaint</th>
+                                            <th>Symptoms</th>
+                                            <th>Recommendation</th>
                                             <th>Date Released</th>
+                                            <th>Note</th>
 
                                         </tr>
                                     </thead>
@@ -340,7 +342,10 @@ $stmt->close();
                                             echo "<td>" . htmlspecialchars($record['first_name']).' ' . htmlspecialchars($record['last_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['recommendation']) . "</td>";
+                                            
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['note']) . "</td>";
                                             echo "</tr>";
 
 
@@ -358,7 +363,7 @@ $stmt->close();
 
 
 
-<div class="col-xl-6 col-lg-6">
+<div class="col-xl-12 col-lg-6">
 <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Staff Record Log </h6>
@@ -370,10 +375,12 @@ $stmt->close();
                                         <tr>
                                          
                                             <th>Staff Name</th>
-                                            <th>Illness</th>
+                                            <th>Chief Complain</th>
                                             <th>symptoms</th>
+                                            <th>Reccomendation</th>
                                             <th>Department</th>
                                             <th>Date Released</th>
+                                            <th>Note</th>
 
                                         </tr>
                                     </thead>
@@ -398,8 +405,10 @@ $stmt->close();
                                             echo "<td>" . htmlspecialchars($record['first_name']).' ' . htmlspecialchars($record['last_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['recommendation']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['department']) . "</td>";
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
+                                            echo "<td>" . htmlspecialchars($record['note']) . "</td>";
                                             echo "</tr>";
 
 
@@ -448,7 +457,7 @@ $stmt->close();
         <!-- Card Header - Dropdown -->
         <div
             class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">Registered Patient Gender</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Registered Students Gender</h6>
             <div class="dropdown no-arrow">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -516,7 +525,7 @@ var monthlyVisitChart = new Chart(ctxLine, {
     data: {
         labels: monthlyLabels,
         datasets: [{
-            label: 'Patients Inquired',
+            label: 'Student Inquired',
             data: monthlyVisitsData,
             backgroundColor: 'rgba(78, 115, 223, 0.05)',
             borderColor: 'rgba(78, 115, 223, 1)',

@@ -5,6 +5,31 @@ include("../include/connection.php");
 
 if (isset($_GET['student_id'])) {
     $student_id = $_GET['student_id'];
+
+      // Prepare the SQL statement
+      $stmt = $connection->prepare("SELECT * FROM students_table WHERE student_id = ?");
+
+      if ($stmt) {
+          // Bind the student_id parameter
+          $stmt->bind_param('i', $student_id);
+
+          // Execute the query
+          $stmt->execute();
+
+          // Get the result
+          $result = $stmt->get_result();
+
+          // Fetch the row
+          $student_data = $result->fetch_assoc();
+
+          // Close the statement
+          $stmt->close();
+      } else {
+          // Handle SQL error
+          $_SESSION['error'] = "Failed to prepare the SQL statement.";
+      }
+
+
 }
 
 $sql_medicine = "SELECT * FROM medicines";
@@ -14,6 +39,8 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
     $medicine[] = $row_medicine;
 }
 ?>
+
+
 
 <body id="page-top">
 
@@ -56,22 +83,33 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                     <form action="process_code/student_medical_records.php" method="POST">
                         <!-- Student Information -->
                         <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-md-4">
-                                    <label for="studentId">Student ID</label>
-                                    <h1><?php echo $student_id; ?></h1>
-
-
-                                    <input type="hidden" name="student_id" value="<?php echo $student_id; ?>">
-                                </div>
+                         
+                        <div class="form-row studentinfo" >
+                            <div class="col-md-4">
+                                <label for="studentId">Student ID</label>
+                                <h1><?php echo htmlspecialchars($student_data['student_id'] ?? 'N/A'); ?></h1>
                             </div>
+
+                            <div class="col-md-4">
+                                <label for="studentName">Student Name</label>
+                                <h4><?php echo htmlspecialchars($student_data['first_name'] . ' ' . $student_data['last_name']); ?></h4>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="course">Course</label>
+                                <h4><?php echo htmlspecialchars($student_data['course'] . ' ' . $student_data['year']); ?></h4>
+                            </div>
+                        </div>
+
+
+                        
                         </div>
 
                         <!-- Illness Details -->
                         <div class="form-group">
-                            <h3>Illness Details</h3>
+                         
                             <div class="form-group">
-                                <label for="illness">Illness</label>
+                                <label for="illness">Chief Complain</label>
                                 <input type="text" class="form-control" id="illness" name="illness" required>
                             </div>
                             <div class="form-group">
@@ -113,6 +151,12 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                     <button type="button" id="add-medicine" class="btn btn-primary">Add Medicine</button>
                                 </div>
                             </div>
+
+                            <div class="form-group mt-4">
+                                <label for="recommendation">Recommendation</label>
+                                <textarea class="form-control" id="recommendation" name="recommendation" rows="3" required></textarea>
+                            </div>
+
                             <div class="form-group mt-4">
                                 <label for="note">Note</label>
                                 <textarea class="form-control" id="note" name="note" rows="3" required></textarea>

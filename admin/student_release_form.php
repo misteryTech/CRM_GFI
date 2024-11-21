@@ -4,6 +4,7 @@ session_start();
 include("../include/connection.php");
 
 
+
 ?>
 
 <body id="page-top">
@@ -84,7 +85,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>" . $row['email'] . "</td>";
 
     echo "<td>";
-    echo "<a class='btn btn-primary' href='student_release_form_page.php?student_id=" . $row['student_id'] . "'>Release Medicine</a> ";
+    echo "<a class='btn btn-primary' href='student_release_form_page.php?student_id=" . $row['student_id'] . " '>Release Medicine</a> ";
     echo "</td>";
     echo "</tr>";
 

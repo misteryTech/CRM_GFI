@@ -66,7 +66,7 @@ include("../include/connection.php");
 
                     <!-- staff Information -->
                     <div class="form-group">
-                        <div class="form-row">
+                        <div class="form-row studentinfo">
                             <div class="col-md-4">
                                 <label for="staffId">Staff ID</label>
                                 <h1><?php echo htmlspecialchars($staff_data['id_no'] ?? 'N/A'); ?></h1>

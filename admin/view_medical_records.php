@@ -52,7 +52,7 @@ include("../include/connection.php");
                     <h2>Student Medical Record</h2>
 
                     <!-- Medical History Table -->
-                    <div class="card shadow mb-4">
+                    <!-- <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Student Medical Records</h6>
                         </div>
@@ -84,7 +84,7 @@ include("../include/connection.php");
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Existing Illness Table -->
                     <div class="card shadow mb-4">

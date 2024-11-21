@@ -2,6 +2,12 @@
 include("student_header.php");
 include("../include/connection.php");
 
+
+
+$student_id = $_SESSION['student_id'];
+$username = $_SESSION['username'];
+
+
 // Check if student is logged in
 if (!isset($_SESSION['student_id'])) {
     $_SESSION['error'] = "You must be logged in to view this page.";
@@ -67,17 +73,11 @@ $student = mysqli_fetch_assoc($studentResult);
             </div>
             <div class="col-md-8">
                 <label for="documents">Documents</label>
-                <input type="file" class="form-control" id="documents" name="documents" required>
+                <input type="file" class="form-control" id="documents" name="documents" >
             </div>
         </div>
         <br>
 
-        <div class="form-row">
-            <div class="col-md-12">
-                <label for="chiefComplain">Chief Complaint</label>
-                <textarea class="form-control" name="chief_complain" id="chiefComplain"></textarea>
-            </div>
-        </div>
 
         <div class="form-row">
             <div class="col-md-6">
@@ -117,8 +117,20 @@ $student = mysqli_fetch_assoc($studentResult);
                 <input type="date" class="form-control" id="endDate" name="end_date" required>
             </div>
         </div>
+
+        <br>
+
+        <div class="form-row">
+            <div class="col-md-12">
+                <label for="chiefComplain">Chief Complaint</label>
+                <textarea class="form-control" name="chief_complain" id="chiefComplain"></textarea>
+            </div>
+        </div>
+
+
     </div>
 
+    
     <button type="submit" class="btn btn-success">Update</button>
 </form>
 

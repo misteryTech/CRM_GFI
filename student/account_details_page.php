@@ -2,6 +2,12 @@
 include("student_header.php");
 include("../include/connection.php");
 
+
+
+$student_id = $_SESSION['student_id'];
+$username = $_SESSION['username'];
+
+
 // Check if student is logged in
 if (!isset($_SESSION['student_id'])) {
     $_SESSION['error'] = "You must be logged in to view this page.";

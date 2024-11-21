@@ -3,9 +3,7 @@ include("admin_header.php");
 session_start();
 include("../include/connection.php");
 
-// Fetch all student information from the database
-$query = "SELECT * FROM student_clinic_record_table";
-$result = mysqli_query($connection, $query);
+
 ?>
 
 <body id="page-top">
@@ -74,22 +72,31 @@ $result = mysqli_query($connection, $query);
                                     <thead>
                                         <tr>
                                             <th>Student Id</th>
-                                            <th>Illness</th>
+                                            <th>Chief Complain</th>
                                             <th>Systoms</th>
+                                            <th>Reccomendation</th>
 
                                             <th>Diagnosed Date</th>
+                                            <th>Note</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
                                     <?php
                                     // Loop through each row of the result set
+                                    // Fetch all student information from the database
+$query = "SELECT * FROM student_clinic_record_table";
+$result = mysqli_query($connection, $query);
+
+
                                     while ($row = mysqli_fetch_assoc($result)) {
                                         echo "<tr>";
                                         echo "<td>" . $row['student_id'] . "</td>";
                                         echo "<td>" . $row['illness'] . "</td>";
                                         echo "<td>" . $row['symptoms']."</td>";
+                                        echo "<td>" . $row['recommendation']."</td>";
                                         echo "<td>" . $row['date_diagnosed'] . "</td>";
+                                        echo "<td>" . $row['note'] . "</td>";
 
                                         echo "</tr>";
                                     }
