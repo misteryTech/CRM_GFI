@@ -1,38 +1,40 @@
 <?php
-include("student_header.php");
+include("staff_header.php");
 include("../include/connection.php");
 
-// Check if the student is logged in
-if (!isset($_SESSION['student_id'])) {
+
+
+// Check if the staff is logged in
+if (!isset($_SESSION['staff_id'])) {
 
 
     $_SESSION['error'] = "You must be logged in to view this page.";
-    header("Location: ../login_student.php");
+    header("Location: ../login_staff.php");
     exit();
     
 }
 
 
-$student_id = $_SESSION['student_id'];
+$staff_id = $_SESSION['staff_id'];
 $username = $_SESSION['username'];
 
 
 
 
-// Fetch student details from the database
-$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
-$studentResult = mysqli_query($connection, $studentQuery);
+// Fetch staff details from the database
+$staffQuery = "SELECT * FROM staff_table WHERE staff_id = '$staff_id'";
+$staffResult = mysqli_query($connection, $staffQuery);
 
 // Check if data was fetched successfully
-if (mysqli_num_rows($studentResult) == 1) {
-    $student = mysqli_fetch_assoc($studentResult);
+if (mysqli_num_rows($staffResult) == 1) {
+    $staff = mysqli_fetch_assoc($staffResult);
 
     // Check for missing details
-    $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email', 'year', 'section', 'course'];
+    $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email'];
     $missingDetails = false;
 
     foreach ($requiredFields as $field) {
-        if (empty($student[$field])) {
+        if (empty($staff[$field])) {
             $missingDetails = true;
             break;
         }
@@ -44,17 +46,21 @@ if (mysqli_num_rows($studentResult) == 1) {
         header("Location: account_details_page.php");
     }
 } else {
-    // Student not found in the database
-    $_SESSION['error'] = "Student record not found.";
-    header("Location: ../login_student.php");
+    // staff not found in the database
+    $_SESSION['error'] = "staff record not found.";
+    header("Location: ../login_staff.php");
     exit();
 }
 
 
 
-// Get student ID from session
-$student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
+// Get staff ID from session
+$staff_id = mysqli_real_escape_string($connection, $_SESSION['staff_id']);
 
+// Fetch staff details from the database
+$staffQuery = "SELECT * FROM staff_table WHERE staff_id = '$staff_id'";
+$staffResult = mysqli_query($connection, $staffQuery);
+$staff = mysqli_fetch_assoc($staffResult);
 
 
 ?>
@@ -64,7 +70,7 @@ $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?php include("student_sidebar.php"); ?>
+        <?php include("staff_sidebar.php"); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -72,7 +78,7 @@ $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
             <!-- Main Content -->
             <div id="content">
 
-                <?php include("student_topbar.php"); ?>
+                <?php include("staff_topbar.php"); ?>
 
                 <div class="container mt-5 mb-5">
                     <?php if (isset($_SESSION['success'])): ?>
@@ -94,11 +100,11 @@ $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
 
                     <h2>Send Message to School Nurse</h2>
                     <form action="process_code/message_request.php" method="POST" enctype="multipart/form-data">
-                        <!-- Student Information -->
+                        <!-- staff Information -->
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" id="studentId" name="studentId" value="<?php echo $student['student_id']; ?>" hidden readonly>
+                                    <input type="text" class="form-control" id="staffId" name="staffId" value="<?php echo $staff['staff_id']; ?>" hidden readonly>
                                 </div>
                             </div>
                             <br>
@@ -130,13 +136,13 @@ $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
 
                         
                             <?php
-                            // Fetch student details from the database
-$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
-$studentResult = mysqli_query($connection, $studentQuery);
-$student = mysqli_fetch_assoc($studentResult);
+                            // Fetch staff details from the database
+$staffQuery = "SELECT * FROM staff_table WHERE staff_id = '$staff_id'";
+$staffResult = mysqli_query($connection, $staffQuery);
+$staff = mysqli_fetch_assoc($staffResult);
 
-// Fetch message requests sent by the student
-$messageQuery = "SELECT * FROM message_request_tbl WHERE student_id = '$student_id'";
+// Fetch message requests sent by the staff
+$messageQuery = "SELECT * FROM message_request_tbl WHERE student_id = '$staff_id'";
 $messageResult = mysqli_query($connection, $messageQuery);
 
                             while ($message = mysqli_fetch_assoc($messageResult)): ?>
@@ -162,6 +168,6 @@ $messageResult = mysqli_query($connection, $messageQuery);
     </div>
     <!-- End of Page Wrapper -->
 
-    <?php include("student_footer.php"); ?>
+    <?php include("staff_footer.php"); ?>
 </body>
 </html>

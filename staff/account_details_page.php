@@ -27,7 +27,7 @@ if (mysqli_num_rows($staffResult) == 1) {
     $staff = mysqli_fetch_assoc($staffResult);
 
     // Check for missing details
-    $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email', 'year', 'section', 'course'];
+    $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email'];
     $missingDetails = false;
 
     foreach ($requiredFields as $field) {
@@ -140,7 +140,17 @@ if (mysqli_num_rows($staffResult) == 1) {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" value="<?php echo $staff['phone']; ?>" required>
+                                    <input 
+    type="text" 
+    class="form-control" 
+    id="phone" 
+    name="phone" 
+    maxlength="11" 
+    value="<?php echo $staff['phone']; ?>" 
+    pattern="\d{11}" 
+    title="Phone number must be 11 digits" 
+    oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+    required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -169,11 +179,11 @@ if (mysqli_num_rows($staffResult) == 1) {
                                     <label for="position">Position</label>
                              
                                     <select class="form-control" id="position" name="position" required>
-                                        <option value="">Select Position</option>
-                                        <option value="Administrator">Administrator</option>
-                                        <option value="Staff">Staff</option>
-                              
-                                    </select>
+    <option value="" disabled>Select Position</option>
+    <option value="Administrator" <?php echo ($staff['position'] == 'Administrator') ? 'selected' : ''; ?>>Administrator</option>
+    <option value="Staff" <?php echo ($staff['position'] == 'Staff') ? 'selected' : ''; ?>>Staff</option>
+</select>
+
 
 
 
@@ -203,7 +213,7 @@ if (mysqli_num_rows($staffResult) == 1) {
                                 <div class="col-md-6">
 
                                     <label for="dob">Date Hired</label>
-                                    <input type="date" class="form-control" id="date_hired" name="date_hired" required>
+                                    <input type="date" class="form-control" id="date_hired" name="date_hired" value="<?php echo $staff['date_hired']; ?>"  required>
                                 </div>
 
 

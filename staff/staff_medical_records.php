@@ -18,10 +18,6 @@ $staff_id = $_SESSION['staff_id'];
 $username = $_SESSION['username'];
 
 
-
-
-
-
 ?>
 
 <body id="page-top">
@@ -30,10 +26,11 @@ $username = $_SESSION['username'];
         <?php
         if (isset($_GET['user_id'])) {
             $staff_id = $_GET['user_id'];
+            $role = 'Staff';
 
             // Fetch data from medical_history_table
-            $stmt_medical = $connection->prepare("SELECT * FROM medical_history_table WHERE user_id = ? AND role 'staff' ");
-            $stmt_medical->bind_param('i', $staff_id);
+            $stmt_medical = $connection->prepare("SELECT * FROM medical_history_table WHERE user_id = ? AND role = ? ");
+            $stmt_medical->bind_param('is', $staff_id, $role);
             $stmt_medical->execute();
             $result_medical = $stmt_medical->get_result();
 

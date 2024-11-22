@@ -2,16 +2,16 @@
 session_start();
 include("../../include/connection.php");
 
-// Check if student is logged in
-if (!isset($_SESSION['student_id'])) {
+// Check if staff is logged in
+if (!isset($_SESSION['staff_id'])) {
     $_SESSION['error'] = "You must be logged in to update your account details.";
-    header("Location: ../login_student.php");
+    header("Location: ../login_staff.php");
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get student ID from session
-    $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
+    // Get staff ID from session
+    $staff_id = mysqli_real_escape_string($connection, $_SESSION['staff_id']);
 
     // Get form data
     $username = mysqli_real_escape_string($connection, $_POST['username']);
@@ -26,15 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $barangay = mysqli_real_escape_string($connection, $_POST['barangay']);
     $municipality = mysqli_real_escape_string($connection, $_POST['municipality']);
     $province = mysqli_real_escape_string($connection, $_POST['province']);
-    $year = mysqli_real_escape_string($connection, $_POST['year']);
-    $section = mysqli_real_escape_string($connection, $_POST['section']);
-    $course = mysqli_real_escape_string($connection, $_POST['course']);
+    $position = mysqli_real_escape_string($connection, $_POST['position']);
+    $department = mysqli_real_escape_string($connection, $_POST['department']);
+    $date_hired = mysqli_real_escape_string($connection, $_POST['date_hired']);
     $archive = mysqli_real_escape_string($connection, $_POST['archive']);
-    
 
     // Update query
     $updateQuery = "
-        UPDATE students_table
+        UPDATE staff_table
         SET
             username = '$username',
             password = '$password',
@@ -48,17 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             barangay = '$barangay',
             municipality = '$municipality',
             province = '$province',
-            year = '$year',
-            section = '$section',
-            course = '$course',
+            position = '$position',
+            department = '$department',
+            date_hired = '$date_hired',
             archive = '$archive'
-        WHERE student_id = '$student_id'
+        WHERE staff_id = '$staff_id'
     ";
 
+    // Execute the query
     if (mysqli_query($connection, $updateQuery)) {
         $_SESSION['success'] = "Account details updated successfully.";
     } else {
-        $_SESSION['error'] = "Failed to update account details. Please try again.";
+        $_SESSION['error'] = "Failed to update account details. Error: " . mysqli_error($connection);
     }
 
     header("Location: ../account_details_page.php");
@@ -68,4 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: ../account_details_page.php");
     exit();
 }
+
+// Close the database connection
+mysqli_close($connection);
 ?>

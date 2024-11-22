@@ -140,7 +140,17 @@ if (mysqli_num_rows($studentResult) == 1) {
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" value="<?php echo $student['phone']; ?>" required>
+                                    <input 
+    type="text" 
+    class="form-control" 
+    id="phone" 
+    name="phone" 
+    maxlength="11" 
+    value="<?php echo $staff['phone']; ?>" 
+    pattern="\d{11}" 
+    title="Phone number must be 11 digits" 
+    oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+    required>
                                 </div>
                             </div>
                             <div class="form-group">
