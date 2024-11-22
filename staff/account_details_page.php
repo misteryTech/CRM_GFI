@@ -1,5 +1,5 @@
 <?php
-include("student_header.php");
+include("staff_header.php");
 include("../include/connection.php");
 
 
@@ -8,30 +8,30 @@ $staff_id = $_SESSION['staff_id'];
 $username = $_SESSION['username'];
 
 
-// Check if student is logged in
+// Check if staff is logged in
 if (!isset($_SESSION['staff_id'])) {
     $_SESSION['error'] = "You must be logged in to view this page.";
     header("Location: ../index.php");
     exit();
 }
 
-// Get student ID from session
+// Get staff ID from session
 $staff_id = mysqli_real_escape_string($connection, $_SESSION['staff_id']);
 
-// Fetch student details from the database
-$studentQuery = "SELECT * FROM staff_table WHERE staff_id = '$staff_id'";
-$studentResult = mysqli_query($connection, $studentQuery);
+// Fetch staff details from the database
+$staffQuery = "SELECT * FROM staff_table WHERE staff_id = '$staff_id'";
+$staffResult = mysqli_query($connection, $staffQuery);
 
 // Check if data was fetched successfully
-if (mysqli_num_rows($studentResult) == 1) {
-    $student = mysqli_fetch_assoc($studentResult);
+if (mysqli_num_rows($staffResult) == 1) {
+    $staff = mysqli_fetch_assoc($staffResult);
 
     // Check for missing details
     $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email', 'year', 'section', 'course'];
     $missingDetails = false;
 
     foreach ($requiredFields as $field) {
-        if (empty($student[$field])) {
+        if (empty($staff[$field])) {
             $missingDetails = true;
             break;
         }
@@ -43,9 +43,9 @@ if (mysqli_num_rows($studentResult) == 1) {
 
     }
 } else {
-    // Student not found in the database
-    $_SESSION['error'] = "Student record not found.";
-    header("Location: ../login_student.php");
+    // staff not found in the database
+    $_SESSION['error'] = "Staff record not found.";
+    header("Location: ../index.php");
     exit();
 }
 ?>
@@ -56,7 +56,7 @@ if (mysqli_num_rows($studentResult) == 1) {
     <div id="wrapper">
 
         <?php
-        include("student_sidebar.php");
+        include("staff_sidebar.php");
         ?>
 
         <!-- Content Wrapper -->
@@ -66,7 +66,7 @@ if (mysqli_num_rows($studentResult) == 1) {
             <div id="content">
 
                 <?php
-                include("student_topbar.php");
+                include("staff_topbar.php");
                 ?>
 
                 <div class="container mt-5 mb-5">
@@ -89,43 +89,43 @@ if (mysqli_num_rows($studentResult) == 1) {
 
                     <h2>Account Details</h2>
                     <form action="process_code/account_details_updates.php" method="POST">
-                        <!-- student Information -->
+                        <!-- staff Information -->
                         <div class="form-group">
                             <div class="form-row">
 
-                                    <input type="hidden" name="archive" value="<?php echo $student['archive']; ?>">
+                                    <input type="hidden" name="archive" value="<?php echo $staff['archive']; ?>">
                                 <div class="col-md-4">
-                                    <label for="studentId">student ID</label>
-                                    <input type="text" class="form-control" id="studentId" name="staff_id" value="<?php echo $student['staff_id']; ?>" required readonly>
+                                    <label for="staffId">staff ID</label>
+                                    <input type="text" class="form-control" id="staffId" name="staff_id" value="<?php echo $staff['staff_id']; ?>" required readonly>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $student['username']; ?>" required>
+                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $staff['username']; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="password">Password</label>
-                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $student['password']; ?>" required>
+                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $staff['password']; ?>" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" name="first_name" value="<?php echo $student['first_name']; ?>" required>
+                                    <input type="text" class="form-control" id="firstName" name="first_name" value="<?php echo $staff['first_name']; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" name="last_name" value="<?php echo $student['last_name']; ?>" required>
+                                    <input type="text" class="form-control" id="lastName" name="last_name" value="<?php echo $staff['last_name']; ?>" required>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="dob">Date of Birth</label>
-                                    <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $student['dob']; ?>" required>
+                                    <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $staff['dob']; ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="gender">Gender</label>
                                 <select class="form-control" id="gender" name="gender" required>
-                                    <option value="Male" <?php echo ($student['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                    <option value="Female" <?php echo ($student['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+                                    <option value="Male" <?php echo ($staff['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                                    <option value="Female" <?php echo ($staff['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
                                 </select>
                             </div>
                         </div>
@@ -136,28 +136,28 @@ if (mysqli_num_rows($studentResult) == 1) {
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $student['email']; ?>" required>
+                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $staff['email']; ?>" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" value="<?php echo $student['phone']; ?>" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" maxlength="11" value="<?php echo $staff['phone']; ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="street">Street</label>
-                                <input type="text" class="form-control" id="street" name="street"  value="<?php echo $student['street']; ?>" required>
+                                <input type="text" class="form-control" id="street" name="street"  value="<?php echo $staff['street']; ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="barangay">Barangay</label>
-                                <input type="text" class="form-control" id="barangay" name="barangay" value="<?php echo $student['barangay']; ?>"  required>
+                                <input type="text" class="form-control" id="barangay" name="barangay" value="<?php echo $staff['barangay']; ?>"  required>
                             </div>
                             <div class="form-group">
                                 <label for="municipality">Municipality</label>
-                                <input type="text" class="form-control" id="municipality" name="municipality" value="<?php echo $student['municipality']; ?>"  required>
+                                <input type="text" class="form-control" id="municipality" name="municipality" value="<?php echo $staff['municipality']; ?>"  required>
                             </div>
                             <div class="form-group">
                                 <label for="province">Province</label>
-                                <input type="text" class="form-control" id="province" name="province" value="<?php echo $student['province']; ?>"  required>
+                                <input type="text" class="form-control" id="province" name="province" value="<?php echo $staff['province']; ?>"  required>
                             </div>
                         </div>
 
@@ -170,23 +170,23 @@ if (mysqli_num_rows($studentResult) == 1) {
                               
 
                                     <select class="form-control" id="gender" name="year" required>
-                                    <option value="First Year" <?php echo ($student['year'] == 'First Year') ? 'selected' : ''; ?>>First Year</option>
-                                    <option value="Second Year" <?php echo ($student['year'] == 'Second Year') ? 'selected' : ''; ?>>Second Year</option>
-                                    <option value="Third Year" <?php echo ($student['year'] == 'Third Year') ? 'selected' : ''; ?>>Third Year</option>
-                                    <option value="Fourth Year" <?php echo ($student['year'] == 'Fourth Year') ? 'selected' : ''; ?>>Fourth Year</option>
+                                    <option value="First Year" <?php echo ($staff['year'] == 'First Year') ? 'selected' : ''; ?>>First Year</option>
+                                    <option value="Second Year" <?php echo ($staff['year'] == 'Second Year') ? 'selected' : ''; ?>>Second Year</option>
+                                    <option value="Third Year" <?php echo ($staff['year'] == 'Third Year') ? 'selected' : ''; ?>>Third Year</option>
+                                    <option value="Fourth Year" <?php echo ($staff['year'] == 'Fourth Year') ? 'selected' : ''; ?>>Fourth Year</option>
                                 </select>q
 
 
                                 </div>
                                 <div class="col-md-4">
                                     <label for="section">Section</label>
-                                    <input type="text" class="form-control" id="section" name="section" value="<?php echo $student['section']; ?>"  required>
+                                    <input type="text" class="form-control" id="section" name="section" value="<?php echo $staff['section']; ?>"  required>
                                 </div>
 
                                 <div class="col-md-4">
                                 <label for="course">Course</label>
                                 <select class="form-control" id="course" name="course" required>
-    <option value="<?php echo $student['course']; ?>" selected><?php echo $student['course']; ?></option>
+    <option value="<?php echo $staff['course']; ?>" selected><?php echo $staff['course']; ?></option>
     <option value="𝐁𝐒 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲">BS 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲</option>
   <option value="𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠">𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠</option>
   <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧</option>
@@ -231,7 +231,7 @@ if (mysqli_num_rows($studentResult) == 1) {
     <!-- End of Page Wrapper -->
 
     <?php
-    include("student_footer.php");
+    include("staff_footer.php");
     ?>
 </body>
 </html>
