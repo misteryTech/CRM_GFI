@@ -1,33 +1,42 @@
 <?php
 include("../process_code/connection.php");
 
-if (isset($_POST['staff_id'])) {
-    $staff_id = $_POST['staff_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['staff_id'])) {
+    $id_no = trim($_POST['staff_id']); // Sanitize input
 
-    // Prepare a MySQL query to check if the student ID exists
-    $query = "SELECT * FROM staff_table WHERE staff_id = ?";
-    
-    // Initialize the statement
-    $stmt = mysqli_prepare($connection, $query);
-    
-    // Bind the parameter
-    mysqli_stmt_bind_param($stmt, "s", $student_id);
-    
-    // Execute the statement
-    mysqli_stmt_execute($stmt);
-    
-    // Store the result to check the number of rowss
-    mysqli_stmt_store_result($stmt);
-    
-    // Check if any rows were returned
-    if (mysqli_stmt_num_rows($stmt) > 0) {
-        echo "exists";  // Student ID found in the database
-    } else {
-        echo "not exists";  // Student ID does not exist
+    // Check if the ID number is not empty
+    if (empty($id_no)) {
+        echo "invalid"; // Invalid input
+        exit;
     }
+
+    // Prepare the MySQL query to check if the ID number exists
+    $query = "SELECT 1 FROM staff_table WHERE id_no = ?";
     
-    // Close the statement
-    mysqli_stmt_close($stmt);
+    if ($stmt = mysqli_prepare($connection, $query)) {
+        // Bind the parameter to the prepared statement
+        mysqli_stmt_bind_param($stmt, "s", $id_no);
+
+        // Execute the statement
+        mysqli_stmt_execute($stmt);
+
+        // Store the result to check the number of rows
+        mysqli_stmt_store_result($stmt);
+
+        // Respond based on the query result
+        if (mysqli_stmt_num_rows($stmt) > 0) {
+            echo "exists";  // ID number found in the database
+        } else {
+            echo "available";  // ID number does not exist
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "error"; // Error in preparing the statement
+    }
+} else {
+    echo "invalid_request"; // Invalid request method or missing parameters
 }
 
 // Close the database connection

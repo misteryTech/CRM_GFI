@@ -57,7 +57,7 @@ include("../include/connection.php");
                                         <tr>
                                             <th>Student Id</th>
                                             <th>Username</th>
-                                            <th>Student Name</th>
+                                            <th>Staff Name</th>
 
                                             <th>Email</th>
                                             <th>Position</th>

@@ -10,15 +10,15 @@ include("../include/connection.php");
         <?php include("admin_sidebar.php"); ?>
 
         <?php
-        if (isset($_GET['staff_id'])) {
-            $staff_id = $_GET['staff_id'];
+        if (isset($_GET['id_no'])) {
+            $id_no = $_GET['id_no'];
 
             // Prepare the SQL statement
             $stmt = $connection->prepare("SELECT * FROM staff_table WHERE id_no = ?");
 
             if ($stmt) {
                 // Bind the staff_id parameter
-                $stmt->bind_param('i', $staff_id);
+                $stmt->bind_param('i', $id_no);
 
                 // Execute the query
                 $stmt->execute();

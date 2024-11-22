@@ -101,8 +101,49 @@ include("header.php");
                                 <button type="submit" class="btn btn-success" >Register</button>
                             </form>
 
-                        <!-- Staff Registration Form -->
-                    
+                    <!-- Staff Registration Form -->
+<form id="staffForm" action="staff_registration.php" method="POST" enctype="multipart/form-data" style="display: none;">
+    <h3>Staff Registration</h3>
+    <!-- Staff Information -->
+    <div class="form-group">
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="staffId">Staff ID <span class="validation">*</span></label>
+                <input type="text" class="form-control" id="staffId" name="staff_id" onblur="checkStaffId()" required>
+                <span id="staffIdError" style="color:red; display:none;">Staff ID is invalid or already in use.</span>
+            </div>
+            <div class="col-md-6">
+                <label for="staffUsername">Username <span class="validation">*</span></label>
+                <input type="text" class="form-control" id="staffUsername" name="staffUsername" required>
+       
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="department">Department <span class="validation">*</span></label>
+                <select class="form-control" id="department" name="department" required>
+                    <option value="">Select Department</option>
+                    <option value="HR">HR</option>
+                    <option value="IT">IT</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="staffPassword">Password <span class="validation">*</span></label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="staffPassword" name="password" oninput="passwordValidation()" required>
+                    <span class="input-group-addon" style="cursor: pointer;" onclick="togglePasswordVisibility('staffPassword', 'staffPasswordToggle')">
+                        <i class="fas fa-eye-slash" id="staffPasswordToggle"></i> <!-- Toggle Icon -->
+                    </span>
+                </div>
+                <div id="staffPasswordError" class="text-danger" style="display: none;">Password must be at least 5 characters long.</div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">Register</button>
+</form>
+
                     </div>
                 </div>
             </div>
@@ -144,6 +185,83 @@ function passwordValidation() {
 
 
 
+
+function checkStaffId() {
+    var staffId = document.getElementById('staffId').value.trim(); // Get input value and trim whitespace
+
+    if (!staffId) {
+        // Reset validation if input is empty
+        resetStaffIdValidation();
+        return;
+    }
+
+    // AJAX call to validate Staff ID
+    $.ajax({
+        url: "validation/check_staff_id.php", // Update with your correct path
+        method: "POST",
+        data: { staff_id: staffId },
+        success: function (response) {
+            try {
+                var data = JSON.parse(response); // Parse the JSON response
+                if (data.status === "exists") {
+                    // If the staff ID exists
+                    $("#staffIdError").hide();
+                    $("#staffIdAvail").show().html('Staff ID found! Proceeding with registration.');
+                    $("button[type='submit']").prop('disabled', false); // Enable submit button
+
+                    // Apply green border and text color to the input field
+                    $("#staffId").css({
+                        'border-color': 'green', // Green border for valid ID
+                        'color': 'green'         // Green text color for input field
+                    });
+
+                    $("#staffIdAvail").css('color', 'green');
+
+                    // Auto-fill the username field
+                    $("#staffUsername").val(data.username); // Fill the username field with the fetched username
+
+                } else if (data.status === "available") {
+                    // If the staff ID is not found, redirect to walk-in registration
+                    $("#staffIdError").show().html('Staff ID not found! Please proceed to walk-in registration.');
+                    $("#staffIdAvail").hide();
+                    $("button[type='submit']").prop('disabled', true); // Disable submit button
+                    $("#staffId").css('border-color', 'red'); // Red border for unavailable ID
+
+                    // Optionally, offer a prompt to redirect to walk-in registration
+                    if (confirm("Staff ID not found. Do you want to proceed to walk-in registration?")) {
+                        window.location.href = "walk_in_registration.php"; // Replace with the correct URL
+                    }
+                } else {
+                    // Handle unexpected response
+                    alert("Unexpected response from server: " + response);
+                    resetStaffIdValidation();
+                }
+            } catch (e) {
+                alert("Error parsing server response: " + e.message);
+                resetStaffIdValidation();
+            }
+        },
+        error: function () {
+            // Handle AJAX error
+            alert("Error occurred while validating the Staff ID.");
+            resetStaffIdValidation();
+        }
+    });
+}
+
+// Reset Validation Function
+function resetStaffIdValidation() {
+    $("#staffIdError").hide();
+    $("#staffIdAvail").hide();
+    $("button[type='submit']").prop('disabled', true); // Disable submit button by default
+    $("#staffId").css('border-color', ''); // Reset border color
+    $("#staffUsername").val(''); // Clear the username field
+}
+
+
+
+
+
 // Additional password validation (optional) for minimum length or other criteria
 function checkPassword() {
     var password = document.getElementById("password").value;
@@ -158,6 +276,8 @@ function checkPassword() {
         document.getElementById("password").style.borderColor = "green"; // Green border for password
     }
 }
+
+
 
 
 function checkStudentId() {

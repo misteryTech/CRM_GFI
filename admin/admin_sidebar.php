@@ -89,7 +89,7 @@ $request_count = $row['request_count'] ?? 0;
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Staff Management</span>
             </a>:</h6>
-            <a class="collapse-item" href="staff_registration_page.php">Staff Registration</a>
+            <a class="collapse-item" href="staffs_registration_page.php">Staff Registration</a>
             <a class="collapse-item" href="staff_information_page_data.php">Staff Data</a>
             <a class="collapse-item" href="staff_medical_records.php">Medical Records</a>
 

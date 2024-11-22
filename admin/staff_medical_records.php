@@ -80,7 +80,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td>" . $row['email'] . "</td>";
 
     echo "<td>";
-    echo "<a class='btn btn-success' href='staff_medical_records_page.php?staff_id=" . $row['id_no'] . "'>View Medical Records</a> ";
+    echo "<a class='btn btn-success' href='staff_medical_records_page.php?id_no=" . $row['id_no'] . "'>View Medical Records</a> ";
     echo "</td>";
     echo "</tr>";
 

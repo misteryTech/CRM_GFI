@@ -145,7 +145,7 @@ include("../include/connection.php");
         } else {
             // AJAX Call to Validate Username
             $.ajax({
-                url: "validation/check_username.php", // Update with your actual PHP path
+                url: "validation/check_staff_username.php", // Update with your actual PHP path
                 method: "POST",
                 data: { username: username },
                 success: function (response) {

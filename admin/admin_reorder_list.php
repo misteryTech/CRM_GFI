@@ -58,7 +58,7 @@ include("../include/connection.php");
                                         <tr>
                                             <th>Medicine ID</th>
                                             <th>Medicine Name</th>
-                                            <th>Stock Onhand</th>
+                                            <th>Remaining Stocks</th>
                                             <th>Additional Stocks</th>
                                             <th>Total Request</th>
                                             <th>Reording Point</th>

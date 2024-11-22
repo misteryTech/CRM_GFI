@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="stylehome.css" />
     <script src="functionhome.js"></script>
+
     <style>
-       .navbar {
+      .navbar {
         box-shadow: 0 4px 8px rgba(5, 5, 5, 5);
         position: sticky;
         top: 0;
@@ -25,23 +26,11 @@
         font-family: 'Times New Roman', Times, serif;
         padding: 0 25px 0 25px;
       }
+
       .navbar.transparent {
-      background-color: transparent;
-    }
-
-      /* Add hover animation on navbar items */
-      .navbar-inverse .navbar-nav > li > a:hover,
-      .navbar-inverse .navbar-nav > li > a:focus {
-        background-color: #f5f5dc !important;
-        color: #000 !important;
+        background-color: transparent;
       }
 
-      /* Add hover animation on navbar submenu*/
-      .navbar-inverse .navbar-nav > li > .dropdown-menu li > a:hover,
-      .navbar-inverse .navbar-nav > li > .dropdown-menu li > a:focus {
-        background-color: #800020 !important;
-        color: #ffffff !important;
-      }
       .carousel {
         margin-top: -25px;
       }
@@ -56,163 +45,39 @@
         background-image: url(wings.jpg);
       }
 
-      /* Custom styles for the button */
-      .btn-hero.btn-lg {
-        padding: 10px 40px;
-        background-color: #800020;
-        border-color: #800020;
-        color: #ffffff;
+      .content-container {
+        background: #f5f5dc;
+        background-image: url("https://www.transparenttextures.com/patterns/black-paper.png");
       }
 
-      .btn.btn-hero,
-      .btn.btn-hero:hover,
-      .btn.btn-hero:focus {
-        background-color: #800020;
-        border-color: #800020;
+      .footer {
+        background-color: #111111;
         color: #ffffff;
+        padding: 50px 0;
       }
 
-    /* Footer Styles */
-.footer {
-  background-color: #111111;
-  color: #ffffff;
-  padding: 50px 0;
-}
+      .footer h4 {
+        color: #ffffff;
+        font-weight: bold;
+      }
 
-.footer h4 {
-  color: #ffffff;
-  font-weight: bold;
-}
+      /* Custom modal size and padding */
+      .modal-content {
+        max-height: 600px;
+        overflow-y: auto;
+      }
 
-.map-container {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  margin-bottom: 20px;
-}
-.content{
-  background: #f5f5dc;
-	background-image: url("https://www.transparenttextures.com/patterns/black-paper.png");
-}
-.contact-info p {
-  margin-bottom: 5px;
-}
+      /* Additional styles for the modal */
+      .modal-header, .modal-body {
+        padding: 20px;
+      }
 
-.newsletter-form input[type="email"],
-.newsletter-form button[type="submit"] {
-  width: 100%;
-  color:#000;
-}
-
-.newsletter-form button[type="submit"] span {
-  display: inline-block;
-}
-
-.opening-hours {
-  list-style: none;
-  padding-left: 0;
-}
-
-.reservation-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #ffffff;
-  color: #111111;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-top: 10px;
-}
-
-.social-media-icons {
-  margin-top: 20px;
-}
-
-.social-media-icon {
-  display: inline-block;
-  background-color: #ffffff;
-  color: #111111;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  line-height: 40px;
-  text-align: center;
-  margin-right: 10px;
-}
-
-.footer-navigation ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.footer-navigation li {
-  display: block;
-  margin-bottom: 10px;
-}
-
-
-
-.footer-navigation a {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.privacy-links {
-  margin-bottom: 10px;
-}
-
-.accessibility-statement {
-  margin-bottom: 10px;
-}
-
-.eatside-resto {
-  color: #cfcf6b;
-}
-
-/* Mobile Styles */
-@media (max-width: 767px) {
-  .footer .container {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
-  .col-sm-6 {
-    margin-bottom: 30px;
-  }
-
-  .newsletter-form input[type="email"],
-  .newsletter-form button[type="submit"] {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-  }
-}
-
-
+      /* Mobile Styles */
       @media (max-width: 767px) {
         .carousel {
           width: 100%;
         }
-
-        .carousel h1 {
-          font-size: 35px;
-        }
-
-        .carousel h3 {
-          font-size: 15px;
-        }
-
-        .footer-logo {
-        width: 250px;
-        height: 80px;
-      }  
-
-  
-
-
       }
-
-  
     </style>
   </head>
   <body>
@@ -221,94 +86,86 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="navbar-header">
-              <!-- Button to toggle the collapsed state of the navigation menu on mobile devices -->
-              <button
-                class="navbar-toggle"
-                data-target="#mobile_menu"
-                data-toggle="collapse"
-              >
+              <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
               <a href="#" class="navbar-brand">
-                <!-- Logo of the website -->
                 <img class="brand-logo" src="PICTURE/clinic_picture.png" height="80px" alt="GFI LOGO" />
-              
               </a>
               <h5>Gensantos Foundation College</h5>
             </div>
 
             <div class="navbar-collapse collapse" id="mobile_menu">
-             
               <ul class="nav navbar-nav navbar-right">
-             
-           
-         
                 <li>
                   <a href="#" id="login-signup-btn" class="login-link">
                     <span class="glyphicon glyphicon-log-in"></span> Login
                     <span class="caret"></span>
                   </a>
-                 
                 </li>
               </ul>
             </div>
           </div>
         </div>
-      </div>  
+      </div>
     </div>
 
-        <!-- Login Modal -->
-        <div id="loginModal" class="modal fade" role="dialog">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-
-                <button type="button" class="close" data-diss miss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="loginModalLabel">Patient Login</h4>
-              </div>
-              <div class="modal-body">
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal fade" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="loginModalLabel">Login</h4>
+          </div>
+          <div class="modal-body">
+            <!-- Tab navigation for Student / Staff Login -->
+            <ul class="nav nav-pills">
+              <li class="active"><a href="#student-login" data-toggle="pill">Student Login</a></li>
+              <li><a href="#staff-login" data-toggle="pill">Staff Login</a></li>
+            </ul>
+            <div class="tab-content">
+              <!-- Student Login Tab -->
+              <div id="student-login" class="tab-pane fade in active">
                 <form action="student_login_process.php" method="POST">
-
-
-                <?php
-                        if (isset($_SESSION['error'])) {
-                            echo "<div class='alert alert-danger'>" . $_SESSION['error'] . "</div>";
-                            unset($_SESSION['error']);
-                        }
-                        if (isset($_SESSION['success'])) {
-                            echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
-                            unset($_SESSION['success']);
-                        }
-                        ?>
-
-                        
                   <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username">
+                    <label for="student-username">Username</label>
+                    <input type="text" class="form-control" id="student-username" name="username" placeholder="Enter your username">
                   </div>
                   <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
+                    <label for="student-password">Password</label>
+                    <input type="password" class="form-control" name="password" id="student-password" placeholder="Enter your password">
                   </div>
-          
-
                   <button type="submit" class="btn btn-success">Login</button>
                   <a href="registration.php" class="btn btn-primary">Register</a>
+                </form>
+              </div>
+              <!-- Staff Login Tab -->
+              <div id="staff-login" class="tab-pane fade">
+                <form action="staff_login.process.php" method="POST">
+                  <div class="form-group">
+                    <label for="staff-username">Username</label>
+                    <input type="text" class="form-control" id="staff-username" name="username" placeholder="Enter your username">
+                  </div>
+                  <div class="form-group">
+                    <label for="staff-password">Password</label>
+                    <input type="password" class="form-control" name="password" id="staff-password" placeholder="Enter your password">
+                  </div>
+                  <button type="submit" class="btn btn-success">Login</button>
+                  <a href="staff_registration.php" class="btn btn-primary">Register</a>
                 </form>
               </div>
             </div>
           </div>
         </div>
-
-
-        
       </div>
+    </div>
 
-
+    
     <div
       class="carousel fade-carousel slide"
       data-ride="carousel"
@@ -403,36 +260,30 @@
 </div>
 </div>
 
+
+
+
     <footer class="footer">
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-md-4">
-        
             <div class="contact-info">
               <h4>GFI - CMS</h4>
               <p>#</p>
-              <p>#</p>
-              <p>#</p>
             </div>
-       
           </div>
           <div class="col-sm-6 col-md-4">
             <h4>Opening Hours</h4>
             <ul class="opening-hours">
               <li>Monday - Sunday: 24 Hours</li>
             </ul>
-        
           </div>
           <div class="col-sm-6 col-md-4">
             <h4>Follow Us</h4>
             <div class="social-media-icons">
               <a href="#" class="social-media-icon"><i class="fab fa-facebook-f"></i></a>
               <a href="#" class="social-media-icon"><i class="fab fa-twitter"></i></a>
-
             </div>
-         
-          </div>
-      
           </div>
         </div>
       </div>
@@ -442,29 +293,22 @@
             <p class="privacy-links">
               <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
             </p>
-            <p class="accessibility-statement">
-              Accessibility Statement: We are committed to ensuring that our website is accessible to everyone. If you have any questions or suggestions regarding the accessibility of this site, please <a href="#">contact us</a>.
-            </p>
             <p>&copy; 2024 <span class="eatside-resto">CMS</span>. All rights reserved.</p>
           </div>
         </div>
       </div>
-    </div>
-  </footer>
-    
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      // When the "Log In / Sign Up" button is clicked
-      $("#login-signup-btn").click(function(event) {
-        event.preventDefault();
-  
-        // Show the login modal
-        $("#loginModal").modal("show");
-      });
-    });
-  </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+      $(document).ready(function() {
+        // When the "Login" button is clicked, show the modal
+        $('#login-signup-btn').click(function() {
+          $('#loginModal').modal('show');
+        });
+      });
+    </script>
   </body>
 </html>
