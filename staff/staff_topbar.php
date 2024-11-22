@@ -176,7 +176,7 @@
 
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">
-              <a href="student_logout.php" id="userDropdown">
+              <a href="staff_logout.php" id="userDropdown">
                   <input type="button" class="btn btn-danger" value="Logout">
               </a>
               <!-- Dropdown - User Information -->
