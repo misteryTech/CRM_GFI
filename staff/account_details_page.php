@@ -161,62 +161,54 @@ if (mysqli_num_rows($staffResult) == 1) {
                             </div>
                         </div>
 
-                           <!-- Course -->
-                        <div class="form-group">
-                            <h3>Course</h3>
+                           <!-- Department -->
+                           <div class="form-group">
+                            <h3>Position Details</h3>
                             <div class="form-row">
-                                <div class="col-md-4">
-                                    <label for="year">Year</label>
+                                <div class="col-md-6">
+                                    <label for="position">Position</label>
+                             
+                                    <select class="form-control" id="position" name="position" required>
+                                        <option value="">Select Position</option>
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="Staff">Staff</option>
                               
+                                    </select>
 
-                                    <select class="form-control" id="gender" name="year" required>
-                                    <option value="First Year" <?php echo ($staff['year'] == 'First Year') ? 'selected' : ''; ?>>First Year</option>
-                                    <option value="Second Year" <?php echo ($staff['year'] == 'Second Year') ? 'selected' : ''; ?>>Second Year</option>
-                                    <option value="Third Year" <?php echo ($staff['year'] == 'Third Year') ? 'selected' : ''; ?>>Third Year</option>
-                                    <option value="Fourth Year" <?php echo ($staff['year'] == 'Fourth Year') ? 'selected' : ''; ?>>Fourth Year</option>
-                                </select>q
 
 
                                 </div>
-                                <div class="col-md-4">
-                                    <label for="section">Section</label>
-                                    <input type="text" class="form-control" id="section" name="section" value="<?php echo $staff['section']; ?>"  required>
+                                <div class="col-md-6">
+                                <label for="department">Department</label>
+    <select class="form-control" id="department" name="department" required>
+        <option value="" disabled selected>Select Department</option>
+        <option value="Administration" <?php echo ($staff['department'] == 'Administration') ? 'selected' : ''; ?>>Administration</option>
+        <option value="Finance" <?php echo ($staff['department'] == 'Finance') ? 'selected' : ''; ?>>Finance</option>
+        <option value="Human Resources" <?php echo ($staff['department'] == 'Human Resources') ? 'selected' : ''; ?>>Human Resources</option>
+        <option value="IT" <?php echo ($staff['department'] == 'IT') ? 'selected' : ''; ?>>IT</option>
+        <option value="Maintenance" <?php echo ($staff['department'] == 'Maintenance') ? 'selected' : ''; ?>>Maintenance</option>
+        <option value="Library" <?php echo ($staff['department'] == 'Library') ? 'selected' : ''; ?>>Library</option>
+        <option value="Mathematics" <?php echo ($staff['department'] == 'Mathematics') ? 'selected' : ''; ?>>Mathematics</option>
+        <option value="Science" <?php echo ($staff['department'] == 'Science') ? 'selected' : ''; ?>>Science</option>
+        <option value="English" <?php echo ($staff['department'] == 'English') ? 'selected' : ''; ?>>English</option>
+        <option value="Social Studies" <?php echo ($staff['department'] == 'Social Studies') ? 'selected' : ''; ?>>Social Studies</option>
+        <option value="Physical Education" <?php echo ($staff['department'] == 'Physical Education') ? 'selected' : ''; ?>>Physical Education</option>
+        <option value="Arts" <?php echo ($staff['department'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
+        <option value="Music" <?php echo ($staff['department'] == 'Music') ? 'selected' : ''; ?>>Music</option>
+        <option value="Foreign Languages" <?php echo ($staff['department'] == 'Foreign Languages') ? 'selected' : ''; ?>>Foreign Languages</option>
+        <option value="Special Education" <?php echo ($staff['department'] == 'Special Education') ? 'selected' : ''; ?>>Special Education</option>
+    </select>
+
                                 </div>
+                                <div class="col-md-6">
 
-                                <div class="col-md-4">
-                                <label for="course">Course</label>
-                                <select class="form-control" id="course" name="course" required>
-    <option value="<?php echo $staff['course']; ?>" selected><?php echo $staff['course']; ?></option>
-    <option value="𝐁𝐒 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲">BS 𝐢𝐧 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐚𝐧𝐜𝐲</option>
-  <option value="𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠">𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠</option>
-  <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧</option>
-  <option value="𝐌𝐚𝐣𝐨𝐫 𝐢𝐧 𝐄𝐧𝐠𝐥𝐢𝐬𝐡 & 𝐌𝐚𝐭𝐡">𝐌𝐚𝐣𝐨𝐫 𝐢𝐧 𝐄𝐧𝐠𝐥𝐢𝐬𝐡 & 𝐌𝐚𝐭𝐡</option>
-  <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐢𝐧 𝐏𝐡𝐲𝐬𝐢𝐜𝐚𝐥 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐢𝐧 𝐏𝐡𝐲𝐬𝐢𝐜𝐚𝐥 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧</option>
-  <option value="𝐁𝐒 𝐢𝐧 𝐂𝐫𝐢𝐦𝐢𝐧𝐨𝐥𝐨𝐠𝐲">𝐁𝐒 𝐢𝐧 𝐂𝐫𝐢𝐦𝐢𝐧𝐨𝐥𝐨𝐠𝐲</option>
-  <option value="𝐁𝐒 𝐢𝐧 𝐎𝐟𝐟𝐢𝐜𝐞 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧">𝐁𝐒 𝐢𝐧 𝐎𝐟𝐟𝐢𝐜𝐞 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧</option>
-  <option value="𝐁𝐒 𝐢𝐧 𝐓𝐨𝐮𝐫𝐢𝐬𝐦 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">𝐁𝐒 𝐢𝐧 𝐓𝐨𝐮𝐫𝐢𝐬𝐦 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭</option>
-  <option value="𝐁𝐒 𝐢𝐧 𝐁𝐮𝐬𝐢𝐧𝐞𝐬𝐬 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧">𝐁𝐒 𝐢𝐧 𝐁𝐮𝐬𝐢𝐧𝐞𝐬𝐬 𝐀𝐝𝐦𝐢𝐧𝐢𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧</option>
-  <optgroup label="Major in Business Administration">
-    <option value="𝐅𝐢𝐧𝐚𝐧𝐜𝐢𝐚𝐥 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">Financial Management</option>
-    <option value="𝐌𝐚𝐫𝐤𝐞𝐭𝐢𝐧𝐠 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">Marketing Management</option>
-    <option value="𝐇𝐮𝐦𝐚𝐧 𝐑𝐞𝐬𝐨𝐮𝐫𝐜𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐦𝐞𝐧𝐭 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭">Human Resource Development Management</option>
-  </optgroup>
-  <option value="𝐁𝐒 𝐢𝐧 𝐄𝐧𝐭𝐫𝐞𝐩𝐫𝐞𝐧𝐞𝐮𝐫𝐬𝐡𝐢𝐩">𝐁𝐒 𝐢𝐧 𝐄𝐧𝐭𝐫𝐞𝐩𝐫𝐞𝐧𝐞𝐮𝐫𝐬𝐡𝐢𝐩</option>
-  <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐀𝐫𝐭𝐬 𝐢𝐧 𝐋𝐢𝐭𝐞𝐫𝐚𝐫𝐲 & 𝐂𝐮𝐥𝐭𝐮𝐫𝐚𝐥 𝐒𝐭𝐮𝐝𝐢𝐞𝐬">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐀𝐫𝐭𝐬 𝐢𝐧 𝐋𝐢𝐭𝐞𝐫𝐚𝐫𝐲 & 𝐂𝐮𝐥𝐭𝐮𝐫𝐚𝐥 𝐒𝐭𝐮𝐝𝐢𝐞𝐬</option>
-  <option value="𝐁𝐒 𝐢𝐧 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 𝐒𝐲𝐬𝐭𝐞𝐦">𝐁𝐒 𝐢𝐧 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧 𝐒𝐲𝐬𝐭𝐞𝐦</option>
-  <option value="𝐀𝐬𝐬𝐨𝐜𝐢𝐚𝐭𝐞 𝐢𝐧 𝐂𝐨𝐦𝐩𝐮𝐭𝐞𝐫 𝐓𝐞𝐜𝐡𝐧𝐨𝐥𝐨𝐠𝐲">𝐀𝐬𝐬𝐨𝐜𝐢𝐚𝐭𝐞 𝐢𝐧 𝐂𝐨𝐦𝐩𝐮𝐭𝐞𝐫 𝐓𝐞𝐜𝐡𝐧𝐨𝐥𝐨𝐠𝐲</option>
-</select>
-
+                                    <label for="dob">Date Hired</label>
+                                    <input type="date" class="form-control" id="date_hired" name="date_hired" required>
                                 </div>
 
 
                             </div>
-                   
-
                         </div>
-
-                        
-
 
                         <button type="submit" class="btn btn-success">Update</button>
                     </form>
