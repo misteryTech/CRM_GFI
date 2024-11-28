@@ -55,15 +55,41 @@
 
 
         <!-- End of Page Wrapper -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         <!-- Include necessary libraries -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-            <!-- End of Main Content -->
-            <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-            <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<!-- Initialize DataTable with filtering -->
+<script>
+    $(document).ready(function() {
+        // Initialize DataTable
+        var table = $('#example').DataTable({
+            dom: 'Bfrtip',  // To display buttons and filter
+            buttons: [
+                'print'  // Example: print button
+            ],
+            // Enable filtering on search bar
+            language: {
+                search: "Filter records:"
+            },
+            // Additional settings (optional)
+            paging: true,
+            ordering: true,
+            info: true
+        });
+
+        // Initialize Select2 for dropdowns inside the DataTable
+        $('select').select2({
+            placeholder: 'Select an option',  // Placeholder text
+            allowClear: true  // Allow clearing selection
+        });
+    });
+</script>
 
 
 
@@ -135,40 +161,115 @@
 
         
         $(document).ready(function() {
-            $('#staffMedicalRecords').DataTable();
-        });
+            $(document).ready(function() {
+    // Initialize DataTable for multiple tables
+    $('#staffMedicalRecords').DataTable({
+        dom: 'Bfrtip',  // To display buttons and filter
+        language: {
+            search: "Filter records:",  // Custom label for the search input field
+        },
+        paging: true,  // Enable pagination
+        ordering: true, // Enable ordering of columns (this enables the ASC/DESC arrows)
+        info: true,     // Display table info (e.g., showing 1 to 10 of 50 records)
+        columnDefs: [{
+            orderable: true, // Ensure all columns are orderable (if specific columns are non-orderable, you can set them here)
+            targets: "_all"
+        }]
+    });
 
-        $(document).ready(function() {
-            $('#staffmedicalRecordTable').DataTable();
-        });
+    $('#staffmedicalRecordTable').DataTable({
+        dom: 'Bfrtip', 
+        language: {
+            search: "Filter records:",
+        },
+        paging: true,
+        ordering: true,
+        info: true,
+        columnDefs: [{
+            orderable: true,
+            targets: "_all"
+        }]
+    });
+
+    $('#medicineTable').DataTable({
+        dom: 'Bfrtip', 
+        language: {
+            search: "Filter records:",
+        },
+        paging: true,
+        ordering: true,
+        info: true,
+        columnDefs: [{
+            orderable: true,
+            targets: "_all"
+        }]
+    });
+
+    $('#medicalrecordTables').DataTable({
+        dom: 'Bfrtip', 
+        language: {
+            search: "Filter records:",
+        },
+        paging: true,
+        ordering: true,
+        info: true,
+        columnDefs: [{
+            orderable: true,
+            targets: "_all"
+        }]
+    });
+
+    $('#medicalRecordTable').DataTable({
+        dom: 'Bfrtip', 
+        language: {
+            search: "Filter records:",
+        },
+        paging: true,
+        ordering: true,
+        info: true,
+        columnDefs: [{
+            orderable: true,
+            targets: "_all"
+        }]
+    });
+
+    $('#medicalReleaseRecordTable').DataTable({
+        dom: 'Bfrtip', 
+        language: {
+            search: "Filter records:",
+        },
+        paging: true,
+        ordering: true,
+        info: true,
+        columnDefs: [{
+            orderable: true,
+            targets: "_all"
+        }]
+    });
+
+    $('#medicalRecordTables').DataTable({
+        dom: 'Bfrtip',  // To display buttons and filter
+        language: {
+            search: "Filter records:",  // Custom label for the search input field
+        },
+        paging: true,  // Enable pagination
+        ordering: true, // Enable ordering of columns
+        info: true,     // Display table info (e.g., showing 1 to 10 of 50 records)
+        columnDefs: [{
+            orderable: true, 
+            targets: "_all"
+        }]
+    });
+});
 
 
-        $(document).ready(function() {
-            $('#medicineTable').DataTable();
-        });
-
-
-        $(document).ready(function() {
-            $('#medicalrecordTables').DataTable();
-        });
-
-        $(document).ready(function() {
-            $('#medicalRecordTable').DataTable();
-        });
-
-
-        $(document).ready(function() {
-            $('#medicalReleaseRecordTable').DataTable();
-        });
-
-
-        $(document).ready(function() {
             $('#studentName').select2({
                 placeholder: "Select a student",
                 allowClear: true
             });
         });
 
+ 
 
 
 

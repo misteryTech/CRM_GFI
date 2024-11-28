@@ -32,12 +32,7 @@ if (isset($_GET['student_id'])) {
 
 }
 
-$sql_medicine = "SELECT * FROM medicines";
-$result_medicine = $connection->query($sql_medicine);
-$medicine = [];
-while ($row_medicine = $result_medicine->fetch_assoc()) {
-    $medicine[] = $row_medicine;
-}
+
 ?>
 
 
@@ -129,13 +124,26 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                 <div class="form-row">
                                     <div class="col-md-5">
                                         <label for="medicine_name">Medicine Name</label>
-                                        <select name="medicine_id[]" class="form-control">
-                                            <?php foreach ($medicine as $medicine_data) :?>
-                                                <option value="<?php echo $medicine_data['id']; ?>">
-                                                    <?php echo ($medicine_data['medicine_name']); ?>
-                                                </option>
-                                            <?php endforeach?>
-                                        </select>
+                                    <select name="medicine_id[]" class="form-control">
+                                        <option value="N/A" selected>N/A</option> <!-- Default option N/A -->
+                                        <?php
+                                        $sql_medicine = "SELECT * FROM medicines";
+                                        $result_medicine = $connection->query($sql_medicine);
+                                        $medicine = [];
+                                        while ($row_medicine = $result_medicine->fetch_assoc()) {
+                                            $medicine[] = $row_medicine;
+                                        }
+
+                                        
+                                        
+                                        
+                                        foreach ($medicine as $medicine_data) : ?>
+                                            <option value="<?php echo $medicine_data['id']; ?>">
+                                                <?php echo ($medicine_data['medicine_name']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                        
                                     </div>
                                     <div class="col-md-5">
                                         <label for="quantity">Quantity</label>

@@ -240,31 +240,35 @@ echo "</div>";
     ?>
     <script>
      $(document).ready(function() {
-            $('#medicineTables').DataTable({
-                dom: 'Bfrtip', // Adds the Buttons container
-                buttons: [
-                    {
-                        extend: 'print',
-                        text: 'Print Table', // Customize the print button text
-                        exportOptions: {
-                            columns: ':visible' // Print only visible columns
-                        },
-                        customize: function (win) {
-                            // Get the current date
-                            const currentDate = new Date().toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                            });
+        $('#medicineTables').DataTable({
+    dom: 'Bfrtip', // Adds the Buttons container
+    buttons: [
+        {
+            extend: 'print',
+            text: 'Print Table', // Customize the print button text
+            exportOptions: {
+                columns: function (index, data, node) {
+                    // Exclude the 8th column (index 7)
+                    return index !== 7; // Exclude the 8th column
+                }
+            },
+            customize: function (win) {
+                // Get the current date
+                const currentDate = new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
 
-                            // Add a header to the print view
-                            $(win.document.body)
-                                .prepend('<h3 style="text-align:center;">Medicine Stock Report</h3>')
-                                .prepend('<h5 style="text-align:center;">Printed on: ' + currentDate + '</h5>');
-                        }
-                    }
-                ]
-            });
+                // Add a header to the print view
+                $(win.document.body)
+                    .prepend('<h3 style="text-align:center;">Medicine Stock Report</h3>')
+                    .prepend('<h5 style="text-align:center;">Printed on: ' + currentDate + '</h5>');
+            }
+        }
+    ]
+});
+
         });
 
     </script>

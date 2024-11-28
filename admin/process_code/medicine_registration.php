@@ -12,16 +12,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $dosage = mysqli_real_escape_string($connection, $_POST['dosage']);
     $frequency = mysqli_real_escape_string($connection, $_POST['frequency']);
     $duration = mysqli_real_escape_string($connection, $_POST['duration']);
-    $storage_temperature = mysqli_real_escape_string($connection, $_POST['storage_temperature']);
-    $storage_instructions = mysqli_real_escape_string($connection, $_POST['storage_instructions']);
+
     $stock = (int)$_POST['stock']; // Cast to integer for safety
     $reorder = (int)$_POST['reorder']; // Cast to integer for safety
 
     // Insert into medicines table
     $medicine_query = "INSERT INTO medicines (
-        medicine_name, brand_name, medicine_type, expiry_date, manufacturer, dosage, frequency, duration, storage_temperature, storage_instructions, stock, reorder_point
+        medicine_name, brand_name, medicine_type, expiry_date, manufacturer, dosage, frequency, duration, stock, reorder_point
     ) VALUES (
-        '$medicine_name', '$brand_name', '$medicine_type', '$expiry_date', '$manufacturer', '$dosage', '$frequency', '$duration', '$storage_temperature', '$storage_instructions', $stock, $reorder
+        '$medicine_name', '$brand_name', '$medicine_type', '$expiry_date', '$manufacturer', '$dosage', '$frequency', '$duration', $stock, $reorder
     )";
 
     if (mysqli_query($connection, $medicine_query)) {

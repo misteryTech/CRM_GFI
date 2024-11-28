@@ -169,10 +169,23 @@
 
           </li>
 
+<!-- Welcome Message and Student's Full Name -->
+<div class="d-flex align-items-center mt-2">
+    <span class="mr-2">Welcome Back!</span>
+    <h3 class="mb-0" style="color: black;">
+        <?php 
+            // Convert name to Camel Case
+            echo ucwords(strtolower($student['first_name'])) . ' ' . ucwords(strtolower($student['last_name'])); 
+        ?>
+    </h3>
+</div>
 
-          <span class="mt-2">Welcome Back!</span>
-          <div class="sidebar-brand-text mx-3 mt-2"><?php echo $username; ?><sup><br></sup></div>
-          <div class="topbar-divider d-none d-sm-block"></div>
+<!-- Divider -->
+<div class="topbar-divider d-none d-sm-block"></div>
+
+
+
+
 
           <!-- Nav Item - User Information -->
           <li class="nav-item dropdown no-arrow">

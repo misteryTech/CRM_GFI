@@ -10,15 +10,15 @@ include("../include/connection.php");
         <?php include("admin_sidebar.php"); ?>
 
         <?php
-        if (isset($_GET['id_no'])) {
-            $id_no = $_GET['id_no'];
+        if (isset($_GET['staff_id'])) {
+            $staff_id = $_GET['staff_id'];
 
             // Prepare the SQL statement
-            $stmt = $connection->prepare("SELECT * FROM staff_table WHERE id_no = ?");
+            $stmt = $connection->prepare("SELECT * FROM staff_table WHERE staff_id = ?");
 
             if ($stmt) {
                 // Bind the staff_id parameter
-                $stmt->bind_param('i', $id_no);
+                $stmt->bind_param('i', $staff_id);
 
                 // Execute the query
                 $stmt->execute();
@@ -69,7 +69,7 @@ include("../include/connection.php");
                         <div class="form-row studentinfo">
                             <div class="col-md-4">
                                 <label for="staffId">Staff ID</label>
-                                <h1><?php echo htmlspecialchars($staff_data['id_no'] ?? 'N/A'); ?></h1>
+                                <h1><?php echo htmlspecialchars($staff_data['staff_id'] ?? 'N/A'); ?></h1>
                             </div>
 
                             <div class="col-md-4">

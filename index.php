@@ -15,6 +15,32 @@
     <script src="functionhome.js"></script>
 
     <style>
+
+.navbar-header {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.brand-logo {
+  margin-top: 25px;
+  margin-right: 15px; /* Space between logo and text */
+}
+
+.brand-title {
+  margin-top: 25px;
+  font-size: 24px; /* Increase the font size for the title */
+  font-weight: bold; /* Make it bold */
+  color: #fff; /* Adjust color as needed */
+}
+
+
+
       .navbar {
         box-shadow: 0 4px 8px rgba(5, 5, 5, 5);
         position: sticky;
@@ -85,17 +111,18 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div class="navbar-header">
-              <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a href="#" class="navbar-brand">
-                <img class="brand-logo" src="PICTURE/clinic_picture.png" height="80px" alt="GFI LOGO" />
-              </a>
-              <h5>Gensantos Foundation College</h5>
-            </div>
+          <div class="navbar-header d-flex align-items-center">
+  <button class="navbar-toggle" data-target="#mobile_menu" data-toggle="collapse">
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a href="#" class="navbar-brand d-flex align-items-center">
+    <img class="brand-logo" src="PICTURE/gfi-logo.jfif" height="80px" alt="GFI LOGO" />
+    <span class="brand-title">Gensantos Foundation College</span>
+  </a>
+</div>
+
 
             <div class="navbar-collapse collapse" id="mobile_menu">
               <ul class="nav navbar-nav navbar-right">

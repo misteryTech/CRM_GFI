@@ -105,20 +105,6 @@ session_start(); // Ensure session is started to use session variables
                             </div>
                         </div>
 
-                        <!-- Storage Details -->
-                        <div class="form-group mt-4">
-                            <h3>Storage Details</h3>
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <label for="storageTemperature">Storage Temperature</label>
-                                    <input type="text" class="form-control" id="storageTemperature" name="storage_temperature" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="storageInstructions">Storage Instructions</label>
-                                    <textarea class="form-control" id="storageInstructions" name="storage_instructions" required></textarea>
-                                </div>
-                            </div>
-                        </div>
 
                         <button type="submit" class="btn btn-success">Register Medicine</button>
                     </form>

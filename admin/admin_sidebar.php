@@ -37,6 +37,27 @@ $request_count = $row['request_count'] ?? 0;
     <?php endif; ?>
 </a>
 
+<?php
+// Query to count medicines that need reordering
+$reorder_count_query = "SELECT COUNT(*) AS reorder_count FROM medicines WHERE stock < reorder_point";
+$result = mysqli_query($connection, $reorder_count_query);
+
+// Fetch the count from the result
+$row = mysqli_fetch_assoc($result);
+
+// If there's a result, set the count; otherwise, default to 0
+$reorder_count = $row['reorder_count'] ?? 0;
+?>
+
+<a class="nav-link" href="admin_med_stock.php">
+    <i class="fas fa-fw fa-exclamation-triangle"></i>
+    <span>Reorder Notification</span>
+    <?php if ($reorder_count > 0): ?>
+        <span class="badge badge-pill badge-danger"><?php echo $reorder_count; ?></span>
+    <?php endif; ?>
+</a>
+
+
 
 
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#accountData"

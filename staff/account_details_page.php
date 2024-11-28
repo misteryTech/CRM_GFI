@@ -89,139 +89,130 @@ if (mysqli_num_rows($staffResult) == 1) {
 
                     <h2>Account Details</h2>
                     <form action="process_code/account_details_updates.php" method="POST">
-                        <!-- staff Information -->
-                        <div class="form-group">
-                            <div class="form-row">
+    <!-- Staff Information -->
+    <div class="form-group">
+        <div class="form-row">
+            <input type="hidden" name="archive" value="<?php echo $staff['archive']; ?>">
+            <div class="col-md-4">
+                <label for="staffId">Staff ID <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="staffId" name="staff_id" value="<?php echo $staff['staff_id']; ?>" required readonly>
+            </div>
+            <div class="col-md-4">
+                <label for="username">Username <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="username" name="username" value="<?php echo $staff['username']; ?>" required>
+            </div>
+            <div class="col-md-4">
+                <label for="password">Password <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="password" name="password" value="<?php echo $staff['password']; ?>" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4">
+                <label for="firstName">First Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="firstName" name="first_name" value="<?php echo $staff['first_name']; ?>" required>
+            </div>
+            <div class="col-md-4">
+                <label for="lastName">Last Name <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="lastName" name="last_name" value="<?php echo $staff['last_name']; ?>" required>
+            </div>
+            <div class="col-md-4">
+                <label for="dob">Date of Birth <span style="color: red;">*</span></label>
+                <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $staff['dob']; ?>" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender <span style="color: red;">*</span></label>
+            <select class="form-control" id="gender" name="gender" required>
+                <option value="Male" <?php echo ($staff['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
+                <option value="Female" <?php echo ($staff['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
+            </select>
+        </div>
+    </div>
 
-                                    <input type="hidden" name="archive" value="<?php echo $staff['archive']; ?>">
-                                <div class="col-md-4">
-                                    <label for="staffId">staff ID</label>
-                                    <input type="text" class="form-control" id="staffId" name="staff_id" value="<?php echo $staff['staff_id']; ?>" required readonly>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" value="<?php echo $staff['username']; ?>" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="password">Password</label>
-                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $staff['password']; ?>" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-4">
-                                    <label for="firstName">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" name="first_name" value="<?php echo $staff['first_name']; ?>" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" name="last_name" value="<?php echo $staff['last_name']; ?>" required>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="dob">Date of Birth</label>
-                                    <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $staff['dob']; ?>" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="gender">Gender</label>
-                                <select class="form-control" id="gender" name="gender" required>
-                                    <option value="Male" <?php echo ($staff['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
-                                    <option value="Female" <?php echo ($staff['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
-                                </select>
-                            </div>
-                        </div>
+    <!-- Contact Details -->
+    <div class="form-group">
+        <h3>Contact Details</h3>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="email">Email <span style="color: red;">*</span></label>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo $staff['email']; ?>" required>
+            </div>
+            <div class="col-md-6">
+                <label for="phone">Phone Number <span style="color: red;">*</span></label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="phone" 
+                    name="phone" 
+                    maxlength="11" 
+                    value="<?php echo $staff['phone']; ?>" 
+                    pattern="\d{11}" 
+                    title="Phone number must be 11 digits" 
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
+                    required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="street">Street <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" id="street" name="street" value="<?php echo $staff['street']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="barangay">Barangay <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" id="barangay" name="barangay" value="<?php echo $staff['barangay']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="municipality">Municipality <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" id="municipality" name="municipality" value="<?php echo $staff['municipality']; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="province">Province <span style="color: red;">*</span></label>
+            <input type="text" class="form-control" id="province" name="province" value="<?php echo $staff['province']; ?>" required>
+        </div>
+    </div>
 
-                            <!-- Contact Details -->
-                            <div class="form-group">
-                            <h3>Contact Details</h3>
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $staff['email']; ?>" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone">Phone Number</label>
-                                    <input 
-    type="text" 
-    class="form-control" 
-    id="phone" 
-    name="phone" 
-    maxlength="11" 
-    value="<?php echo $staff['phone']; ?>" 
-    pattern="\d{11}" 
-    title="Phone number must be 11 digits" 
-    oninput="this.value = this.value.replace(/[^0-9]/g, '')" 
-    required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="street">Street</label>
-                                <input type="text" class="form-control" id="street" name="street"  value="<?php echo $staff['street']; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="barangay">Barangay</label>
-                                <input type="text" class="form-control" id="barangay" name="barangay" value="<?php echo $staff['barangay']; ?>"  required>
-                            </div>
-                            <div class="form-group">
-                                <label for="municipality">Municipality</label>
-                                <input type="text" class="form-control" id="municipality" name="municipality" value="<?php echo $staff['municipality']; ?>"  required>
-                            </div>
-                            <div class="form-group">
-                                <label for="province">Province</label>
-                                <input type="text" class="form-control" id="province" name="province" value="<?php echo $staff['province']; ?>"  required>
-                            </div>
-                        </div>
+    <!-- Position Details -->
+    <div class="form-group">
+        <h3>Position Details</h3>
+        <div class="form-row">
+            <div class="col-md-6">
+                <label for="position">Position <span style="color: red;">*</span></label>
+                <select class="form-control" id="position" name="position" required>
+                    <option value="" disabled>Select Position</option>
+                    <option value="Administrator" <?php echo ($staff['position'] == 'Administrator') ? 'selected' : ''; ?>>Administrator</option>
+                    <option value="Staff" <?php echo ($staff['position'] == 'Staff') ? 'selected' : ''; ?>>Staff</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="department">Department <span style="color: red;">*</span></label>
+                <select class="form-control" id="department" name="department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="Administration" <?php echo ($staff['department'] == 'Administration') ? 'selected' : ''; ?>>Administration</option>
+                    <option value="Finance" <?php echo ($staff['department'] == 'Finance') ? 'selected' : ''; ?>>Finance</option>
+                    <option value="Human Resources" <?php echo ($staff['department'] == 'Human Resources') ? 'selected' : ''; ?>>Human Resources</option>
+                    <option value="IT" <?php echo ($staff['department'] == 'IT') ? 'selected' : ''; ?>>IT</option>
+                    <option value="Maintenance" <?php echo ($staff['department'] == 'Maintenance') ? 'selected' : ''; ?>>Maintenance</option>
+                    <option value="Library" <?php echo ($staff['department'] == 'Library') ? 'selected' : ''; ?>>Library</option>
+                    <option value="Mathematics" <?php echo ($staff['department'] == 'Mathematics') ? 'selected' : ''; ?>>Mathematics</option>
+                    <option value="Science" <?php echo ($staff['department'] == 'Science') ? 'selected' : ''; ?>>Science</option>
+                    <option value="English" <?php echo ($staff['department'] == 'English') ? 'selected' : ''; ?>>English</option>
+                    <option value="Social Studies" <?php echo ($staff['department'] == 'Social Studies') ? 'selected' : ''; ?>>Social Studies</option>
+                    <option value="Physical Education" <?php echo ($staff['department'] == 'Physical Education') ? 'selected' : ''; ?>>Physical Education</option>
+                    <option value="Arts" <?php echo ($staff['department'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
+                    <option value="Music" <?php echo ($staff['department'] == 'Music') ? 'selected' : ''; ?>>Music</option>
+                    <option value="Foreign Languages" <?php echo ($staff['department'] == 'Foreign Languages') ? 'selected' : ''; ?>>Foreign Languages</option>
+                    <option value="Special Education" <?php echo ($staff['department'] == 'Special Education') ? 'selected' : ''; ?>>Special Education</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="date_hired">Date Hired <span style="color: red;">*</span></label>
+                <input type="date" class="form-control" id="date_hired" name="date_hired" value="<?php echo $staff['date_hired']; ?>" required>
+            </div>
+        </div>
+    </div>
 
-                           <!-- Department -->
-                           <div class="form-group">
-                            <h3>Position Details</h3>
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <label for="position">Position</label>
-                             
-                                    <select class="form-control" id="position" name="position" required>
-    <option value="" disabled>Select Position</option>
-    <option value="Administrator" <?php echo ($staff['position'] == 'Administrator') ? 'selected' : ''; ?>>Administrator</option>
-    <option value="Staff" <?php echo ($staff['position'] == 'Staff') ? 'selected' : ''; ?>>Staff</option>
-</select>
+    <button type="submit" class="btn btn-success">Update</button>
+</form>
 
-
-
-
-                                </div>
-                                <div class="col-md-6">
-                                <label for="department">Department</label>
-    <select class="form-control" id="department" name="department" required>
-        <option value="" disabled selected>Select Department</option>
-        <option value="Administration" <?php echo ($staff['department'] == 'Administration') ? 'selected' : ''; ?>>Administration</option>
-        <option value="Finance" <?php echo ($staff['department'] == 'Finance') ? 'selected' : ''; ?>>Finance</option>
-        <option value="Human Resources" <?php echo ($staff['department'] == 'Human Resources') ? 'selected' : ''; ?>>Human Resources</option>
-        <option value="IT" <?php echo ($staff['department'] == 'IT') ? 'selected' : ''; ?>>IT</option>
-        <option value="Maintenance" <?php echo ($staff['department'] == 'Maintenance') ? 'selected' : ''; ?>>Maintenance</option>
-        <option value="Library" <?php echo ($staff['department'] == 'Library') ? 'selected' : ''; ?>>Library</option>
-        <option value="Mathematics" <?php echo ($staff['department'] == 'Mathematics') ? 'selected' : ''; ?>>Mathematics</option>
-        <option value="Science" <?php echo ($staff['department'] == 'Science') ? 'selected' : ''; ?>>Science</option>
-        <option value="English" <?php echo ($staff['department'] == 'English') ? 'selected' : ''; ?>>English</option>
-        <option value="Social Studies" <?php echo ($staff['department'] == 'Social Studies') ? 'selected' : ''; ?>>Social Studies</option>
-        <option value="Physical Education" <?php echo ($staff['department'] == 'Physical Education') ? 'selected' : ''; ?>>Physical Education</option>
-        <option value="Arts" <?php echo ($staff['department'] == 'Arts') ? 'selected' : ''; ?>>Arts</option>
-        <option value="Music" <?php echo ($staff['department'] == 'Music') ? 'selected' : ''; ?>>Music</option>
-        <option value="Foreign Languages" <?php echo ($staff['department'] == 'Foreign Languages') ? 'selected' : ''; ?>>Foreign Languages</option>
-        <option value="Special Education" <?php echo ($staff['department'] == 'Special Education') ? 'selected' : ''; ?>>Special Education</option>
-    </select>
-
-                                </div>
-                                <div class="col-md-6">
-
-                                    <label for="dob">Date Hired</label>
-                                    <input type="date" class="form-control" id="date_hired" name="date_hired" value="<?php echo $staff['date_hired']; ?>"  required>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-success">Update</button>
-                    </form>
                 </div>
 
                 <!-- /.container-fluid -->

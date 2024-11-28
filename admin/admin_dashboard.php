@@ -308,7 +308,7 @@ $stmt->close();
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="medicalRecordTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="medicalRecordTables" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                          
@@ -318,6 +318,7 @@ $stmt->close();
                                             <th>Recommendation</th>
                                             <th>Date Released</th>
                                             <th>Note</th>
+                                            <th>Action</th>
 
                                         </tr>
                                     </thead>
@@ -346,6 +347,7 @@ $stmt->close();
                                             
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['note']) . "</td>";
+                                            echo "<td><button class='btn btn-success view-btn' data-id='" . $record['student_id'] . "'>View</button></td>";
                                             echo "</tr>";
 
 
@@ -360,6 +362,32 @@ $stmt->close();
                     </div>
                     
 </div>
+
+
+
+
+<!-- Optional: Modal for displaying more details on click -->
+<div class="modal fade" id="viewRecordModal" tabindex="-1" role="dialog" aria-labelledby="viewRecordModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewRecordModalLabel">Medical Record Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Dynamic content will be loaded here using JavaScript or Ajax -->
+                <p id="recordDetails"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 
 
@@ -391,7 +419,7 @@ $stmt->close();
                                     
                                     
                                     FROM staff_clinic_record_table AS scrts
-                                     INNER JOIN staff_table AS  tb  ON scrts.staff_id = tb.id_no
+                                     INNER JOIN staff_table AS  tb  ON scrts.staff_id = tb.staff_id
                                     ORDER BY scrts.record_id DESC
                                     ";
                                     $result = mysqli_query($connection, $query);
@@ -502,11 +530,29 @@ $stmt->close();
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-
+  
 // Data for Monthly Visits Chart
 var monthlyLabels = <?php echo json_encode($monthlyLabels); ?>;
 var monthlyVisitsData = <?php echo json_encode($monthlyVisitsData); ?>;
 
+
+$('.view-btn').on('click', function() {
+        var recordId = $(this).data('id'); // Get the record ID
+        
+        // Optional: Use Ajax to fetch and display the details for the selected record
+        $.ajax({
+            url: 'process_code/fetch_record_details.php',  // Create a PHP file to fetch details by record ID
+            type: 'GET',
+            data: { id: recordId },
+            success: function(response) {
+                // Populate modal with fetched data
+                $('#recordDetails').html(response);
+                $('#viewRecordModal').modal('show');  // Show the modal
+            }
+        });
+    });
+
+    
 // Convert numeric month labels to month names
 var monthNames = ["January", "February", "March", "April", "May", "June", 
                   "July", "August", "September", "October", "November", "December"];

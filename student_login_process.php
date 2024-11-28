@@ -17,6 +17,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
+
+            // Check if the student is archived
+            if ($row['archive'] == '1') {
+                // If archived, show alert and redirect
+                echo "<script>
+                        alert('Your account is archived and cannot log in.');
+                        window.location.href = 'index.php';
+                      </script>";
+                exit();
+            }
+
             $stored_password = $row['password'];
 
             // Verify the password
@@ -24,27 +35,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Password is correct, set the session variables
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['student_id'] = $row['student_id'];
+                $_SESSION['first_name'] = $row['first_name'];
 
                 header("Location: student/student_dashboard.php");
                 exit();
             } else {
                 // Incorrect password
-                $_SESSION['error'] = "Invalid username or password!";
-                header("Location: index.php");
+                echo "<script>
+                        alert('Invalid username or password!');
+                        window.location.href = 'index.php';
+                      </script>";
                 exit();
             }
         } else {
             // Username not found
-            $_SESSION['error'] = "Invalid username or password!";
-            header("Location: index.php");
+            echo "<script>
+                    alert('Invalid username or password!');
+                    window.location.href = 'index.php';
+                  </script>";
             exit();
         }
 
         mysqli_stmt_close($stmt);
     } else {
         // Query preparation failed
-        $_SESSION['error'] = "Error preparing query: " . mysqli_error($connection);
-        header("Location: index.php");
+        echo "<script>
+                alert('Error preparing query: " . mysqli_error($connection) . "');
+                window.location.href = 'index.php';
+              </script>";
         exit();
     }
 }

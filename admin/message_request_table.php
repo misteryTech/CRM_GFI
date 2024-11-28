@@ -86,7 +86,8 @@ $reorder_threshold = 5; // Set reorder threshold
                                             echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['message']) . "</td>";
                                             echo "<td>" . htmlspecialchars($row['date_send']) . "</td>";
-                                            echo "<td><a class='btn btn-primary' href='reply_page.php?message_id=" . urlencode($row['message_id']) . "'>Reply Message</a></td>";
+                                            echo "<td><a class='btn btn-primary reply-btn' data-message-id='" . $row['message_id'] . "' href='reply_page.php?message_id=" . urlencode($row['message_id']) . "'>Reply Message</a></td>";
+
                                             echo "</tr>";
                                         }
 
@@ -117,7 +118,7 @@ $reorder_threshold = 5; // Set reorder threshold
                                     $result = mysqli_query($connection, $query);
 
                                     if (mysqli_num_rows($result) > 0) {
-                                        echo "<table class='table table-bordered' id='stocktable'>";
+                                        echo "<table class='table table-bordered' id='messagetable'>";
                                         echo "<thead>";
                                         echo "<tr>";
                                         echo "<th>Student</th>";
@@ -166,7 +167,38 @@ $reorder_threshold = 5; // Set reorder threshold
 
 <script>
 $(document).ready(function() {
+
+
+    $(document).ready(function() {
+    // Initialize DataTables
     $('#Unread').DataTable();
-    $('#stocktable').DataTable();
+    $('#messagetable').DataTable();
+
+    // Handle Reply Button Click
+    $(document).on('click', '.reply-btn', function(event) {
+        event.preventDefault(); // Prevent immediate navigation
+        var messageId = $(this).data('message-id'); // Get message ID
+        var redirectUrl = $(this).attr('href'); // Get the reply page URL
+
+        // Send AJAX request to update status
+        $.ajax({
+            url: 'process_code/update_message_status.php', // PHP script to handle status update
+            type: 'POST',
+            data: { message_id: messageId },
+            success: function(response) {
+                console.log(response); // Optional: log the response for debugging
+                // Navigate to the reply page after updating status
+                window.location.href = redirectUrl;
+            },
+            error: function(xhr, status, error) {
+                console.error("Error updating status: ", error);
+            }
+        });
+    });
+});
+
+
+    $('#Unread').DataTable();
+    $('#messagetable').DataTable();
 });
 </script>
