@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         password = '$password',
         department = '$department',
         archive = '$archive'
-    WHERE id_no = '$staff_id'
+    WHERE staff_id = '$staff_id'
     ";
 
     // Execute the query and handle the result

@@ -5,7 +5,7 @@ if (isset($_POST['staff_id'])) {
     $staff_id = $_POST['staff_id'];
 
     // Prepare a MySQL query to check if the staff ID exists and fetch the username
-    $query = "SELECT username, department FROM staff_table WHERE id_no = ?";
+    $query = "SELECT username, department FROM staff_table WHERE staff_id = ?";
 
     // Initialize the statement
     $stmt = mysqli_prepare($connection, $query);

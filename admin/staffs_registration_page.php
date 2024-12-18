@@ -4,7 +4,7 @@ session_start();
 include("../include/connection.php");
 ?>
 
-<body id="page-top" onload="generatePassword()">
+<body id="page-top" >
 
     <!-- Page Wrapper -->
     <div id="wrapper">

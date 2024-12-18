@@ -360,6 +360,12 @@ document.getElementById('registrationType').addEventListener('change', function(
     }
 });
 
+
+
+
+
+
+
     </script>
 
     <script src="vendor/jquery/jquery.min.js"></script>

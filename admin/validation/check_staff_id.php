@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['staff_id'])) {
     }
 
     // Prepare the MySQL query to check if the ID number exists
-    $query = "SELECT 1 FROM staff_table WHERE id_no = ?";
+    $query = "SELECT 1 FROM staff_table WHERE staff_id = ?";
     
     if ($stmt = mysqli_prepare($connection, $query)) {
         // Bind the parameter to the prepared statement
