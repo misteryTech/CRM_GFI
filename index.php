@@ -119,7 +119,7 @@
   </button>
   <a href="#" class="navbar-brand d-flex align-items-center">
     <img class="brand-logo" src="PICTURE/gfi-logo.jfif" height="80px" alt="GFI LOGO" />
-    <span class="brand-title">Gensantos Foundation College</span>
+    <span class="brand-title">Gensantos Foundation College Inc.</span>
   </a>
 </div>
 
@@ -168,7 +168,7 @@
                     <input type="password" class="form-control" name="password" id="student-password" placeholder="Enter your password">
                   </div>
                   <button type="submit" class="btn btn-success">Login</button>
-                  <a href="registration.php" class="btn btn-primary">Register</a>
+                  <a href="registration.php" class="btn btn-primary">Proceed Registration</a>
                 </form>
               </div>
               <!-- Staff Login Tab -->
@@ -183,7 +183,7 @@
                     <input type="password" class="form-control" name="password" id="staff-password" placeholder="Enter your password">
                   </div>
                   <button type="submit" class="btn btn-success">Login</button>
-                  <a href="staff_registration.php" class="btn btn-primary">Register</a>
+                  <a href="registration.php" class="btn btn-primary">Proceed Registration</a>
                 </form>
               </div>
             </div>

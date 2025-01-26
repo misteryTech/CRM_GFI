@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($connection, $query)) {
         $_SESSION['success'] = "Staff registered successfully!";
-        header("Location: ../staff_registration_page.php");
+        header("Location: ../staffs_registration_page.php");
         exit();
     } else {
         $_SESSION['error'] = "Error: " . $query . "<br>" . mysqli_error($connection);
-        header("Location: ../staff_registration_page.php");
+        header("Location: ../staffs_registration_page.php");
         exit();
     }
 }
