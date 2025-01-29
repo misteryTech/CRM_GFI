@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($connection, $query_straff)) {
         $_SESSION['success'] = "staff registered successfully!";
-        header("Location: ../staff_registration_page.php");
+        header("Location: ../staffs_registration_page.php");
 
         exit();
     } else {
