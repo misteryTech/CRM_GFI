@@ -205,7 +205,7 @@ $("#username").blur(function () {
         });
     });
 
-    
+
 
 
             // The rest remains the same as the student code
