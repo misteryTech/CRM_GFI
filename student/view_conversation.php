@@ -9,6 +9,56 @@ if (!isset($_SESSION['student_id'])) {
     exit();
 }
 
+
+
+
+
+$student_id = $_SESSION['student_id'];
+$username = $_SESSION['username'];
+
+
+
+
+// Fetch student details from the database
+$studentQuery = "SELECT * FROM students_table WHERE student_id = '$student_id'";
+$studentResult = mysqli_query($connection, $studentQuery);
+
+// Check if data was fetched successfully
+if (mysqli_num_rows($studentResult) == 1) {
+    $student = mysqli_fetch_assoc($studentResult);
+
+    // Check for missing details
+    $requiredFields = ['username', 'password', 'first_name', 'last_name', 'dob', 'gender', 'email', 'year', 'section', 'course'];
+    $missingDetails = false;
+
+    foreach ($requiredFields as $field) {
+        if (empty($student[$field])) {
+            $missingDetails = true;
+            break;
+        }
+    }
+
+    // Set a session error if details are missing
+    if ($missingDetails) {
+        $_SESSION['error'] = "Please complete your account details.";
+        header("Location: account_details_page.php");
+    }
+} else {
+    // Student not found in the database
+    $_SESSION['error'] = "Student record not found.";
+    header("Location: ../login_student.php");
+    exit();
+}
+
+
+
+// Get student ID from session
+$student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
+
+
+
+
+
 // Get message_id from the URL
 $message_id = isset($_GET['message_id']) ? mysqli_real_escape_string($connection, $_GET['message_id']) : null;
 
