@@ -124,22 +124,22 @@ $student = mysqli_fetch_assoc($studentResult);
                 <input type="text" class="form-control" id="illness" name="illness" required>
             </div>
             <div class="col-md-6">
-                <label for="allergicReaction">Allergic Reaction</label>
+                <label for="allergicReaction">Allergic Reaction (N/A)</label>
                 <input type="text" class="form-control" id="allergicReaction" name="allergic_reaction" required>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col-md-4">
-                <label for="medication">Medication</label>
+                <label for="medication">Medication (N/A)</label>
                 <input type="text" class="form-control" id="medication" name="medication" required>
             </div>
             <div class="col-md-4">
-                <label for="dose">Dose</label>
+                <label for="dose">Dose ( N/A / 0)</label>
                 <input type="number" class="form-control" id="dose" name="dose" required>
             </div>
             <div class="col-md-4">
-                <label for="timesPerDay">Times Per Day</label>
+                <label for="timesPerDay">Times Per Day ( N/A / 0)</label>
                 <input type="number" class="form-control" id="timesPerDay" name="times_per_day" required>
             </div>
         </div>
