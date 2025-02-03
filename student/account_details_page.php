@@ -179,6 +179,12 @@ if (mysqli_num_rows($studentResult) == 1) {
             <div class="col-md-4">
                 <label for="year">Year <span style="color: red;">*</span></label>
                 <select class="form-control" id="year" name="year" required>
+                    <option value="Grade 7" <?php echo ($student['year'] == 'Grade 7') ? 'selected' : ''; ?>>Grade 7</option>
+                    <option value="Grade 8" <?php echo ($student['year'] == 'Grade 8') ? 'selected' : ''; ?>>Grade 8</option>
+                    <option value="Grade 9" <?php echo ($student['year'] == 'Grade 9') ? 'selected' : ''; ?>>Grade 9</option>
+                    <option value="Grade 10" <?php echo ($student['year'] == 'Grade 10') ? 'selected' : ''; ?>>Grade 10</option>
+                    <option value="Grade 11" <?php echo ($student['year'] == 'Grade 11') ? 'selected' : ''; ?>>Grade 11</option>
+                    <option value="Grade 12" <?php echo ($student['year'] == 'Grade 12') ? 'selected' : ''; ?>>Grade 12</option>
                     <option value="First Year" <?php echo ($student['year'] == 'First Year') ? 'selected' : ''; ?>>First Year</option>
                     <option value="Second Year" <?php echo ($student['year'] == 'Second Year') ? 'selected' : ''; ?>>Second Year</option>
                     <option value="Third Year" <?php echo ($student['year'] == 'Third Year') ? 'selected' : ''; ?>>Third Year</option>
@@ -190,9 +196,11 @@ if (mysqli_num_rows($studentResult) == 1) {
                 <input type="text" class="form-control" id="section" name="section" value="<?php echo $student['section']; ?>" required>
             </div>
             <div class="col-md-4">
-                <label for="course">Course <span style="color: red;">*</span></label>
+                <label for="course">Course / High School Department<span style="color: red;">*</span></label>
                 <select class="form-control" id="course" name="course" required>
                     <option value="<?php echo $student['course']; ?>" selected><?php echo $student['course']; ?></option>
+                    <option value="Junior HS">Junior HS</option>
+                    <option value="Senior HS">Senior HS</option>
                     <option value="BS in Accountancy">BS in Accountancy</option>
                     <option value="𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠">𝐁𝐒 𝐢𝐧 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐀𝐜𝐜𝐨𝐮𝐧𝐭𝐢𝐧𝐠</option>
                      <option value="𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧">𝐁𝐚𝐜𝐡𝐞𝐥𝐨𝐫 𝐨𝐟 𝐒𝐞𝐜𝐨𝐧𝐝𝐚𝐫𝐲 𝐄𝐝𝐮𝐜𝐚𝐭𝐢𝐨𝐧</option>

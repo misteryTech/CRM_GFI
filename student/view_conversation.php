@@ -10,13 +10,8 @@ if (!isset($_SESSION['student_id'])) {
 }
 
 
-
-
-
 $student_id = $_SESSION['student_id'];
 $username = $_SESSION['username'];
-
-
 
 
 // Fetch student details from the database
@@ -54,9 +49,6 @@ if (mysqli_num_rows($studentResult) == 1) {
 
 // Get student ID from session
 $student_id = mysqli_real_escape_string($connection, $_SESSION['student_id']);
-
-
-
 
 
 // Get message_id from the URL
