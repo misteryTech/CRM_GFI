@@ -62,7 +62,7 @@ while ($row_medicine = $result_medicine->fetch_assoc()) {
                                     <h1><?php echo $staff_id; ?></h1>
 
 
-                                    <input type="hidden" name="student_id" value="<?php echo $staff_id; ?>">
+                                    <input type="hidden" name="staff_id" value="<?php echo $staff_id; ?>">
                                 </div>
                             </div>
                         </div>

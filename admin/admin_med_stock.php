@@ -76,6 +76,7 @@ $reorder = '100';
             <th>Medicine Name</th>
             <th>Stock On Hand</th>
             <th>Reorder Point</th>
+            <th>Expiration</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -87,6 +88,7 @@ $reorder = '100';
                 <td><?= htmlspecialchars($row['medicine_name']); ?></td>
                 <td><?= htmlspecialchars($row['stock']); ?></td>
                 <td><?= htmlspecialchars($row['reorder_point']); ?></td>
+                <td><?= htmlspecialchars($row['expiry_date']); ?></td>
                 <td>
                     <!-- Edit Button that triggers the modal -->
                     <button class="btn btn-success" data-toggle="modal" data-target="#editModal<?= $row['id']; ?>">Edit</button>

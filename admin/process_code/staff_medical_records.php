@@ -78,14 +78,14 @@ try {
     $connection->commit();
 
     $_SESSION['success'] = "Medical record successfully added!";
-    header("Location: ../student_release_form_page.php?student_id=$student_id");
+    header("Location: ../staff_release_form_page.php?staff_id=$student_id");
     exit();
 
 } catch (Exception $e) {
     // Rollback the transaction if something went wrong
     $connection->rollback();
     $_SESSION['error'] = "Failed to add record: " . $e->getMessage();
-    header("Location: ../student_release_form_page.php?student_id=$student_id");
+    header("Location: ../student_release_form_page.php?staff_id=$student_id");
     exit();
 }
 ?>

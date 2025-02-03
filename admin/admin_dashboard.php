@@ -1,6 +1,3 @@
-
-
-
 <?php
 include("admin_header.php");
 
@@ -352,8 +349,6 @@ $stmt->close();
 
 
                                         }
-
-
                                     ?>
                                     </tbody>
                                 </table>
@@ -409,6 +404,7 @@ $stmt->close();
                                             <th>Department</th>
                                             <th>Date Released</th>
                                             <th>Note</th>
+                                            <th>Action</th>
 
                                         </tr>
                                     </thead>
@@ -437,6 +433,7 @@ $stmt->close();
                                             echo "<td>" . htmlspecialchars($record['department']) . "</td>";
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['note']) . "</td>";
+                                            echo "<td><button class='btn btn-success view-btn' data-id='" . $record['staff_id'] . "'>View</button></td>";
                                             echo "</tr>";
 
 
