@@ -72,7 +72,14 @@ $staff = mysqli_fetch_assoc($staffResult);
                                 </div>
                                 <div class="col-md-4">
                                     <label for="password">Password</label>
-                                    <input type="text" class="form-control" id="password" name="password" value="<?php echo $staff['password']; ?>" required>
+                                              <div class="input-group">
+                                                <input type="password" class="form-control" id="password" name="password" value="<?php echo $staff['password']; ?>" required>
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                        Show
+                                                    </button>
+                                                </div>
+                                            </div>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -88,14 +95,16 @@ $staff = mysqli_fetch_assoc($staffResult);
                                     <label for="dob">Date of Birth</label>
                                     <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $staff['dob']; ?>" required>
                                 </div>
-                            </div>
-                            <div class="form-group">
+                                
+                                <div class="col-md-4">
                                 <label for="gender">Gender</label>
                                 <select class="form-control" id="gender" name="gender" required>
                                     <option value="Male" <?php echo ($staff['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
                                     <option value="Female" <?php echo ($staff['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
                                 </select>
+                                </div>
                             </div>
+                 
                         </div>
 
                         <button type="submit" class="btn btn-success">Update</button>

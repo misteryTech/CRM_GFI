@@ -1,13 +1,8 @@
 <?php
 include("admin_header.php");
 
-
-  $localhost= "localhost";
-  $username= "root";
-  $password= "";
-  $dbname= "crm_gfi";
-
-  $connection = mysqli_connect($localhost,$username,$password,$dbname);
+session_start();
+include("../include/connection.php");
 
   //if($connection){
    // echo"connected";

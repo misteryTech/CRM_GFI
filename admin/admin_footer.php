@@ -66,6 +66,17 @@
 
 <!-- Initialize DataTable with filtering -->
 <script>
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        var passwordInput = document.getElementById("password");
+        var type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Toggle button text
+        this.textContent = type === "password" ? "Show" : "Hide";
+    });
+
+
+
     $(document).ready(function() {
         // Initialize DataTable
         var table = $('#example').DataTable({

@@ -4,9 +4,9 @@ include("connection.php");
 
 $student_id = $_POST['student_id'];
 $illness = $_POST['illness'];
-$symptoms = $_POST['symptoms'];
+$symptoms =  " ";
 $date_diagnosed = $_POST['date_diagnosed'];
-$note = $_POST['note'];
+$note = " ";
 $medicines = $_POST['medicine_id']; // Array of medicine IDs
 $quantities = $_POST['quantity']; // Array of corresponding quantities
 $recommendation = $_POST['recommendation']; // Array of corresponding quantities

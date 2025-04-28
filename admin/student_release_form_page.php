@@ -104,13 +104,10 @@ if (isset($_GET['student_id'])) {
                         <div class="form-group">
                          
                             <div class="form-group">
-                                <label for="illness">Chief Complain</label>
+                                <label for="illness">Chief Complaint</label>
                                 <input type="text" class="form-control" id="illness" name="illness" required>
                             </div>
-                            <div class="form-group">
-                                <label for="symptoms">Symptoms</label>
-                                <textarea class="form-control" id="symptoms" name="symptoms" rows="3" required></textarea>
-                            </div>
+                        
                             <div class="form-group">
                                 <label for="date_diagnosed">Date Diagnosed</label>
                                 <input type="date" class="form-control" id="date_diagnosed" name="date_diagnosed" required>
@@ -123,7 +120,7 @@ if (isset($_GET['student_id'])) {
                             <div id="medicine-fields">
                                 <div class="form-row">
                                     <div class="col-md-5">
-                                        <label for="medicine_name">Medicine Name</label>
+                                        <label for="medicine_name">Generic Name</label>
                                     <select name="medicine_id[]" class="form-control">
                                         <option value="N/A" selected>N/A</option> <!-- Default option N/A -->
                                         <?php
@@ -165,10 +162,6 @@ if (isset($_GET['student_id'])) {
                                 <textarea class="form-control" id="recommendation" name="recommendation" rows="3" required></textarea>
                             </div>
 
-                            <div class="form-group mt-4">
-                                <label for="note">Note</label>
-                                <textarea class="form-control" id="note" name="note" rows="3" required></textarea>
-                            </div>
                         </div>
 
                         <div class="form-group mt-4 text-right">
@@ -197,7 +190,7 @@ if (isset($_GET['student_id'])) {
             newField.className = 'form-row mt-3';
             newField.innerHTML = `
                 <div class="col-md-5">
-                    <label for="medicine_name">Medicine Name</label>
+                    <label for="medicine_name">Generic Name</label>
                     <select name="medicine_id[]" class="form-control">
                         <?php foreach ($medicine as $medicine_data) :?>
                             <option value="<?php echo $medicine_data['id']; ?>">

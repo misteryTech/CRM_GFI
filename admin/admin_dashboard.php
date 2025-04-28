@@ -311,10 +311,10 @@ $stmt->close();
                                          
                                             <th>Student Name</th>
                                             <th>Chief Complaint</th>
-                                            <th>Symptoms</th>
+                                    
                                             <th>Recommendation</th>
                                             <th>Date Released</th>
-                                            <th>Note</th>
+                                         
                                             <th>Action</th>
 
                                         </tr>
@@ -339,11 +339,11 @@ $stmt->close();
                                  
                                             echo "<td>" . htmlspecialchars($record['first_name']).' ' . htmlspecialchars($record['last_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
+                                         
                                             echo "<td>" . htmlspecialchars($record['recommendation']) . "</td>";
                                             
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
-                                            echo "<td>" . htmlspecialchars($record['note']) . "</td>";
+                                        
                                             echo "<td><button class='btn btn-success view-btn' data-id='" . $record['student_id'] . "'>View</button></td>";
                                             echo "</tr>";
 
@@ -398,12 +398,12 @@ $stmt->close();
                                         <tr>
                                          
                                             <th>Staff Name</th>
-                                            <th>Chief Complain</th>
-                                            <th>symptoms</th>
+                                            <th>Chief Complaint</th>
+                                         
                                             <th>Reccomendation</th>
                                             <th>Department</th>
                                             <th>Date Released</th>
-                                            <th>Note</th>
+                                   
                                             <th>Action</th>
 
                                         </tr>
@@ -428,11 +428,11 @@ $stmt->close();
                                  
                                             echo "<td>" . htmlspecialchars($record['first_name']).' ' . htmlspecialchars($record['last_name']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['illness']) . "</td>";
-                                            echo "<td>" . htmlspecialchars($record['symptoms']) . "</td>";
+                            
                                             echo "<td>" . htmlspecialchars($record['recommendation']) . "</td>";
                                             echo "<td>" . htmlspecialchars($record['department']) . "</td>";
                                             echo "<td>" . htmlspecialchars($month_name) . "</td>";
-                                            echo "<td>" . htmlspecialchars($record['note']) . "</td>";
+                                        
                                             echo "<td><button class='btn btn-success view-btn' data-id='" . $record['staff_id'] . "'>View</button></td>";
                                             echo "</tr>";
 

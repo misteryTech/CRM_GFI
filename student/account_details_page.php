@@ -104,8 +104,8 @@ if (mysqli_num_rows($studentResult) == 1) {
                 <input type="text" class="form-control" id="username" name="username" value="<?php echo $student['username']; ?>" required>
             </div>
             <div class="col-md-4">
-                <label for="password">Password <span style="color: red;">*</span></label>
-                <input type="text" class="form-control" id="password" name="password" value="<?php echo $student['password']; ?>" required>
+         
+                <input type="hidden" class="form-control" id="password" name="password" value="<?php echo $student['password']; ?>" required>
             </div>
         </div>
         <div class="form-row">
@@ -121,14 +121,18 @@ if (mysqli_num_rows($studentResult) == 1) {
                 <label for="dob">Date of Birth <span style="color: red;">*</span></label>
                 <input type="date" class="form-control" id="dob" name="dob" value="<?php echo $student['dob']; ?>" required>
             </div>
-        </div>
-        <div class="form-group">
+
+            <div class="col-md-4">
             <label for="gender">Gender <span style="color: red;">*</span></label>
             <select class="form-control" id="gender" name="gender" required>
                 <option value="Male" <?php echo ($student['gender'] == 'Male') ? 'selected' : ''; ?>>Male</option>
                 <option value="Female" <?php echo ($student['gender'] == 'Female') ? 'selected' : ''; ?>>Female</option>
             </select>
+            </div>
+
+
         </div>
+      
     </div>
 
     <!-- Contact Details -->
